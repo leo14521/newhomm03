@@ -1,0 +1,8 @@
+# Netlify — Next.js 14 (App Router)
+# 사이트 대시보드에서 연결 저장소: leo14521/newhomm03, 브랜치: main
+[build]
+  command = "npm run build"
+  # @netlify/plugin-nextjs 가 출력 경로를 처리합니다.
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
