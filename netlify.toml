@@ -1,11 +1,12 @@
 # Next.js App Router — 반드시 이 플러그인으로 배포물이 생성됩니다.
 # (플러그인 없으면 Netlify가 정적 사이트처럼 index.html만 찾아 전체가 404가 될 수 있음)
-# 대시보드: Publish directory 는 비워 두세요. "public" / "." 로 두면 안 됩니다.
+# Publish 가 "." 이면 플러그인 오류: "publish directory cannot be the same as the base directory"
+# → next build 산출물인 .next 를 명시 (대시보드의 Publish 는 비우거나, 이 toml 이 덮어쓰게 두세요)
 # https://docs.netlify.com/frameworks/next-js/overview/
 
 [build]
   command = "npm run build"
-  # Next 런타임이 출력 경로를 잡습니다. 여기에 publish 를 쓰지 마세요.
+  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "20"
