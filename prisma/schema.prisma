@@ -1,5 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  // Netlify 등 Linux 빌드 환경용 (로컬 Windows는 native)
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {

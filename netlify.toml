@@ -1,8 +1,9 @@
-# Netlify — Next.js 14 (App Router)
-# 사이트 대시보드에서 연결 저장소: leo14521/newhomm03, 브랜치: main
+# Next.js — Netlify가 저장소 연결 시 OpenNext 어댑터를 자동 적용합니다.
+# package.json에 @netlify/plugin-nextjs를 고정하면 플랫폼과 버전 충돌이 날 수 있어 제외했습니다.
+# https://docs.netlify.com/frameworks/next-js/overview/
+
 [build]
   command = "npm run build"
-  # @netlify/plugin-nextjs 가 출력 경로를 처리합니다.
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+[build.environment]
+  NODE_VERSION = "20"
