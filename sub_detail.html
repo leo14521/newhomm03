@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOMMAGE | Detail Program</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Italiana&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <style>
+        :root {
+            --c-bg-deep: #141211; --c-text-gold: #E3D3B8; --c-accent: #C5A065;
+            --pad-global: 5vw;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background: var(--c-bg-deep); color: var(--c-text-gold); font-family: 'Pretendard', sans-serif; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+        .serif { font-family: 'Cormorant Garamond', serif; }
+
+        /* Header (Simplified) */
+        header {
+            position: fixed; top: 0; width: 100%; height: 80px; z-index: 100;
+            padding: 0 var(--pad-global); display: flex; justify-content: space-between; align-items: center;
+            background: rgba(20,18,17,0.95); border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .logo { font-family: 'Italiana'; font-size: 24px; letter-spacing: 2px; }
+        .btn-back { font-size: 14px; color: #888; }
+
+        /* Sub Hero */
+        .sub-hero {
+            height: 40vh; position: relative; display: flex; align-items: center; justify-content: center;
+            background: url('https://images.unsplash.com/photo-1552693673-1bf958298935?q=80&w=2673&auto=format&fit=crop') center/cover;
+        }
+        .sub-hero::after { content:''; position: absolute; inset:0; background: rgba(0,0,0,0.6); }
+        .hero-txt { position: relative; z-index: 2; text-align: center; }
+        .hero-tit { font-family: 'Cormorant Garamond'; font-size: 40px; color: var(--c-accent); margin-bottom: 10px; }
+
+        /* Detail List */
+        .detail-sec { padding: 60px var(--pad-global); max-width: 800px; margin: 0 auto; }
+        .proc-item {
+            border-bottom: 1px solid rgba(255,255,255,0.1); padding: 30px 0;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+        }
+        .proc-info h3 { font-family: 'Cormorant Garamond'; font-size: 26px; color: #fff; margin-bottom: 5px; }
+        .proc-info p { font-size: 14px; color: #888; }
+        
+        .proc-action { text-align: right; }
+        .price { display: block; font-size: 18px; color: var(--c-accent); font-weight: 600; margin-bottom: 5px; }
+        .btn-book {
+            padding: 8px 20px; border: 1px solid var(--c-accent); background: transparent;
+            color: var(--c-accent); font-size: 12px; cursor: pointer; transition: 0.3s;
+        }
+        .btn-book:hover { background: var(--c-accent); color: #000; }
+
+        /* Footer */
+        footer { padding: 50px var(--pad-global); text-align: center; font-size: 12px; color: #555; border-top: 1px solid rgba(255,255,255,0.1); }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .proc-item { flex-direction: column; align-items: flex-start; }
+            .proc-action { text-align: left; width: 100%; display: flex; justify-content: space-between; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">HOMMAGE</a>
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> HOME</a>
+    </header>
+
+    <section class="sub-hero">
+        <div class="hero-txt">
+            <h2 class="hero-tit">Premium Lifting</h2>
+            <p>시간을 되돌리는 오마쥬만의 시그니처 리프팅 솔루션</p>
+        </div>
+    </section>
+
+    <section class="detail-sec">
+        <div class="proc-item">
+            <div class="proc-info">
+                <h3>Ulthera Prime</h3>
+                <p>울쎄라 300샷 + 수면마취 + 진정관리</p>
+            </div>
+            <div class="proc-action">
+                <span class="price">1,200,000 KRW</span>
+                <button class="btn-book">예약하기</button>
+            </div>
+        </div>
+        <div class="proc-item">
+            <div class="proc-info">
+                <h3>Thermage FLX</h3>
+                <p>써마지 FLX 600샷 + 아이써마지 225샷</p>
+            </div>
+            <div class="proc-action">
+                <span class="price">2,500,000 KRW</span>
+                <button class="btn-book">예약하기</button>
+            </div>
+        </div>
+        <div class="proc-item">
+            <div class="proc-info">
+                <h3>Titanium Lifting</h3>
+                <p>티타늄 리프팅 (전체모드) + LDM 관리</p>
+            </div>
+            <div class="proc-action">
+                <span class="price">800,000 KRW</span>
+                <button class="btn-book">예약하기</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>COPYRIGHT © HOMMAGE CLINIC. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <script>
+        const lenis = new Lenis();
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+    </script>
+</body>
+</html>

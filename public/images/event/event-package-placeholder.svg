@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="420" viewBox="0 0 560 420" fill="none">
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="560" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fffcfa"/>
+      <stop offset="0.35" stop-color="#faf4ee"/>
+      <stop offset="0.7" stop-color="#f3e8df"/>
+      <stop offset="1" stop-color="#ebe2d8"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(268 178) rotate(90) scale(160 200)">
+      <stop stop-color="#fffefb" stop-opacity="0.95"/>
+      <stop offset="0.45" stop-color="#f8ebe3" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#e8d4c8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lineGold" x1="200" y1="120" x2="360" y2="280" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a86e50"/>
+      <stop offset="0.5" stop-color="#d9a487"/>
+      <stop offset="1" stop-color="#c98966"/>
+    </linearGradient>
+    <linearGradient id="lineSoft" x1="240" y1="160" x2="320" y2="240" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c98966" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#a86e50" stop-opacity="0.45"/>
+    </linearGradient>
+  </defs>
+  <rect width="560" height="420" rx="20" fill="url(#wash)"/>
+  <!-- 얇은 이중 프레임 (초대장 느낌) -->
+  <rect x="36" y="36" width="488" height="348" rx="16" stroke="#e8ddd4" stroke-width="1"/>
+  <rect x="44" y="44" width="472" height="332" rx="12" stroke="#f0e6de" stroke-width="1"/>
+  <!-- 코너 장식 -->
+  <g stroke="url(#lineGold)" stroke-width="0.9" fill="none" stroke-linecap="round" opacity="0.55">
+    <path d="M 72 108 L 72 84 L 96 84"/>
+    <path d="M 488 108 L 488 84 L 464 84"/>
+    <path d="M 72 312 L 72 336 L 96 336"/>
+    <path d="M 488 312 L 488 336 L 464 336"/>
+  </g>
+  <circle cx="280" cy="188" r="102" fill="url(#glow)"/>
+  <!-- 추상 플로럴 라인 (아이콘형 기하 대신 부드러운 곡선) -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path
+      d="M 280 118 C 318 148 318 218 280 252 C 242 218 242 148 280 118Z"
+      stroke="url(#lineSoft)"
+      stroke-width="1.4"
+      opacity="0.9"
+    />
+    <path
+      d="M 280 132 C 252 158 252 208 280 238 C 308 208 308 158 280 132Z"
+      stroke="url(#lineGold)"
+      stroke-width="1.15"
+      opacity="0.42"
+    />
+    <path
+      d="M 218 188 C 238 168 268 168 280 188 C 292 168 322 168 342 188"
+      stroke="url(#lineGold)"
+      stroke-width="0.85"
+      opacity="0.35"
+    />
+  </g>
+  <!-- 중앙 세로 악센트 (브랜드 수직 리듬) -->
+  <line x1="280" y1="158" x2="280" y2="218" stroke="url(#lineGold)" stroke-width="1" opacity="0.28" stroke-linecap="round"/>
+  <text
+    x="280"
+    y="312"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', Times, serif"
+    font-size="13"
+    letter-spacing="0.42em"
+    fill="#7a726a"
+    opacity="0.88"
+  >
+    GRAND OPENING
+  </text>
+  <text
+    x="280"
+    y="338"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', Times, serif"
+    font-size="10.5"
+    letter-spacing="0.28em"
+    fill="#a39990"
+    opacity="0.85"
+  >
+    CURATED PACKAGE
+  </text>
+</svg>

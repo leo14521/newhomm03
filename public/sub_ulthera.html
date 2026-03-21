@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HOMMAGE | The Masterpiece Ultherapy</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Italiana&family=Noto+Serif+KR:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'hm-black': '#111111',
+                        'hm-charcoal': '#1E1E1E',
+                        'hm-gold': '#BFA47F',       /* 메인 골드 */
+                        'hm-gold-dark': '#8C7350',  /* 어두운 골드 */
+                        'hm-gold-light': '#D6C4A8', /* 밝은 골드 */
+                        'hm-beige': '#F5F3F0',      /* 배경 베이지 */
+                        'hm-beige-dark': '#EAE7E2',
+                        'hm-gray': '#888888',
+                        'hm-line': 'rgba(0,0,0,0.08)'
+                    },
+                    fontFamily: {
+                        sans: ['Pretendard', 'sans-serif'],
+                        serif: ['Noto Serif KR', 'serif'],
+                        display: ['Italiana', 'serif'],
+                        eng: ['Cormorant Garamond', 'serif']
+                    },
+                    spacing: {
+                        'header': '90px',
+                        'sidebar': '80px'
+                    },
+                    transitionTimingFunction: {
+                        'lux': 'cubic-bezier(0.22, 1, 0.36, 1)'
+                    },
+                    backgroundImage: {
+                        'gold-gradient': 'linear-gradient(135deg, #D6C4A8 0%, #BFA47F 50%, #8C7350 100%)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* 1. Reset & Global Styles */
+        :root {
+            --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
+            --header-h: 90px;
+            --sidebar-w: 80px;
+        }
+        
+        body {
+            background-color: #F5F3F0;
+            color: #111;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography */
+        .txt-display { font-family: 'Italiana', serif; letter-spacing: -0.02em; }
+        .txt-eng { font-family: 'Cormorant Garamond', serif; }
+        .txt-serif { font-family: 'Noto Serif KR', serif; }
+        
+        ::selection { background: #BFA47F; color: #fff; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #F5F3F0; }
+        ::-webkit-scrollbar-thumb { background: #D6C4A8; border-radius: 3px; }
+
+        /* 2. Utility Components */
+        .btn-lux {
+            position: relative; display: inline-flex; align-items: center; justify-content: center;
+            padding: 1.2rem 3rem; border: 1px solid rgba(17, 17, 17, 0.2);
+            background: transparent; color: #111;
+            font-family: 'Pretendard'; font-size: 14px; font-weight: 500; letter-spacing: 0.05em;
+            overflow: hidden; transition: all 0.5s var(--ease-lux);
+            cursor: pointer;
+        }
+        .btn-lux::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: #111; transform: scaleX(0); transform-origin: right;
+            transition: transform 0.5s var(--ease-lux); z-index: -1;
+        }
+        .btn-lux:hover { color: #fff; border-color: #111; }
+        .btn-lux:hover::before { transform: scaleX(1); transform-origin: left; }
+
+        /* Section Spacing */
+        .sec-pad { padding: 160px 0; position: relative; }
+        .container-lux { max-width: 1600px; margin: 0 auto; padding: 0 6vw; }
+
+        /* Navigation Layout */
+        @media (min-width: 1024px) {
+            body { padding-left: var(--sidebar-w); padding-top: var(--header-h); }
+        }
+        @media (max-width: 1024px) {
+            :root { --header-h: 70px; --sidebar-w: 0px; }
+            .sec-pad { padding: 100px 0; }
+        }
+
+        /* Animations */
+        @keyframes flowLine {
+            0% { transform: scaleX(0); transform-origin: left; }
+            50% { transform: scaleX(1); transform-origin: left; }
+            50.1% { transform: scaleX(1); transform-origin: right; }
+            100% { transform: scaleX(0); transform-origin: right; }
+        }
+        .animate-line { animation: flowLine 2s infinite ease-in-out; }
+        
+        /* Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <aside class="hidden lg:flex fixed top-0 left-0 w-[80px] h-screen bg-white border-r border-hm-line z-50 flex-col justify-between items-center py-10">
+        <a href="#" class="w-10 h-10 border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:bg-hm-black hover:text-white transition-all duration-300">
+            <i class="fas fa-home text-xs"></i>
+        </a>
+        
+        <div class="flex flex-col gap-8 items-center">
+            <span class="writing-vertical transform rotate-180 text-[10px] tracking-[0.3em] text-gray-400 font-eng">SCROLL</span>
+            <div class="h-20 w-[1px] bg-gray-200 overflow-hidden relative">
+                <div class="absolute top-0 left-0 w-full h-1/2 bg-hm-gold animate-bounce"></div>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-4">
+            <a href="#" class="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-hm-gold transition-colors"><i class="fas fa-search"></i></a>
+            <a href="#reservation" class="w-10 h-10 bg-hm-black text-white flex items-center justify-center rounded-full hover:bg-hm-gold transition-colors">
+                <i class="far fa-calendar-alt text-xs"></i>
+            </a>
+        </div>
+    </aside>
+
+    <header class="fixed top-0 left-0 lg:left-[80px] right-0 h-[var(--header-h)] bg-hm-beige/90 backdrop-blur-md z-40 border-b border-hm-line flex items-center justify-between px-6 lg:px-12 transition-transform duration-500" id="main-header">
+        <div class="flex items-center gap-6">
+            <a href="#" class="txt-display text-2xl lg:text-3xl tracking-widest text-hm-black">HOMMAGE</a>
+            <div class="hidden lg:flex items-center gap-4">
+                <span class="w-[1px] h-4 bg-gray-300"></span>
+                <span class="text-[10px] tracking-[0.2em] text-hm-gold uppercase">The Masterpiece Ultherapy</span>
+            </div>
+        </div>
+
+        <nav class="hidden lg:flex items-center gap-12">
+            <a href="#intro" class="text-sm font-medium hover:text-hm-gold transition-colors relative group">
+                BRAND
+                <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-hm-gold transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#technology" class="text-sm font-medium hover:text-hm-gold transition-colors relative group">
+                TECHNOLOGY
+                <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-hm-gold transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#authenticity" class="text-sm font-medium hover:text-hm-gold transition-colors relative group">
+                AUTHENTICITY
+                <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-hm-gold transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#process" class="text-sm font-medium hover:text-hm-gold transition-colors relative group">
+                PROCESS
+                <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-hm-gold transition-all duration-300 group-hover:w-full"></span>
+            </a>
+        </nav>
+
+        <button class="lg:hidden text-2xl text-hm-black">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <nav class="hidden lg:flex fixed right-8 top-1/2 -translate-y-1/2 z-40 flex-col items-end gap-6 mix-blend-difference text-hm-black" id="dot-nav">
+        <a href="#intro" class="group flex items-center gap-3 cursor-pointer">
+            <span class="text-[10px] font-eng opacity-0 group-hover:opacity-100 transition-opacity translate-x-2 group-hover:translate-x-0">INTRO</span>
+            <div class="w-1.5 h-1.5 bg-current rounded-full transition-transform group-hover:scale-150"></div>
+        </a>
+        <a href="#technology" class="group flex items-center gap-3 cursor-pointer">
+            <span class="text-[10px] font-eng opacity-0 group-hover:opacity-100 transition-opacity translate-x-2 group-hover:translate-x-0">TECH</span>
+            <div class="w-1.5 h-1.5 bg-current rounded-full opacity-30 transition-transform group-hover:scale-150 group-hover:opacity-100"></div>
+        </a>
+        <a href="#authenticity" class="group flex items-center gap-3 cursor-pointer">
+            <span class="text-[10px] font-eng opacity-0 group-hover:opacity-100 transition-opacity translate-x-2 group-hover:translate-x-0">GENUINE</span>
+            <div class="w-1.5 h-1.5 bg-current rounded-full opacity-30 transition-transform group-hover:scale-150 group-hover:opacity-100"></div>
+        </a>
+        <a href="#process" class="group flex items-center gap-3 cursor-pointer">
+            <span class="text-[10px] font-eng opacity-0 group-hover:opacity-100 transition-opacity translate-x-2 group-hover:translate-x-0">PROCESS</span>
+            <div class="w-1.5 h-1.5 bg-current rounded-full opacity-30 transition-transform group-hover:scale-150 group-hover:opacity-100"></div>
+        </a>
+    </nav>
+
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
+            
+            <section id="intro" class="relative min-h-[100vh] flex items-center overflow-hidden bg-hm-beige pt-[var(--header-h)]">
+                <div class="absolute top-0 right-[15%] w-[1px] h-full bg-hm-line z-0"></div>
+                <div class="absolute bottom-0 left-[10%] w-[1px] h-1/2 bg-hm-line z-0"></div>
+
+                <div class="container-lux w-full relative z-10 grid lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-7 relative z-20" data-speed="0.8">
+                        <div class="mb-8 overflow-hidden">
+                            <span class="inline-block txt-eng text-hm-gold text-lg lg:text-xl tracking-[0.2em] uppercase reveal-text">
+                                The Private Masterpiece
+                            </span>
+                        </div>
+                        
+                        <h1 class="txt-display text-[12vw] lg:text-[130px] leading-[0.9] text-hm-black mb-10">
+                            <div class="overflow-hidden"><span class="block reveal-text">Defined</span></div>
+                            <div class="overflow-hidden flex items-center gap-4 lg:gap-8">
+                                <span class="block txt-eng italic font-light text-hm-gold text-[60%] translate-y-[-5%] reveal-text delay-100">by</span>
+                                <span class="block reveal-text delay-200">Detail</span>
+                            </div>
+                        </h1>
+
+                        <div class="max-w-xl pl-6 border-l-2 border-hm-gold/30 ml-2">
+                            <p class="txt-serif text-hm-gray text-lg lg:text-xl leading-relaxed break-keep reveal-text delay-300">
+                                <strong>오마쥬 울쎄라</strong>는 단순한 리프팅이 아닙니다. <br>
+                                당신의 고유한 골격과 근막층 깊이를 시각화하여 설계하는, <br>
+                                세상에 단 하나뿐인 <strong>초개인화 리프팅 의식(Ritual)</strong>입니다.
+                            </p>
+                        </div>
+
+                        <div class="mt-16 reveal-text delay-500 flex gap-6">
+                            <a href="#reservation" class="btn-lux group">
+                                <span>프라이빗 상담 예약</span>
+                                <i class="fa-solid fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                            <a href="#technology" class="flex items-center gap-3 text-hm-charcoal px-6 py-4 hover:text-hm-gold transition-colors">
+                                <span class="text-sm font-medium tracking-wider border-b border-current pb-1">DISCOVER TECHNOLOGY</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 relative h-[50vh] lg:h-[70vh] w-full group" data-speed="1.1">
+                        <div class="absolute inset-0 overflow-hidden shadow-2xl bg-gray-200 rounded-sm">
+                            <img src="https://d3gurpvil0se70.cloudfront.net/upfiles/images/product/PVvPh86eCCSWS62GlUtRYUQyQX28.jpg?q=90&f=webp&w=1024?q=80&w=2000&auto=format&fit=crop" 
+                                 alt="Hommage Ultherapy Mood" 
+                                 class="w-full h-[120%] object-cover object-center parallax-img scale-110 transition-transform duration-[2s] group-hover:scale-100">
+                        </div>
+                        
+                        <div class="absolute -bottom-8 -left-8 bg-white/90 backdrop-blur p-6 shadow-xl border border-white/40 hidden lg:block" data-speed="1.2">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-hm-gold rounded-full flex items-center justify-center text-white">
+                                    <i class="fas fa-award text-lg"></i>
+                                </div>
+                                <div>
+                                    <span class="block text-[10px] text-hm-gray uppercase tracking-widest mb-1">Authenticated</span>
+                                    <span class="block txt-display text-xl text-hm-black">Gold Standard</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-20 mix-blend-multiply">
+                    <div class="w-[1px] h-16 bg-hm-charcoal/20 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1/2 bg-hm-black animate-[movedown_2s_infinite]"></div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="py-12 bg-hm-charcoal overflow-hidden relative z-20 border-y border-white/5">
+                <div class="marquee-track flex gap-24 whitespace-nowrap animate-[marquee_30s_linear_infinite]">
+                    <span class="txt-display text-6xl lg:text-8xl text-hm-beige/10">HOMMAGE ULTHERAPY</span>
+                    <span class="txt-eng text-6xl lg:text-8xl text-hm-gold italic">Deep Visualization</span>
+                    <span class="txt-display text-6xl lg:text-8xl text-hm-beige/10">Precision Lifting</span>
+                    <span class="txt-eng text-6xl lg:text-8xl text-hm-gold italic">Authentic Standard</span>
+                    <span class="txt-display text-6xl lg:text-8xl text-hm-beige/10">HOMMAGE ULTHERAPY</span>
+                    <span class="txt-eng text-6xl lg:text-8xl text-hm-gold italic">Deep Visualization</span>
+                </div>
+            </div>
+
+            <section id="technology" class="sec-pad bg-white">
+                <div class="container-lux">
+                    
+                    <div class="flex flex-col lg:flex-row justify-between items-end mb-24 pb-8 border-b border-hm-line">
+                        <div class="mb-8 lg:mb-0 reveal-text">
+                            <span class="block text-hm-gold text-xs tracking-[0.3em] uppercase mb-4">Core Technology</span>
+                            <h2 class="txt-display text-5xl lg:text-7xl text-hm-black">
+                                See Deep, <br>
+                                <span class="txt-eng italic text-hm-gray">Lift High</span>
+                            </h2>
+                        </div>
+                        <p class="max-w-md text-gray-600 text-lg leading-relaxed text-right lg:text-left break-keep reveal-text delay-100">
+                            보이지 않는 곳을 보는 기술. 실시간 초음파 영상 기술(DeepSee™)로 피부 속 4.5mm SMAS층까지 직접 확인하며, 오차 없는 정밀함을 약속합니다.
+                        </p>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center mb-32">
+                        <div class="order-2 lg:order-1 reveal-text">
+                            <div class="space-y-8">
+                                <div class="flex items-start gap-4">
+                                    <span class="txt-eng text-4xl text-hm-gold italic">01</span>
+                                    <div>
+                                        <h3 class="txt-serif text-2xl font-bold text-hm-black mb-2">DeepSee™ 초음파 시각화</h3>
+                                        <p class="text-gray-600 leading-7 break-keep">
+                                            사람마다 피부 두께와 구조는 다릅니다. 오마쥬는 특허받은 실시간 초음파 기술로 피부 속 구조를 눈으로 직접 확인(See)하고, 필요한 부위에 정확히 에너지를 전달(Treat)합니다.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="pl-12">
+                                    <ul class="space-y-3 text-sm text-gray-500 font-light">
+                                        <li class="flex items-center gap-2"><i class="fas fa-check text-hm-gold text-xs"></i> 혈관 및 신경 손상 방지</li>
+                                        <li class="flex items-center gap-2"><i class="fas fa-check text-hm-gold text-xs"></i> 타겟층(SMAS) 정확한 타격</li>
+                                        <li class="flex items-center gap-2"><i class="fas fa-check text-hm-gold text-xs"></i> 개인별 맞춤 에너지 조절</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="order-1 lg:order-2 relative reveal-text delay-200">
+                            <div class="relative rounded-lg overflow-hidden shadow-2xl group border border-gray-100">
+                                <img src="https://www.blsclinic.com/common/img/package/ulthera/pc/ulthera_img7-min.png" 
+                                     alt="DeepSee Technology" 
+                                     class="w-full object-cover relative z-10"
+                                     onerror="this.src='https://ultherapy.com/app/themes/ultherapy2020/static/images/pages/hcp-radio-frequency.webp'"> <div class="absolute inset-0 z-20 pointer-events-none">
+                                    <div class="w-full h-[2px] bg-hm-gold shadow-[0_0_15px_rgba(191,164,127,1)] absolute top-0 animate-[scanY_4s_linear_infinite]"></div>
+                                    
+                                    <div class="absolute top-4 right-4 bg-black/70 backdrop-blur px-3 py-2 rounded text-[10px] font-mono text-hm-gold">
+                                        <span class="block">DEPTH: 4.5mm</span>
+                                        <span class="block">TARGET: SMAS</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="mt-4 text-xs text-center text-gray-400 font-mono tracking-widest">REAL-TIME ULTRASOUND VISUALIZATION</p>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-12 gap-12 items-center bg-hm-beige p-8 lg:p-12 rounded-xl">
+                        <div class="lg:col-span-7 relative">
+                            <img src="https://t3.ftcdn.net/jpg/05/10/25/92/360_F_510259228_8LJr96GlTNWRlMpIs5gXvAPjKlazPQaA.jpg" 
+                                 alt="Temperature Mechanism" 
+                                 class="w-full rounded shadow-lg mix-blend-multiply"
+                                 onerror="this.src='http://www.blsclinic1.com/img/center/ulthera/cont1_img1.jpg'">
+                        </div>
+                        
+                        <div class="lg:col-span-5 space-y-8">
+                            <div class="mb-6">
+                                <span class="txt-eng text-4xl text-hm-gold italic block mb-2">02</span>
+                                <h3 class="txt-serif text-2xl font-bold text-hm-black">최적의 온도 60-70°C</h3>
+                                <p class="text-gray-600 mt-4 leading-7 text-sm break-keep">
+                                    콜라겐 재생에 가장 효과적인 60~70°C의 열에너지를 피부 표면 손상 없이 전달합니다.
+                                </p>
+                            </div>
+
+                            <div class="space-y-2">
+                                <div class="group border border-hm-charcoal/10 bg-white p-4 cursor-pointer hover:border-hm-gold transition-colors">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold text-hm-charcoal text-sm">1.5mm Dermis</span>
+                                        <span class="text-xs text-hm-gold">잔주름/모공</span>
+                                    </div>
+                                    <div class="h-0 overflow-hidden group-hover:h-auto transition-all duration-300">
+                                        <p class="text-xs text-gray-500 mt-2 pt-2 border-t border-gray-100">진피 상부를 자극하여 피부결과 미세 주름을 개선합니다.</p>
+                                    </div>
+                                </div>
+                                <div class="group border border-hm-charcoal/10 bg-white p-4 cursor-pointer hover:border-hm-gold transition-colors">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold text-hm-charcoal text-sm">3.0mm Subcutaneous</span>
+                                        <span class="text-xs text-hm-gold">지방/탄력</span>
+                                    </div>
+                                    <div class="h-0 overflow-hidden group-hover:h-auto transition-all duration-300">
+                                        <p class="text-xs text-gray-500 mt-2 pt-2 border-t border-gray-100">진피 하부와 지방층을 타겟팅하여 콜라겐을 생성합니다.</p>
+                                    </div>
+                                </div>
+                                <div class="group border border-hm-charcoal/10 bg-white p-4 cursor-pointer hover:border-hm-gold transition-colors">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold text-hm-charcoal text-sm">4.5mm SMAS</span>
+                                        <span class="text-xs text-hm-gold">강력 리프팅</span>
+                                    </div>
+                                    <div class="h-0 overflow-hidden group-hover:h-auto transition-all duration-300">
+                                        <p class="text-xs text-gray-500 mt-2 pt-2 border-t border-gray-100">노화의 원인인 근막층을 수축시켜 안면거상 효과를 냅니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="authenticity" class="sec-pad bg-hm-charcoal text-white relative overflow-hidden">
+                <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(#BFA47F 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+                <div class="container-lux relative z-10">
+                    <div class="text-center mb-20 reveal-text">
+                        <div class="inline-flex items-center gap-3 border border-hm-gold/30 rounded-full px-4 py-1 mb-6">
+                            <i class="fas fa-shield-alt text-hm-gold text-xs"></i>
+                            <span class="text-[10px] tracking-[0.2em] text-hm-gold uppercase">Authentic Guarantee</span>
+                        </div>
+                        <h2 class="txt-display text-4xl lg:text-6xl mb-6">The Golden Standard</h2>
+                        <p class="text-white/60 font-light max-w-2xl mx-auto leading-relaxed">
+                            오마쥬는 멀츠(Merz)사가 인증한 정품 울쎄라 시술 병원입니다.<br>
+                            불법 재생 팁 사용은 절대 용납하지 않으며, 시술 전 과정을 투명하게 공개합니다.
+                        </p>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        
+                        <div class="relative group reveal-text">
+                            <div class="absolute -inset-4 bg-gradient-to-r from-hm-gold/20 to-transparent rounded-full blur-3xl opacity-30 group-hover:opacity-50 transition-opacity"></div>
+                            
+                            <div class="relative">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="col-span-2">
+                                        <img src="https://cdn.imweb.me/thumbnail/20250509/5d17313944e08.png" alt="Ulthera Device" class="w-full rounded-lg shadow-2xl border border-white/10"
+                                         onerror="this.src='https://cdn.imweb.me/thumbnail/20210217/633190696328a.jpg'">
+                                    </div>
+                                   <div class="absolute -bottom-6 -right-6 w-1/2 max-w-[240px] shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-transform duration-500 group-hover:-translate-y-2 transform hover:scale-105 z-20">
+             <img src="https://www.blsclinic.com/common/img/package/ulthera/pc/ulthera_img18-min.png" 
+                  alt="Authenticity Certificate" 
+                  class="w-full rounded-lg border-2 border-hm-gold bg-white p-1">
+        </div>
+    </div>
+</div>
+                        </div>
+
+                        <div class="lg:pl-16 space-y-12 reveal-text delay-200">
+                            <div class="border-l border-hm-gold/30 pl-8">
+                                <h3 class="txt-serif text-2xl text-hm-gold mb-4">Amplify II™ Software</h3>
+                                <p class="text-white/70 font-light leading-7">
+                                    최신 소프트웨어 업그레이드가 완료된 정품 장비만을 사용합니다. 
+                                    더욱 안정된 에너지 출력과 선명해진 영상 기술을 경험하세요.
+                                </p>
+                            </div>
+
+                            <div class="border-l border-white/10 pl-8 group hover:border-hm-gold transition-colors">
+                                <h3 class="txt-serif text-2xl text-white group-hover:text-hm-gold transition-colors mb-4">정품 팁 현장 개봉</h3>
+                                <p class="text-white/70 font-light leading-7">
+                                    시술 직전, 고객님 눈앞에서 미개봉 정품 팁을 확인시켜 드리고 개봉합니다. 
+                                    사용된 팁은 시술 후 폐기 원칙을 준수합니다.
+                                </p>
+                            </div>
+
+                            <div class="border-l border-white/10 pl-8 group hover:border-hm-gold transition-colors">
+                                <h3 class="txt-serif text-2xl text-white group-hover:text-hm-gold transition-colors mb-4">정품 인증서 발급</h3>
+                                <p class="text-white/70 font-light leading-7">
+                                    시술 후 사용된 샷 수(Shot)와 팁의 일련번호가 기재된 
+                                    멀츠 공식 정품 인증서를 발급해 드립니다.
+                                </p>
+                                <div class="mt-6">
+                                    <a href="#process" class="text-xs tracking-widest text-hm-gold border-b border-hm-gold pb-1 hover:text-white hover:border-white transition-colors">
+                                        VIEW VERIFICATION PROCESS
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div class="mt-24 pt-10 border-t border-white/5 text-center">
+                        <p class="text-white/40 text-sm mb-4">처음부터 끝까지 투명하게</p>
+                        <div class="flex justify-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-hm-gold"></span>
+                            <span class="w-2 h-2 rounded-full bg-hm-gold opacity-50"></span>
+                            <span class="w-2 h-2 rounded-full bg-hm-gold opacity-25"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="area" class="sec-pad bg-hm-beige relative">
+                <div class="absolute top-[5%] left-0 w-full overflow-hidden pointer-events-none opacity-[0.03]">
+                    <span class="txt-display text-[15vw] leading-none text-hm-charcoal whitespace-nowrap pl-[10vw]">CURATED ZONES</span>
+                </div>
+
+                <div class="container-lux relative z-10">
+                    <div class="mb-20 text-center reveal-text">
+                        <span class="text-hm-gold text-xs tracking-[0.4em] uppercase mb-4 block">Personalized Design</span>
+                        <h2 class="txt-serif text-4xl lg:text-5xl text-hm-black">당신의 선을 재정의하다</h2>
+                        <p class="mt-6 text-gray-500 font-light max-w-lg mx-auto">
+                            획일화된 시술이 아닌, 부위별 피부 두께와 처짐 정도를 고려한 <br>
+                            정교한 커스텀 디자인을 제안합니다.
+                        </p>
+                    </div>
+
+                    <div class="grid lg:grid-cols-12 gap-12 items-start">
+                        
+                        <div class="lg:col-span-6 sticky top-[120px] mb-12 lg:mb-0">
+                            <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-white p-4 border border-white/50">
+                                <div class="relative aspect-square lg:aspect-[4/5] overflow-hidden rounded-xl bg-gray-50">
+                                    <img src="https://cdn.abcn.kr/news/photo/202403/75126_26679_160.jpg" 
+                                         alt="Ultherapy Face Map" 
+                                         class="w-full h-full object-contain object-center scale-105"
+                                         onerror="this.src='https://cdna.artstation.com/p/assets/images/images/030/144/948/large/francesca-baerald-face-map-francescabaerald.jpg'">
+                                    
+                                    <div class="absolute top-[28%] left-[50%] -translate-x-1/2 group cursor-pointer">
+                                        <div class="w-3 h-3 bg-hm-gold rounded-full animate-ping absolute inset-0"></div>
+                                        <div class="w-3 h-3 bg-hm-gold rounded-full relative z-10 border border-white shadow-sm"></div>
+                                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1 bg-black text-white text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">이마/미간</div>
+                                    </div>
+
+                                    <div class="absolute top-[45%] left-[25%] group cursor-pointer">
+                                        <div class="w-3 h-3 bg-hm-gold rounded-full animate-ping absolute inset-0 animation-delay-500"></div>
+                                        <div class="w-3 h-3 bg-hm-gold rounded-full relative z-10 border border-white shadow-sm"></div>
+                                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1 bg-black text-white text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">팔자/심부볼</div>
+                                    </div>
+
+                                    <div class="absolute top-[65%] right-[30%] group cursor-pointer">
+                                        <div class="w-3 h-3 bg-hm-gold rounded-full animate-ping absolute inset-0 animation-delay-1000"></div>
+                                        <div class="w-3 h-3 bg-hm-gold rounded-full relative z-10 border border-white shadow-sm"></div>
+                                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1 bg-black text-white text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">이중턱/턱선</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-6 space-y-20 pt-10">
+                            
+                            <div class="group reveal-text">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <span class="text-5xl font-eng italic text-hm-gold/30 group-hover:text-hm-gold transition-colors">01</span>
+                                    <h3 class="text-2xl font-serif text-hm-black">Upper Face</h3>
+                                </div>
+                                <div class="pl-4 border-l border-hm-charcoal/10 group-hover:border-hm-gold transition-colors duration-500">
+                                    <h4 class="text-sm font-bold text-hm-charcoal uppercase tracking-widest mb-3">Forehead & Eyes</h4>
+                                    <p class="text-gray-600 leading-relaxed text-lg break-keep mb-4">
+                                        피부가 얇고 예민한 눈가와 이마는 1.5mm 팁을 사용하여 섬세하게 시술합니다. 처진 눈꺼풀을 리프팅하여 시원한 눈매를 완성하고, 이마의 잔주름을 개선합니다.
+                                    </p>
+                                    <ul class="text-sm text-gray-500 space-y-1">
+                                        <li>• 눈썹 리프팅 효과</li>
+                                        <li>• 눈가 잔주름 개선</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="group reveal-text">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <span class="text-5xl font-eng italic text-hm-gold/30 group-hover:text-hm-gold transition-colors">02</span>
+                                    <h3 class="text-2xl font-serif text-hm-black">Mid Face</h3>
+                                </div>
+                                <div class="pl-4 border-l border-hm-charcoal/10 group-hover:border-hm-gold transition-colors duration-500">
+                                    <h4 class="text-sm font-bold text-hm-charcoal uppercase tracking-widest mb-3">Cheeks & Nasolabial Folds</h4>
+                                    <p class="text-gray-600 leading-relaxed text-lg break-keep mb-4">
+                                        노안의 주범인 팔자주름과 심부볼 지방을 타겟팅합니다. 3.0mm와 4.5mm 팁을 교차 사용하여 깊은 곳에서부터 차오르는 볼륨감과 탄력을 선사합니다.
+                                    </p>
+                                    <ul class="text-sm text-gray-500 space-y-1">
+                                        <li>• 팔자주름 완화</li>
+                                        <li>• 앞광대 볼륨 회복</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="group reveal-text">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <span class="text-5xl font-eng italic text-hm-gold/30 group-hover:text-hm-gold transition-colors">03</span>
+                                    <h3 class="text-2xl font-serif text-hm-black">Lower Face</h3>
+                                </div>
+                                <div class="pl-4 border-l border-hm-charcoal/10 group-hover:border-hm-gold transition-colors duration-500">
+                                    <h4 class="text-sm font-bold text-hm-charcoal uppercase tracking-widest mb-3">Jawline & Double Chin</h4>
+                                    <p class="text-gray-600 leading-relaxed text-lg break-keep mb-4">
+                                        무너진 턱선을 날렵하게 정리합니다. 불필요한 지방을 수축시키고 근막층을 당겨주어, 어느 각도에서 보아도 완벽한 V라인을 디자인합니다.
+                                    </p>
+                                    <ul class="text-sm text-gray-500 space-y-1">
+                                        <li>• 이중턱 지방 감소</li>
+                                        <li>• 날렵한 턱선 윤곽</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="group reveal-text">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <span class="text-5xl font-eng italic text-hm-gold/30 group-hover:text-hm-gold transition-colors">04</span>
+                                    <h3 class="text-2xl font-serif text-hm-black">Neck Line</h3>
+                                </div>
+                                <div class="pl-4 border-l border-hm-charcoal/10 group-hover:border-hm-gold transition-colors duration-500">
+                                    <h4 class="text-sm font-bold text-hm-charcoal uppercase tracking-widest mb-3">Neck & Decollete</h4>
+                                    <p class="text-gray-600 leading-relaxed text-lg break-keep mb-4">
+                                        나이테처럼 깊어진 목주름을 개선합니다. 얼굴 리프팅과 함께 진행하여 경계 없는 우아함을 완성합니다.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="process" class="sec-pad bg-hm-charcoal text-hm-beige overflow-hidden">
+                <div class="container-lux">
+                    
+                    <div class="grid lg:grid-cols-2 gap-20">
+                        <div class="relative">
+                            <div class="sticky top-[150px]">
+                                <span class="block text-hm-gold text-xs tracking-[0.4em] uppercase mb-6 reveal-text">The Ritual</span>
+                                <h2 class="txt-display text-6xl lg:text-7xl leading-tight mb-8 reveal-text">
+                                    Steps to <br>
+                                    <span class="text-hm-gold italic txt-eng">Perfection</span>
+                                </h2>
+                                <p class="text-white/60 text-lg leading-relaxed max-w-sm mb-12 reveal-text delay-100">
+                                    오마쥬의 시술 과정은 단순한 의료 행위가 아닙니다. <br>
+                                    가장 편안하고 안전한 결과를 위한 당신만의 의식입니다.
+                                </p>
+
+                                <div class="rounded-lg overflow-hidden border border-white/10 relative group reveal-text delay-200">
+                                    <div class="absolute inset-0 bg-black/50 group-hover:bg-transparent transition-colors z-10"></div>
+                                    <span class="absolute top-4 left-4 z-20 text-[10px] bg-hm-gold text-black px-2 py-1 uppercase tracking-widest font-bold">Process Map</span>
+                                    <img src="https://www.docdocdoc.co.kr/news/photo/202409/3021336_3023843_4539.jpg" alt="Ultherapy Process Step 1-8" class="w-full opacity-60 group-hover:opacity-100 transition-opacity duration-50">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative pt-10 lg:pt-0">
+                            <div class="absolute left-[19px] top-10 bottom-10 w-[1px] bg-white/10 hidden lg:block"></div>
+
+                            <div class="space-y-0">
+                                <div class="group pl-0 lg:pl-16 py-8 relative hover:bg-white/5 transition-colors rounded-r-xl border-b border-white/5 lg:border-none">
+                                    <span class="hidden lg:block absolute left-[15px] top-[45px] w-[9px] h-[9px] bg-hm-charcoal border border-white/30 rounded-full group-hover:bg-hm-gold group-hover:border-hm-gold transition-all duration-300 z-10"></span>
+                                    
+                                    <span class="txt-eng text-sm text-hm-gold tracking-widest mb-2 block">STEP 01</span>
+                                    <h3 class="txt-serif text-2xl font-medium mb-3 text-white">맞춤 상담 <span class="text-base font-light text-white/40 ml-2">Consultation</span></h3>
+                                    <p class="text-white/50 font-light leading-relaxed">
+                                        3D 얼굴 분석기를 통해 골격, 지방 분포, 비대칭을 정밀 진단하고 개인별 맞춤 샷 수와 디자인을 설계합니다.
+                                    </p>
+                                </div>
+
+                                <div class="group pl-0 lg:pl-16 py-8 relative hover:bg-white/5 transition-colors rounded-r-xl border-b border-white/5 lg:border-none">
+                                    <span class="hidden lg:block absolute left-[15px] top-[45px] w-[9px] h-[9px] bg-hm-charcoal border border-white/30 rounded-full group-hover:bg-hm-gold group-hover:border-hm-gold transition-all duration-300 z-10"></span>
+                                    
+                                    <span class="txt-eng text-sm text-hm-gold tracking-widest mb-2 block">STEP 02-03</span>
+                                    <h3 class="txt-serif text-2xl font-medium mb-3 text-white">클렌징 & 사진촬영 <span class="text-base font-light text-white/40 ml-2">Preparation</span></h3>
+                                    <p class="text-white/50 font-light leading-relaxed">
+                                        프라이빗 룸에서 편안하게 딥 클렌징을 진행한 후, 시술 전후 비교를 위한 정밀 사진 촬영을 진행합니다.
+                                    </p>
+                                </div>
+
+                                <div class="group pl-0 lg:pl-16 py-8 relative bg-gradient-to-r from-hm-gold/10 to-transparent border-l-2 border-hm-gold rounded-r-xl">
+                                    <span class="hidden lg:block absolute left-[15px] top-[45px] w-[9px] h-[9px] bg-hm-gold border border-hm-gold rounded-full shadow-[0_0_10px_#BFA47F] z-10"></span>
+                                    
+                                    <span class="txt-eng text-sm text-hm-gold tracking-widest mb-2 block">STEP 04</span>
+                                    <h3 class="txt-serif text-2xl font-medium mb-3 text-white">3단계 통증 케어 <span class="text-base font-light text-white/40 ml-2">Anesthesia</span></h3>
+                                    <div class="flex flex-wrap gap-2 mb-3">
+                                        <span class="px-2 py-1 bg-white/10 text-[10px] rounded text-white/80">연고마취</span>
+                                        <span class="px-2 py-1 bg-white/10 text-[10px] rounded text-white/80">근육주사</span>
+                                        <span class="px-2 py-1 bg-white/10 text-[10px] rounded text-white/80">진통제 복용</span>
+                                    </div>
+                                    <p class="text-white/80 font-light leading-relaxed">
+                                        오마쥬만의 <strong>트리플 마취 시스템</strong>으로 통증을 최소화합니다. 아프지 않은 울쎄라를 경험해보세요.
+                                    </p>
+                                </div>
+
+                                <div class="group pl-0 lg:pl-16 py-8 relative hover:bg-white/5 transition-colors rounded-r-xl border-b border-white/5 lg:border-none">
+                                    <span class="hidden lg:block absolute left-[15px] top-[45px] w-[9px] h-[9px] bg-hm-charcoal border border-white/30 rounded-full group-hover:bg-hm-gold group-hover:border-hm-gold transition-all duration-300 z-10"></span>
+                                    
+                                    <span class="txt-eng text-sm text-hm-gold tracking-widest mb-2 block">STEP 05-06</span>
+                                    <h3 class="txt-serif text-2xl font-medium mb-3 text-white">초음파 젤 도포 & 시술 <span class="text-base font-light text-white/40 ml-2">Procedure</span></h3>
+                                    <p class="text-white/50 font-light leading-relaxed">
+                                        전용 초음파 젤을 도포 후, 실시간 모니터링을 통해 정해진 샷 수를 정확한 타겟층에 조사합니다.
+                                    </p>
+                                </div>
+
+                                <div class="group pl-0 lg:pl-16 py-8 relative hover:bg-white/5 transition-colors rounded-r-xl border-b border-white/5 lg:border-none">
+                                    <span class="hidden lg:block absolute left-[15px] top-[45px] w-[9px] h-[9px] bg-hm-charcoal border border-white/30 rounded-full group-hover:bg-hm-gold group-hover:border-hm-gold transition-all duration-300 z-10"></span>
+                                    
+                                    <span class="txt-eng text-sm text-hm-gold tracking-widest mb-2 block">STEP 07</span>
+                                    <h3 class="txt-serif text-2xl font-medium mb-3 text-white">진정 관리 & 마무리 <span class="text-base font-light text-white/40 ml-2">After Care</span></h3>
+                                    <p class="text-white/50 font-light leading-relaxed">
+                                        자극받은 피부를 위해 LDM 물방울 리프팅 또는 크라이오 진정 관리로 붉은 기와 열감을 빠르게 진정시킵니다.
+                                    </p>
+                                </div>
+
+                                <div class="group pl-0 lg:pl-16 py-8 relative hover:bg-white/5 transition-colors rounded-r-xl">
+                                    <span class="hidden lg:block absolute left-[15px] top-[45px] w-[9px] h-[9px] bg-hm-charcoal border border-white/30 rounded-full group-hover:bg-hm-gold group-hover:border-hm-gold transition-all duration-300 z-10"></span>
+                                    
+                                    <span class="txt-eng text-sm text-hm-gold tracking-widest mb-2 block">STEP 08</span>
+                                    <h3 class="txt-serif text-2xl font-medium mb-3 text-white">정품 인증서 발급 <span class="text-base font-light text-white/40 ml-2">Certificate</span></h3>
+                                    <p class="text-white/50 font-light leading-relaxed">
+                                        시술이 끝난 후 사용된 샷 수와 팁의 일련번호가 적힌 정품 인증서를 발급해 드리며, 정품 확인 앱 사용법을 안내해 드립니다.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sec-pad bg-white">
+                <div class="container-lux max-w-[1000px]">
+                    <div class="text-center mb-16 reveal-text">
+                        <span class="text-hm-gold text-xs tracking-[0.3em] uppercase mb-4 block">Q&A Advisory</span>
+                        <h2 class="txt-serif text-3xl lg:text-4xl text-hm-black">자주 묻는 질문</h2>
+                    </div>
+
+                    <div class="border-t border-hm-black reveal-text delay-100">
+                        <details class="group border-b border-hm-line">
+                            <summary class="flex justify-between items-center py-8 cursor-pointer list-none transition-colors hover:bg-gray-50 px-4">
+                                <span class="txt-serif text-xl text-hm-charcoal group-hover:text-hm-gold transition-colors">Q. 시술 효과는 언제부터 나타나나요?</span>
+                                <span class="text-2xl font-thin text-hm-gray group-open:rotate-45 transition-transform duration-300">+</span>
+                            </summary>
+                            <div class="pb-8 px-8 text-gray-600 leading-7 font-light animate-[fadeIn_0.5s_ease-out]">
+                                시술 직후 즉각적인 타이트닝 효과를 느낄 수 있으나, 콜라겐 재생이 본격화되는 <strong>1개월 후부터 효과가 더욱 뚜렷해집니다.</strong><br>
+                                개인의 피부 상태에 따라 다르지만, 평균적으로 1년에서 1년 6개월 정도 효과가 유지됩니다.
+                            </div>
+                        </details>
+
+                        <details class="group border-b border-hm-line">
+                            <summary class="flex justify-between items-center py-8 cursor-pointer list-none transition-colors hover:bg-gray-50 px-4">
+                                <span class="txt-serif text-xl text-hm-charcoal group-hover:text-hm-gold transition-colors">Q. 통증이 심한가요?</span>
+                                <span class="text-2xl font-thin text-hm-gray group-open:rotate-45 transition-transform duration-300">+</span>
+                            </summary>
+                            <div class="pb-8 px-8 text-gray-600 leading-7 font-light animate-[fadeIn_0.5s_ease-out]">
+                                개인차가 있으나, 오마쥬 클리닉만의 <strong>3단계 마취 시스템(연고, 국소, 진통제)</strong>을 통해 통증을 최소화했습니다.<br>
+                                대부분의 고객님께서 "생각보다 참을 만했다"고 말씀하시니 크게 걱정하지 않으셔도 됩니다.
+                            </div>
+                        </details>
+
+                        <details class="group border-b border-hm-line">
+                            <summary class="flex justify-between items-center py-8 cursor-pointer list-none transition-colors hover:bg-gray-50 px-4">
+                                <span class="txt-serif text-xl text-hm-charcoal group-hover:text-hm-gold transition-colors">Q. 일상생활은 바로 가능한가요?</span>
+                                <span class="text-2xl font-thin text-hm-gray group-open:rotate-45 transition-transform duration-300">+</span>
+                            </summary>
+                            <div class="pb-8 px-8 text-gray-600 leading-7 font-light animate-[fadeIn_0.5s_ease-out]">
+                                네, 울쎄라는 피부 표면(상피)에 손상을 주지 않는 비침습 시술입니다.<br>
+                                <strong>시술 직후 세안 및 메이크업이 가능</strong>하며, 약간의 붉은 기나 붓기는 수 시간 내 자연스럽게 사라집니다.
+                            </div>
+                        </details>
+                        
+                        <details class="group border-b border-hm-line">
+                            <summary class="flex justify-between items-center py-8 cursor-pointer list-none transition-colors hover:bg-gray-50 px-4">
+                                <span class="txt-serif text-xl text-hm-charcoal group-hover:text-hm-gold transition-colors">Q. 써마지와 울쎄라의 차이점은 무엇인가요?</span>
+                                <span class="text-2xl font-thin text-hm-gray group-open:rotate-45 transition-transform duration-300">+</span>
+                            </summary>
+                            <div class="pb-8 px-8 text-gray-600 leading-7 font-light animate-[fadeIn_0.5s_ease-out]">
+                                <strong>울쎄라</strong>는 근막층(SMAS)을 수축시켜 <strong>처진 살을 끌어올리는(Lifting)</strong> 데 효과적이며,<br>
+                                <strong>써마지</strong>는 진피층의 콜라겐을 재생시켜 <strong>피부를 쫀쫀하게 조여주는(Tightening)</strong> 데 효과적입니다.<br>
+                                두 가지 고민이 복합적이라면 '울써마지' 병행 시술을 추천해 드립니다.
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <section id="reservation" class="sec-pad bg-hm-charcoal text-white relative overflow-hidden">
+                <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
+
+                <div class="container-lux relative z-10">
+                    <div class="grid lg:grid-cols-2 gap-20 lg:gap-40">
+                        
+                        <div class="flex flex-col justify-center reveal-text">
+                            <span class="text-hm-gold text-xs tracking-[0.4em] uppercase mb-8 block">Private Booking</span>
+                            <h2 class="txt-display text-6xl lg:text-7xl leading-tight mb-10">
+                                Begin Your <br>
+                                <span class="text-hm-gold italic txt-eng">Journey</span>
+                            </h2>
+                            <p class="text-white/60 text-lg leading-relaxed mb-12 max-w-md break-keep">
+                                오마쥬의 모든 시술은 100% 예약제로 운영됩니다.<br>
+                                아래 양식을 남겨주시면, 전담 컨시어지가 <br>
+                                가장 편안한 시간대에 연락드리겠습니다.
+                            </p>
+                            
+                            <div class="space-y-6 text-sm text-white/40 font-light pl-2 border-l border-hm-gold/20">
+                                <p class="flex items-center gap-4"><i class="fa-solid fa-location-dot w-4 text-hm-gold"></i> 서울 강남구 도산대로 67길 13-5</p>
+                                <p class="flex items-center gap-4"><i class="fa-solid fa-phone w-4 text-hm-gold"></i> 02-543-4842</p>
+                                <p class="flex items-center gap-4"><i class="fa-regular fa-clock w-4 text-hm-gold"></i> Mon - Fri : 10:00 - 20:00</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-sm p-10 lg:p-16 border border-white/10 reveal-text delay-200 shadow-2xl">
+                            <form class="space-y-10">
+                                <div class="space-y-2 group">
+                                    <label class="text-xs text-hm-gold tracking-widest uppercase ml-1 opacity-70 group-hover:opacity-100 transition-opacity">Name</label>
+                                    <input type="text" class="w-full bg-transparent border-b border-white/20 py-4 text-xl text-white focus:border-hm-gold outline-none transition-colors placeholder-white/10" placeholder="성함을 입력해주세요">
+                                </div>
+                                
+                                <div class="space-y-2 group">
+                                    <label class="text-xs text-hm-gold tracking-widest uppercase ml-1 opacity-70 group-hover:opacity-100 transition-opacity">Contact</label>
+                                    <input type="tel" class="w-full bg-transparent border-b border-white/20 py-4 text-xl text-white focus:border-hm-gold outline-none transition-colors placeholder-white/10" placeholder="연락처를 입력해주세요">
+                                </div>
+
+                                <div class="space-y-2 group">
+                                    <label class="text-xs text-hm-gold tracking-widest uppercase ml-1 opacity-70 group-hover:opacity-100 transition-opacity">Inquiry</label>
+                                    <div class="relative">
+                                        <select class="w-full bg-transparent border-b border-white/20 py-4 text-xl text-white focus:border-hm-gold outline-none transition-colors cursor-pointer appearance-none rounded-none">
+                                            <option class="bg-hm-charcoal text-white" value="">관심 시술 선택 (Ultherapy)</option>
+                                            <option class="bg-hm-charcoal text-white" value="ulthera">울쎄라 리프팅</option>
+                                            <option class="bg-hm-charcoal text-white" value="ulthermage">울써마지 (울쎄라+써마지)</option>
+                                            <option class="bg-hm-charcoal text-white" value="consult">기타 안티에이징 상담</option>
+                                        </select>
+                                        <i class="fas fa-chevron-down absolute right-2 top-1/2 -translate-y-1/2 text-white/30 pointer-events-none"></i>
+                                    </div>
+                                </div>
+
+                                <div class="pt-8">
+                                    <button type="button" class="btn-lux w-full border-white/30 text-white hover:bg-white hover:text-hm-black hover:border-white">
+                                        <span>REQUEST CONSULTATION</span>
+                                    </button>
+                                </div>
+                                
+                                <p class="text-[10px] text-white/30 text-center leading-relaxed">
+                                    * 보내주신 정보는 상담 예약 목적으로만 활용되며,<br>개인정보보호법에 따라 안전하게 관리됩니다.
+                                </p>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <footer class="bg-hm-black text-white/40 pt-20 pb-10 border-t border-white/5 text-xs font-light tracking-wide">
+                <div class="container-lux">
+                    <div class="flex flex-col lg:flex-row justify-between items-start gap-12 mb-20">
+                        <div class="space-y-6 max-w-md">
+                            <h2 class="txt-display text-3xl text-white tracking-widest">HOMMAGE</h2>
+                            <p class="leading-relaxed text-white/50">
+                                <strong>오마쥬 의원</strong> | 대표원장: 김이름<br>
+                                사업자등록번호: 123-45-67890 | 의료기관개설신고증: 제 2023-서울강남-0000호<br>
+                                서울시 강남구 도산대로 67길 Hommage Bldg.
+                            </p>
+                            <p class="text-[10px] text-white/30">
+                                ※ 시술 후 개인에 따라 멍, 붓기, 통증 등이 발생할 수 있습니다.
+                            </p>
+                        </div>
+                        <div class="flex gap-16">
+                            <ul class="space-y-3">
+                                <li class="text-white uppercase tracking-widest text-[10px] mb-2 text-hm-gold">Brand</li>
+                                <li><a href="#" class="hover:text-white transition-colors">Philosophy</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors">Doctors</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors">Interior</a></li>
+                            </ul>
+                            <ul class="space-y-3">
+                                <li class="text-white uppercase tracking-widest text-[10px] mb-2 text-hm-gold">Social</li>
+                                <li><a href="#" class="hover:text-white transition-colors"><i class="fab fa-instagram mr-2"></i>Instagram</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors"><i class="fab fa-youtube mr-2"></i>Youtube</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors"><i class="fas fa-comment mr-2"></i>Kakao Talk</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex flex-col lg:flex-row justify-between items-center gap-4 pt-10 border-t border-white/5">
+                        <p>COPYRIGHT © 2026 HOMMAGE CLINIC. ALL RIGHTS RESERVED.</p>
+                        <p class="opacity-50">Designed by Luxury Creative</p>
+                    </div>
+                </div>
+            </footer>
+
+        </div> </main> <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <script>
+        // 1. Initialize Lenis (Premium Smooth Scroll)
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // 2. GSAP Configuration
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 3. Parallax Effect for Images
+        const parallaxImages = document.querySelectorAll(".parallax-img");
+        parallaxImages.forEach((img) => {
+            gsap.to(img, {
+                yPercent: 15, // Move image slightly slower than scroll
+                ease: "none",
+                scrollTrigger: {
+                    trigger: img.parentElement,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+        });
+
+        // 4. Text Reveal Animation (Fade Up)
+        const revealElements = document.querySelectorAll(".reveal-text");
+        revealElements.forEach(el => {
+            gsap.fromTo(el, 
+                { y: 50, opacity: 0 },
+                {
+                    y: 0, opacity: 1, duration: 1.2, ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%", // Trigger when top of element hits 85% of viewport
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // 5. Active Link Highlighting (Dot Nav)
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll("#dot-nav a");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - sectionHeight / 3) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach((link) => {
+                link.classList.remove("opacity-100", "scale-110"); // Reset generic styles if any
+                const dot = link.querySelector("div");
+                const text = link.querySelector("span");
+                
+                // Reset dot styles
+                dot.classList.remove("scale-150", "opacity-100");
+                dot.classList.add("opacity-30");
+                
+                // Reset text styles
+                text.classList.remove("opacity-100", "translate-x-0");
+                text.classList.add("translate-x-2");
+
+                if (link.getAttribute("href").includes(current)) {
+                    // Active State
+                    dot.classList.add("scale-150", "opacity-100");
+                    dot.classList.remove("opacity-30");
+                    
+                    text.classList.add("opacity-100", "translate-x-0");
+                    text.classList.remove("translate-x-2");
+                }
+            });
+        });
+
+        // 6. Header Scroll Logic (Hide/Show)
+        let lastScrollTop = 0;
+        const header = document.getElementById("main-header");
+        
+        window.addEventListener("scroll", function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scroll Down -> Hide
+                header.style.transform = "translateY(-100%)";
+            } else {
+                // Scroll Up -> Show
+                header.style.transform = "translateY(0)";
+            }
+            lastScrollTop = scrollTop;
+        });
+
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const style = document.createElement('style');
+            style.innerHTML = `
+                /* 1. 모든 메인 이미지에 럭셔리 필터 적용 */
+                main img {
+                    filter: grayscale(60%) sepia(10%) contrast(95%) brightness(0.95);
+                    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); /* 부드러운 전환 */
+                    mix-blend-mode: normal;
+                }
+
+                /* 2. Hero 섹션(맨 위) 이미지는 조금 더 선명하게 유지 (임팩트) */
+                #intro img {
+                    filter: grayscale(30%) sepia(10%) contrast(100%);
+                }
+
+                /* 3. 마우스 호버 시 원본 색상 복구 (생동감) */
+                main img:hover,
+                .group:hover img { /* 그룹 호버 시 이미지도 같이 반응 */
+                    filter: grayscale(0%) sepia(0%) contrast(100%) brightness(100%);
+                    transform: scale(1.02); /* 살짝 커지는 효과 추가 */
+                }
+
+                /* 4. 검은 배경 섹션(Authenticity) 이미지는 밝기 조절 */
+                #authenticity img {
+                    filter: grayscale(50%) sepia(0%) brightness(0.9);
+                }
+                #authenticity .group:hover img {
+                    filter: grayscale(0%) brightness(100%);
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>

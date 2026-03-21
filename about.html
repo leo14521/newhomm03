@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HOMMAGE | Brand Story</title>
+    
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Italiana&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <style>
+        /* --- [1] DESIGN TOKENS (index.html과 동일) --- */
+        :root {
+            --c-bg-deep: #F7F6F5; --c-bg-sub: #EBE9E6; --c-bg-panel: #E3E0DC;
+            --c-text-primary: #1A1918; --c-text-muted: #999692;
+            --c-accent: #9C8C74; --c-border: rgba(0, 0, 0, 0.08);
+            --font-kr: 'Pretendard', sans-serif; --font-kr-serif: 'Noto Serif KR', serif;
+            --font-display: 'Italiana', serif; --font-en-serif: 'Cormorant Garamond', serif;
+            --header-h: 90px; --sidebar-w: 100px; --pad-global: 6vw;
+        }
+        /* --- [2] BASE STYLES --- */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--c-bg-deep); color: var(--c-text-primary); font-family: var(--font-kr); padding-left: var(--sidebar-w); }
+        a { text-decoration: none; color: inherit; }
+        
+        /* 공통 헤더/사이드바 스타일 */
+        .sidebar-desk { position: fixed; top: 0; left: 0; width: var(--sidebar-w); height: 100vh; background: #FFF; border-right: 1px solid var(--c-border); z-index: 1001; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 40px 0; }
+        .sb-logo-v { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--font-display); letter-spacing: 4px; cursor: pointer; }
+        .sb-nav { display: flex; flex-direction: column; gap: 25px; }
+        .sb-icon { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--c-border); display: flex; justify-content: center; align-items: center; color: var(--c-text-muted); transition: 0.3s; }
+        .sb-btn-link:hover .sb-icon { background: var(--c-accent); color: #fff; border-color: var(--c-accent); }
+        
+        header { position: fixed; top: 0; left: 100px; width: calc(100% - 100px); height: 100px; z-index: 1000; background: #FFF; display: flex; align-items: center; padding: 0 4vw; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .logo-text { font-family: var(--font-display); font-size: 24px; letter-spacing: 0.15em; }
+        .gnb-area { display: flex; gap: 40px; height: 100%; align-items: center; }
+        .gnb-item a { font-size: 13px; font-weight: 600; letter-spacing: 0.05em; }
+        
+        /* 섹션 공통 스타일 */
+        section { padding: 140px var(--pad-global); position: relative; }
+        section:nth-of-type(even) { background-color: #F9F8F7; }
+        section:nth-of-type(odd) { background-color: #FFFFFF; }
+        .sec-head { text-align: center; margin-bottom: 80px; }
+        .sec-label { display: block; font-family: var(--font-display); font-size: 13px; letter-spacing: 0.3em; color: var(--c-accent); margin-bottom: 20px; }
+        .philo-tit { font-family: var(--font-kr-serif); font-size: clamp(32px, 4vw, 48px); line-height: 1.3; margin-bottom: 20px; }
+        
+        /* 모바일 대응 */
+        @media (max-width: 1024px) {
+            body { padding-left: 0; }
+            .sidebar-desk, .gnb-area { display: none; }
+            header { left: 0; width: 100%; height: 70px; padding: 0 20px; }
+            section { padding: 80px 20px; }
+        }
+
+        /* --- [3] ABOUT PAGE SPECIFIC STYLES --- */
+        .hero-wrap { padding: 0 !important; height: 60vh; min-height: 500px; position: relative; background: #000; overflow: hidden; }
+        .slide-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transform: scale(1.1); }
+        .slide-content { position: absolute; top: 50%; left: var(--pad-global); transform: translateY(-50%); z-index: 10; color: #fff; }
+        .slide-subtitle { color: var(--c-accent); font-family: var(--font-display); letter-spacing: 0.4em; display: block; margin-bottom: 20px; }
+        .slide-title { font-family: var(--font-kr-serif); font-size: clamp(40px, 5vw, 60px); line-height: 1.2; color: #fff; }
+        
+        .philo-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: center; }
+        .philo-desc { border-left: 1px solid var(--c-accent); padding-left: 30px; margin-bottom: 40px; color: #555; line-height: 1.8; }
+        .career-list li { margin-bottom: 8px; font-size: 15px; color: #666; }
+        
+        .program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .lux-card { padding: 40px; background: #F9F8F7; height: 350px; display: flex; flex-direction: column; justify-content: center; transition: 0.3s; }
+        .lux-card:hover { transform: translateY(-10px); background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        
+        @media (max-width: 1024px) {
+            .philo-grid, .program-grid { grid-template-columns: 1fr; gap: 40px; }
+            .philo-desc { border-left: none; border-top: 1px solid var(--c-accent); padding-left: 0; padding-top: 30px; }
+            .lux-card { height: auto; min-height: 250px; }
+        }
+    </style>
+</head>
+
+<body class="hover-target">
+    <aside class="sidebar-desk">
+        <div class="sb-logo-wrap"><a href="index.html" class="sb-logo-v">HOMMAGE</a></div>
+        <nav class="sb-nav">
+            <a href="#" class="sb-btn-link"><div class="sb-icon"><i class="fas fa-phone"></i></div></a>
+            <a href="#" class="sb-btn-link"><div class="sb-icon"><i class="far fa-calendar-check"></i></div></a>
+        </nav>
+        <div class="sb-bottom"><button class="sb-bottom-btn"><i class="fas fa-arrow-up"></i></button></div>
+    </aside>
+
+    <header id="main-header">
+        <div class="header-inner" style="width:100%; display:flex; justify-content:space-between; align-items:center;">
+            <div class="logo-area"><a href="index.html" class="logo-text">HOMMAGE</a></div>
+            <nav class="gnb-area">
+                <div class="gnb-item"><a href="about.html">BRAND</a></div>
+                <div class="gnb-item"><a href="sub_ulthera.html">CENTER</a></div>
+                <div class="gnb-item"><a href="#">PROGRAM</a></div>
+                <div class="gnb-item"><a href="#">EVENT</a></div>
+            </nav>
+            <div class="mobile-toggle" style="display:none;"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+
+    <main id="sub-contents">
+        
+        <section class="hero-wrap">
+            <div class="slide-bg-wrap">
+                <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?q=80&w=2000" class="slide-bg" alt="About Hero">
+            </div>
+            <div class="slide-content">
+                <span class="slide-subtitle reveal-text">ABOUT HOMMAGE</span>
+                <h1 class="slide-title reveal-text">
+                    가장 나다운 아름다움,<br>
+                    <span class="f-en italic gold">The Private Masterpiece</span>
+                </h1>
+            </div>
+        </section>
+
+        <section class="section-philo">
+            <div class="philo-grid">
+                <div class="doctor-img reveal-text" style="height: 600px; overflow: hidden; border-radius: 4px;">
+                    <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1000" style="width:100%; height:100%; object-fit:cover;" alt="Doctor">
+                </div>
+                <div class="philo-text-wrap reveal-text">
+                    <span class="sec-label">REPRESENTATIVE DIRECTOR</span>
+                    <h3 class="philo-tit">대표원장 <span class="bold">홍 길 동</span></h3>
+                    <div class="philo-desc">
+                        <p>"획일화된 시술이 아닌, 개인의 고유한 매력을 찾아내는 것이 진정한 의술입니다."</p>
+                        <p>오마쥬 의원은 단순한 치료를 넘어, 당신의 삶에 자신감을 불어넣는 라이프 스타일 파트너가 되겠습니다.</p>
+                    </div>
+                    <ul class="career-list">
+                        <li>現 오마쥬 의원 대표원장</li>
+                        <li>前 청담 00 피부과 원장</li>
+                        <li>대한 레이저 피부 모발 학회 정회원</li>
+                        <li>대한 미용 성형 레이저 의학회 정회원</li>
+                        <li>Ulthera / Thermage 공식 키닥터</li>
+                    </ul>
+                    <div class="official-seal" style="margin-top: 40px; font-family:'Italiana'; font-size:24px;">
+                        Medical Director. Hong Gil Dong
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-knowhow">
+            <div class="sec-head reveal-text">
+                <span class="sec-label">CORE VALUES</span>
+                <h3 class="philo-tit" style="text-align:center;">오마쥬의 3가지 약속</h3>
+            </div>
+            <div class="program-grid reveal-text">
+                <div class="lux-card">
+                    <div style="font-family: var(--font-display); font-size: 40px; color: var(--c-accent); margin-bottom: 20px;">01</div>
+                    <h4 style="font-size: 22px; font-weight: 600; margin-bottom: 15px;">Private & Custom</h4>
+                    <p style="color: #666; line-height: 1.6;">공장형 시술을 지양하고, 1:1 전담 마크를 통해 처음부터 끝까지 프라이빗하게 케어합니다.</p>
+                </div>
+                <div class="lux-card">
+                    <div style="font-family: var(--font-display); font-size: 40px; color: var(--c-accent); margin-bottom: 20px;">02</div>
+                    <h4 style="font-size: 22px; font-weight: 600; margin-bottom: 15px;">Safety First</h4>
+                    <p style="color: #666; line-height: 1.6;">정품, 정량 사용 원칙을 철저히 준수하며, 검증된 하이엔드 장비만을 사용합니다.</p>
+                </div>
+                <div class="lux-card">
+                    <div style="font-family: var(--font-display); font-size: 40px; color: var(--c-accent); margin-bottom: 20px;">03</div>
+                    <h4 style="font-size: 22px; font-weight: 600; margin-bottom: 15px;">Continuous Care</h4>
+                    <p style="color: #666; line-height: 1.6;">시술 후가 진짜 시작입니다. 체계적인 애프터 케어 시스템으로 끝까지 책임집니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-location" style="background: #fff;">
+            <div class="sec-head reveal-text">
+                <span class="sec-label">LOCATION</span>
+                <h3 class="philo-tit" style="text-align:center;">오시는 길</h3>
+            </div>
+            <div class="map-wrap reveal-text" style="width:100%; height:450px; background:#eee; margin-bottom: 50px;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.839861234567!2d127.0398!3d37.524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDMxJzI2LjQiTiAxMjfCsDAyJzIzLjMiRQ!5e0!3m2!1sko!2skr!4v1234567890" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <div class="loc-info-grid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 30px; text-align: center;">
+                <div>
+                    <i class="fas fa-map-marker-alt" style="font-size:24px; color:var(--c-accent); margin-bottom:15px;"></i>
+                    <h5 style="font-size:18px; margin-bottom:10px; font-weight:600;">ADDRESS</h5>
+                    <p style="color:#666; font-size:15px;">서울 강남구 도산대로 67길 13-5<br>HOMMAGE 빌딩 전층</p>
+                </div>
+                <div>
+                    <i class="far fa-clock" style="font-size:24px; color:var(--c-accent); margin-bottom:15px;"></i>
+                    <h5 style="font-size:18px; margin-bottom:10px; font-weight:600;">HOURS</h5>
+                    <p style="color:#666; font-size:15px;">평일 10:00 - 20:00<br>토요일 10:00 - 16:00</p>
+                </div>
+                <div>
+                    <i class="fas fa-phone-alt" style="font-size:24px; color:var(--c-accent); margin-bottom:15px;"></i>
+                    <h5 style="font-size:18px; margin-bottom:10px; font-weight:600;">CONTACT</h5>
+                    <p style="color:#666; font-size:15px;">02-543-4842</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer style="background:#121212; color:#888; padding:80px var(--pad-global);">
+        <div style="max-width:1400px; margin:0 auto; display:grid; grid-template-columns: 1fr 2fr; gap:40px;">
+            <div>
+                <h2 style="font-family:'Italiana'; font-size:32px; color:#fff; margin-bottom:20px;">HOMMAGE</h2>
+                <p style="font-size:13px; line-height:1.6;">오마쥬 의원 | 대표: 홍길동<br>사업자등록번호: 123-45-67890<br>서울 강남구 도산대로 67길 13-5</p>
+            </div>
+            <div style="display:flex; gap:40px;">
+                <ul style="font-size:13px;">
+                    <li style="color:#fff; margin-bottom:15px; font-weight:bold;">MENU</li>
+                    <li style="margin-bottom:10px;">브랜드 스토리</li>
+                    <li style="margin-bottom:10px;">의료진 소개</li>
+                </ul>
+                <ul style="font-size:13px;">
+                    <li style="color:#fff; margin-bottom:15px; font-weight:bold;">CENTER</li>
+                    <li style="margin-bottom:10px;">리프팅</li>
+                    <li style="margin-bottom:10px;">안티에이징</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.registerPlugin(ScrollTrigger);
+            const lenis = new Lenis({ duration: 1.2, smooth: true });
+            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+            requestAnimationFrame(raf);
+
+            gsap.utils.toArray('.reveal-text').forEach(text => {
+                gsap.from(text, {
+                    scrollTrigger: { trigger: text, start: "top 85%" },
+                    y: 50, opacity: 0, duration: 1.2, ease: "power3.out"
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="오마쥬 의원 - 하이엔드 메디컬 부티크. 울쎄라, 써마지, 스킨부스터, 바디 컨투어링 전문 클리닉. 당신만의 고유한 아름다움을 찾아드립니다.">
+    <meta name="keywords" content="오마쥬의원, 피부과, 성형외과, 울쎄라, 써마지, 인모드, 리쥬란, 쥬베룩, 바디인모드, 삭센다">
+    <meta property="og:title" content="HOMMAGE | The Private Masterpiece">
+    <meta property="og:description" content="결과가 다른 이유, 오마쥬에서 확인하세요.">
+    <title>HOMMAGE | The Private Masterpiece</title>
+
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Italiana&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <style>
+        /* ==========================================================================
+           1. CORE SYSTEM (White Luxury Theme)
+           ========================================================================== */
+        :root {
+            --c-bg: #FFFFFF;
+            --c-bg-sub: #F8F9FA;
+            --c-text-primary: #111111;
+            --c-text-secondary: #555555;
+            --c-text-muted: #999999;
+            --c-accent: #C5A065;
+            --c-accent-hover: #B08D55;
+            --c-border: #E5E5E5;
+            
+            --font-kr: 'Pretendard', sans-serif;
+            --font-en: 'Cormorant Garamond', serif;
+            --font-logo: 'Italiana', serif;
+
+            --pad-pc: 120px 5vw;
+            --header-h: 90px;
+            --z-loader: 99999;
+            --z-cursor: 9999;
+            --z-header: 1000;
+            --z-mobile: 1100;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto; }
+        body { font-family: var(--font-kr); color: var(--c-text-primary); line-height: 1.6; overflow-x: hidden; background: var(--c-bg); cursor: none; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul, li { list-style: none; }
+        img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        button { border: none; background: none; cursor: pointer; font-family: inherit; }
+
+        /* Typography */
+        .serif { font-family: var(--font-en); }
+        .logo-font { font-family: var(--font-logo); }
+        .gold { color: var(--c-accent); }
+        .text-center { text-align: center; }
+
+        /* Custom Cursor */
+        .cursor-dot { position: fixed; top: 0; left: 0; width: 6px; height: 6px; background: var(--c-accent); border-radius: 50%; pointer-events: none; z-index: var(--z-cursor); transform: translate(-50%, -50%); }
+        .cursor-circle { position: fixed; top: 0; left: 0; width: 40px; height: 40px; border: 1px solid var(--c-accent); border-radius: 50%; pointer-events: none; z-index: var(--z-cursor); transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background-color 0.3s; opacity: 0.5; }
+        body.hovering .cursor-circle { width: 80px; height: 80px; background-color: rgba(197, 160, 101, 0.1); opacity: 1; }
+
+        /* ==========================================================================
+           2. HEADER & MEGA MENU (Full Content)
+           ========================================================================== */
+        header {
+            position: fixed; top: 0; width: 100%; height: var(--header-h); z-index: var(--z-header);
+            padding: 0 4vw; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255, 255, 255, 0.0); border-bottom: 1px solid rgba(255,255,255,0.1); transition: 0.4s;
+        }
+        header.scrolled { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--c-border); box-shadow: 0 5px 20px rgba(0,0,0,0.03); }
+        header.scrolled .logo { color: #000; }
+        header.scrolled .gnb-item { color: #333; }
+        header:not(.scrolled) .logo, header:not(.scrolled) .gnb-item { color: #fff; text-shadow: 0 1px 5px rgba(0,0,0,0.3); }
+
+        .logo { font-size: 28px; letter-spacing: 2px; z-index: 1200; position: relative; }
+
+        /* GNB (Desktop) */
+        .gnb-pc { display: flex; height: 100%; gap: 40px; }
+        .gnb-item {
+            position: relative; height: 100%; display: flex; align-items: center;
+            font-size: 15px; font-weight: 500; cursor: pointer;
+        }
+        .gnb-item::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 3px;
+            background: var(--c-accent); transition: 0.3s;
+        }
+        .gnb-item:hover::after { width: 100%; }
+
+        /* MEGA MENU LAYOUT */
+        .mega-menu {
+            position: absolute; top: var(--header-h); left: 0; width: 100%;
+            background: #fff; border-bottom: 1px solid var(--c-border);
+            padding: 60px 4vw; opacity: 0; visibility: hidden; transform: translateY(-10px);
+            transition: 0.3s ease; box-shadow: 0 15px 30px rgba(0,0,0,0.03);
+        }
+        .gnb-item:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .mega-grid { display: grid; grid-template-columns: 1fr 4fr; gap: 60px; max-width: 1600px; margin: 0 auto; }
+        .mega-intro h3 { font-family: var(--font-en); color: var(--c-accent); font-size: 32px; margin-bottom: 15px; }
+        .mega-intro p { color: var(--c-text-secondary); font-size: 14px; line-height: 1.6; }
+        
+        .mega-lists { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; border-left: 1px solid #eee; padding-left: 60px; }
+        .mega-col h4 {
+            font-family: var(--font-en); color: #000; font-size: 18px; font-weight: 600;
+            margin-bottom: 20px; border-bottom: 1px solid #000; padding-bottom: 10px; display: inline-block;
+        }
+        .mega-col ul li { margin-bottom: 12px; }
+        .mega-col ul li a { font-size: 14px; color: #666; transition: 0.2s; display: block; }
+        .mega-col ul li a:hover { color: var(--c-accent); transform: translateX(5px); font-weight: 600; }
+
+        /* Header Utils */
+        .h-utils { display: flex; gap: 15px; align-items: center; }
+        .btn-consult {
+            padding: 10px 24px; background: #000; color: #fff; font-size: 13px; font-weight: 500;
+            border-radius: 4px; transition: 0.3s;
+        }
+        .btn-consult:hover { background: var(--c-accent); }
+        .lang-switch { font-size: 13px; font-weight: 600; border: 1px solid rgba(255,255,255,0.5); padding: 5px 12px; border-radius: 20px; color: #fff; }
+        header.scrolled .lang-switch { border-color: #ddd; color: #333; }
+
+        /* Mobile Hamburger */
+        .mobile-toggle { display: none; font-size: 24px; cursor: pointer; color: #fff; z-index: 1200; position: relative; }
+        header.scrolled .mobile-toggle { color: #000; }
+
+        /* ==========================================================================
+           3. MOBILE MENU (Full Depth Accordion)
+           ========================================================================== */
+        .mobile-menu-wrap {
+            position: fixed; top: 0; right: 0; width: 100%; height: 100vh;
+            background: #fff; z-index: var(--z-mobile);
+            transform: translateX(100%); transition: transform 0.5s cubic-bezier(0.7,0,0.3,1);
+            padding: 100px 20px 100px; overflow-y: auto; display: flex; flex-direction: column;
+        }
+        .mobile-menu-wrap.active { transform: translateX(0); }
+        
+        .m-gnb > li { border-bottom: 1px solid #eee; }
+        .m-depth1 {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 0; font-size: 18px; font-weight: 600; cursor: pointer; color: #222;
+        }
+        .m-depth1.active { color: var(--c-accent); }
+        .m-depth1 i { transition: 0.3s; font-size: 14px; }
+        .m-depth1.active i { transform: rotate(180deg); }
+
+        .m-depth2 { display: none; background: #F9F9F9; padding: 15px 20px; }
+        .m-depth2 li { margin-bottom: 12px; }
+        .m-depth2 a { font-size: 15px; color: #555; display: block; padding: 5px 0; }
+        
+        .m-contact-info { margin-top: auto; padding-top: 40px; border-top: 1px solid #eee; }
+        .m-contact-btn {
+            display: block; width: 100%; padding: 15px; text-align: center;
+            background: #000; color: #fff; font-weight: 600; margin-bottom: 10px; border-radius: 4px;
+        }
+
+        /* ==========================================================================
+           4. HERO SECTION (Video & Toggle)
+           ========================================================================== */
+        .hero { position: relative; height: 100vh; overflow: hidden; background: #000; }
+        .hero-video {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; opacity: 0.8; transform: scale(1.1); transition: opacity 1s;
+        }
+        .hero-video.hidden { opacity: 0; }
+        .hero-overlay {
+            position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            color: #fff; padding: 0 20px; z-index: 2;
+        }
+        
+        .hero-tit { font-family: var(--font-en); font-size: 5.5vw; line-height: 1.1; margin-bottom: 30px; text-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+        .hero-desc { font-size: 18px; font-weight: 300; margin-bottom: 50px; opacity: 0.9; max-width: 600px; }
+
+        /* Center Toggle Switch */
+        .mode-switch {
+            position: absolute; top: 150px; left: 50%; transform: translateX(-50%); z-index: 10;
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2); padding: 5px; border-radius: 40px;
+            display: flex; gap: 5px;
+        }
+        .switch-btn {
+            padding: 12px 30px; border-radius: 30px; color: #fff; font-size: 14px; transition: 0.3s;
+        }
+        .switch-btn.active { background: #fff; color: #000; font-weight: 700; }
+
+        /* Scroll Hint */
+        .scroll-hint {
+            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 5;
+            display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0.8;
+        }
+        .scroll-line { width: 1px; height: 80px; background: rgba(255,255,255,0.2); position: relative; overflow: hidden; }
+        .scroll-line::after {
+            content:''; position: absolute; top:0; left:0; width:100%; height:100%;
+            background: #fff; animation: scrollDown 2s infinite;
+        }
+
+        /* ==========================================================================
+           5. PHILOSOPHY SECTION
+           ========================================================================== */
+        .section-philo { padding: var(--pad-pc); background: #fff; position: relative; }
+        .philo-container { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1400px; margin: 0 auto; }
+        
+        .philo-img { height: 600px; overflow: hidden; border-radius: 4px; }
+        .philo-img img { transition: transform 1.5s; }
+        .philo-container:hover .philo-img img { transform: scale(1.05); }
+
+        .philo-txt h2 { font-size: 40px; line-height: 1.3; margin-bottom: 40px; font-weight: 400; }
+        .philo-txt p { font-size: 16px; color: #666; line-height: 1.8; margin-bottom: 20px; }
+        .philo-sign { margin-top: 60px; font-family: var(--font-en); font-size: 20px; color: var(--c-accent); font-style: italic; }
+
+        /* ==========================================================================
+           6. CONTENT SECTIONS (Cards)
+           ========================================================================== */
+        .content-wrapper { background: var(--c-bg-sub); position: relative; min-height: 100vh; overflow: hidden; }
+        .content-sec { display: none; padding: 100px 5vw; opacity: 0; transition: 0.5s; }
+        .content-sec.active { display: block; opacity: 1; }
+
+        .sec-head { text-align: center; margin-bottom: 80px; }
+        .sec-head span { display: block; color: var(--c-accent); font-size: 13px; letter-spacing: 3px; font-weight: 700; margin-bottom: 15px; }
+        .sec-head h3 { font-family: var(--font-en); font-size: 48px; color: var(--c-text-primary); }
+
+        .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1400px; margin: 0 auto; }
+        .lux-card {
+            background: #fff; border: 1px solid rgba(0,0,0,0.05);
+            position: relative; overflow: hidden; cursor: pointer;
+            display: flex; flex-direction: column; height: 600px;
+            transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .lux-card:hover { transform: translateY(-15px); border-color: var(--c-accent); box-shadow: 0 30px 60px rgba(0,0,0,0.08); }
+        
+        .c-img { height: 60%; overflow: hidden; position: relative; }
+        .c-img img { transition: 0.6s; width: 100%; height: 100%; object-fit: cover; }
+        .lux-card:hover .c-img img { transform: scale(1.1); }
+        
+        .c-body { padding: 40px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .c-tit { font-family: var(--font-en); font-size: 32px; line-height: 1.1; margin-bottom: 15px; color: #111; }
+        .c-desc { font-size: 15px; color: #888; line-height: 1.5; margin-bottom: 20px; }
+        .c-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+        .tag { font-size: 12px; padding: 6px 12px; border: 1px solid #eee; color: #888; border-radius: 4px; background: #fafafa; }
+        
+        .btn-arrow {
+            position: absolute; bottom: 40px; right: 40px;
+            width: 50px; height: 50px; border: 1px solid #ddd; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--c-accent); transition: 0.3s; background: #fff;
+        }
+        .lux-card:hover .btn-arrow { background: var(--c-accent); color: #fff; border-color: var(--c-accent); }
+
+        /* ==========================================================================
+           7. DB CONSULTATION FORM
+           ========================================================================== */
+        .db-section {
+            padding: 120px 5vw; background: #fff; border-top: 1px solid #eee;
+        }
+        .db-container { max-width: 900px; margin: 0 auto; }
+        .db-head { text-align: center; margin-bottom: 60px; }
+        .db-head h3 { font-family: var(--font-en); font-size: 42px; color: var(--c-text-primary); margin-bottom: 10px; }
+        
+        .db-form { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .form-input, .form-select {
+            width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 4px;
+            font-size: 15px; color: #333; transition: 0.3s; background: #f9f9f9;
+        }
+        .form-input:focus, .form-select:focus { border-color: var(--c-accent); background: #fff; }
+        .form-full { grid-column: span 2; }
+        textarea.form-input { height: 150px; resize: none; }
+        
+        .btn-submit {
+            grid-column: span 2; margin-top: 20px;
+            background: #111; color: #fff; padding: 20px;
+            font-size: 16px; font-weight: 600; letter-spacing: 1px;
+            cursor: pointer; transition: 0.3s; width: 100%;
+        }
+        .btn-submit:hover { background: var(--c-accent); }
+
+        /* ==========================================================================
+           8. FOOTER & STICKY BAR
+           ========================================================================== */
+        footer { background: #1a1a1a; color: #888; padding: 100px 5vw 150px; font-size: 13px; }
+        .f-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; max-width: 1600px; margin: 0 auto; }
+        
+        .f-logo { font-family: var(--font-logo); font-size: 36px; color: #fff; margin-bottom: 20px; display: block; }
+        .f-tit { color: #fff; font-size: 16px; margin-bottom: 20px; font-weight: 600; }
+        .f-menu li { margin-bottom: 10px; }
+        .f-menu a { transition: 0.2s; }
+        .f-menu a:hover { color: var(--c-accent); }
+        
+        .f-info p { margin-bottom: 8px; line-height: 1.6; }
+        .copy { border-top: 1px solid #333; margin-top: 60px; padding-top: 30px; text-align: center; color: #555; }
+
+        /* Mobile Sticky Bar */
+        .m-sticky-bar {
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 70px;
+            background: #fff; z-index: 9999; display: none; /* Mobile Only */
+            border-top: 1px solid #eee; box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+        }
+        .m-grid-bar { display: grid; grid-template-columns: 1fr 1fr 1.5fr; height: 100%; }
+        .m-bar-btn {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            font-size: 11px; color: #333; border-right: 1px solid #eee;
+        }
+        .m-bar-btn i { font-size: 20px; margin-bottom: 4px; color: #666; }
+        .m-bar-btn.reserve { background: var(--c-accent); color: #fff; border: none; font-size: 15px; font-weight: 600; flex-direction: row; gap: 8px; }
+        .m-bar-btn.reserve i { color: #fff; font-size: 18px; margin: 0; }
+
+        /* Floating Quick Bar (PC) */
+        .quick-float {
+            position: fixed; right: 40px; bottom: 40px; z-index: 900;
+            display: flex; flex-direction: column; gap: 15px;
+        }
+        .q-btn {
+            width: 60px; height: 60px; background: #fff; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; color: #333; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid #eee; transition: 0.3s;
+        }
+        .q-btn:hover { background: var(--c-accent); color: #fff; transform: translateY(-3px); }
+        .q-btn.main { background: #111; color: #fff; border: none; }
+
+        /* Transition Curtain */
+        .transition-curtain {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--c-accent); z-index: 10000;
+            transform: scaleY(0); transform-origin: bottom; pointer-events: none;
+        }
+
+        /* ==========================================================================
+           9. MEDIA QUERIES (RESPONSIVE)
+           ========================================================================== */
+        @media (max-width: 1024px) {
+            :root { --pad-pc: 80px 20px; --header-h: 70px; }
+            .gnb-pc, .h-utils, .quick-float { display: none; }
+            .mobile-toggle { display: block; }
+            .mode-switch { top: auto; bottom: 40px; width: 90%; }
+            .switch-btn { width: 50%; text-align: center; padding: 10px 0; }
+            
+            .hero-tit { font-size: 12vw; }
+            .philo-grid { grid-template-columns: 1fr; gap: 40px; }
+            .philo-img { height: 300px; }
+            .philo-text h2 { font-size: 28px; }
+            .philo-desc { padding-left: 20px; font-size: 15px; }
+            
+            .sec-head h3 { font-size: 32px; }
+            .card-grid { grid-template-columns: 1fr; gap: 40px; }
+            .lux-card { height: auto; min-height: 480px; }
+            
+            .db-form { grid-template-columns: 1fr; gap: 20px; }
+            .form-full { grid-column: span 1; }
+            
+            .f-grid { grid-template-columns: 1fr; gap: 40px; }
+            .m-sticky-bar { display: block; }
+        }
+
+        /* Animations */
+        @keyframes scrollDown { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+
+    </style>
+</head>
+<body class="hover-target">
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-circle"></div>
+    <div class="transition-curtain"></div>
+
+    <header>
+        <a href="index.html" class="logo logo-font">HOMMAGE</a>
+        
+        <nav class="gnb-pc">
+            <div class="gnb-item hover-trigger">
+                <a href="sub_archive.html">LIFTING</a>
+                <div class="mega-menu">
+                    <div class="mega-grid">
+                        <div class="mega-intro">
+                            <h3>Lifting Center</h3>
+                            <p>시간의 흐름을 거스르는<br>오마쥬만의 탄력 솔루션</p>
+                        </div>
+                        <div class="mega-col">
+                            <h4>Ultrasound</h4>
+                            <ul>
+                                <li><a href="sub_archive.html?f=ulthera">울쎄라 (Ulthera)</a></li>
+                                <li><a href="sub_archive.html?f=shurink">슈링크 유니버스</a></li>
+                                <li><a href="sub_archive.html?f=doublo">더블로 골드</a></li>
+                                <li><a href="sub_archive.html?f=linear">리니어지</a></li>
+                                <li><a href="sub_archive.html?f=ten">텐써마</a></li>
+                            </ul>
+                        </div>
+                        <div class="mega-col">
+                            <h4>RF Frequency</h4>
+                            <ul>
+                                <li><a href="sub_archive.html?f=thermage">써마지 FLX</a></li>
+                                <li><a href="sub_archive.html?f=oligio">올리지오</a></li>
+                                <li><a href="sub_archive.html?f=inmode">인모드 (Inmode)</a></li>
+                                <li><a href="sub_archive.html?f=virtue">버추RF</a></li>
+                                <li><a href="sub_archive.html?f=tune">튠페이스</a></li>
+                            </ul>
+                        </div>
+                        <div class="mega-col">
+                            <h4>Trend Lifting</h4>
+                            <ul>
+                                <li><a href="sub_archive.html?f=titanium">티타늄 리프팅</a></li>
+                                <li><a href="sub_archive.html?f=onda">온다 리프팅</a></li>
+                                <li><a href="sub_archive.html?f=sofwave">소프웨이브</a></li>
+                                <li><a href="sub_archive.html?f=airjet">에어젯 2</a></li>
+                            </ul>
+                        </div>
+                        <div class="mega-col">
+                            <h4>Thread</h4>
+                            <ul>
+                                <li><a href="sub_archive.html?f=silhouette">실루엣 소프트</a></li>
+                                <li><a href="sub_archive.html?f=mint">민트 리프트</a></li>
+                                <li><a href="sub_archive.html?f=cavern">캐번 리프팅</a></li>
+                                <li><a href="sub_archive.html?f=blue">블루로즈</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gnb-item hover-trigger">
+                <a href="sub_archive.html">SKIN</a>
+                <div class="mega-menu">
+                    <div class="mega-grid">
+                        <div class="mega-intro">
+                            <h3>Skin Clinic</h3>
+                            <p>피부 본연의 빛을 되찾는<br>체계적인 스킨케어</p>
+                        </div>
+                        <div class="mega-col">
+                            <h4>Booster</h4>
+                            <ul>
+                                <li><a href="sub_archive.html?f=rejuran">리쥬란 힐러</a></li>
+                                <li><a href="sub_archive.html?f=juvelook">쥬베룩 / 볼륨</a></li>
+                                <li><a href="sub_archive.html?f=exosome">엑소좀 (ASCE+)</a></li>
+                                <li><a href="sub_archive.html?f=filorga">필로가 135</a></li>
+                                <li><a href="sub_archive.html?f=lilied">릴리이드</a></li>
+                            </ul>
+                        </div>
+                        <div class="mega-col">
+                            <h4>Laser Toning</h4>
+                            <ul>
+                                <li><a href="sub_archive.html?f=pico">피코플러스</a></li>
+                                <li><a href="sub_archive.html?f=revlite">레블라이트 SI</a></li>
+                                <li><a href="sub_archive.html?f=clarity">클라리티 II</a></li>
+                                <li><a href="sub_archive.html?f=vbeam">브이빔 퍼펙타</a></li>
+                            </ul>
+                        </div>
+                        <div class="mega-col">
+                            <h4>Care</h4>
+                            <ul>
+                                <li><a href="sub_archive.html?f=aqua">아쿠아필</a></li>
+                                <li><a href="sub_archive.html?f=lala">라라필</a></li>
+                                <li><a href="sub_archive.html?f=ldm">LDM 물방울</a></li>
+                                <li><a href="sub_archive.html?f=o2">오투덤 산소</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gnb-item hover-trigger">
+                <a href="sub_archive.html">BODY</a>
+                <div class="mega-menu">
+                    <div class="mega-grid">
+                        <div class="mega-intro">
+                            <h3>Body Center</h3>
+                            <p>이상적인 바디 라인을 위한<br>프리미엄 컨투어링</p>
+                        </div>
+                        <div class="mega-col">
+                            <h4>Contouring</h4>
+                            <ul>
+                                <li><a href="sub_archive.html?f=body_inmode">바디 인모드</a></li>
+                                <li><a href="sub_archive.html?f=tunebody">튠바디</a></li>
+                                <li><a href="sub_archive.html?f=ulfit">울핏</a></li>
+                                <li><a href="sub_archive.html?f=triple">트리플 바디</a></li>
+                            </ul>
+                        </div>
+                        <div class="mega-col">
+                            <h4>Injection</h4>
+                            <ul>
+                                <li><a href="sub_archive.html?f=girl_shot">걸그룹 주사</a></li>
+                                <li><a href="sub_archive.html?f=gpc">GPC 주사</a></li>
+                                <li><a href="sub_archive.html?f=saxenda">삭센다 처방</a></li>
+                                <li><a href="sub_archive.html?f=body_botox">바디 보톡스</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gnb-item hover-trigger"><a href="sub_archive.html">PRIVATE</a></div>
+            <div class="gnb-item hover-trigger"><a href="sub_archive.html">EVENT</a></div>
+        </nav>
+
+        <div class="h-utils">
+            <button class="lang-switch">KR</button>
+            <button class="btn-consult hover-trigger" onclick="location.href='sub_archive.html'">빠른예약</button>
+        </div>
+
+        <button class="mobile-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+    </header>
+
+    <div class="mobile-menu-wrap" id="mobileMenu">
+        <div style="text-align:right; margin-bottom:20px;">
+            <button onclick="toggleMenu()" style="font-size:24px;"><i class="fas fa-times"></i></button>
+        </div>
+        <ul class="m-gnb">
+            <li>
+                <div class="m-depth1" onclick="toggleAcc(this)">LIFTING <i class="fas fa-chevron-down"></i></div>
+                <ul class="m-depth2">
+                    <li><a href="sub_archive.html?f=ulthera">울쎄라 / 써마지</a></li>
+                    <li><a href="sub_archive.html?f=inmode">인모드 / 티타늄</a></li>
+                    <li><a href="sub_archive.html?f=shurink">슈링크 / 올리지오</a></li>
+                    <li><a href="sub_archive.html?f=thread">실리프팅 클리닉</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="m-depth1" onclick="toggleAcc(this)">SKIN <i class="fas fa-chevron-down"></i></div>
+                <ul class="m-depth2">
+                    <li><a href="sub_archive.html?f=booster">리쥬란 / 쥬베룩</a></li>
+                    <li><a href="sub_archive.html?f=exosome">엑소좀 / 샤넬주사</a></li>
+                    <li><a href="sub_archive.html?f=toning">피코토닝 / 클라리티</a></li>
+                    <li><a href="sub_archive.html?f=care">메디컬 스킨케어</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="m-depth1" onclick="toggleAcc(this)">BODY <i class="fas fa-chevron-down"></i></div>
+                <ul class="m-depth2">
+                    <li><a href="sub_archive.html?f=body_contour">바디인모드 / 튠바디</a></li>
+                    <li><a href="sub_archive.html?f=diet">다이어트 약처방</a></li>
+                    <li><a href="sub_archive.html?f=body_botox">승모근 / 종아리 톡신</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="m-depth1"><a href="sub_archive.html">EVENT</a></div>
+            </li>
+        </ul>
+        <div class="m-contact-info">
+            <a href="tel:02-1234-5678" class="m-contact-btn">전화 상담하기</a>
+            <a href="#" class="m-contact-btn" style="background:#FAE100; color:#3C1E1E;">카카오톡 문의</a>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="hero-video">
+            <video class="active" autoplay muted loop playsinline id="vid-women">
+                <source src="https://videos.pexels.com/video-files/3752528/3752528-hd_1920_1080_25fps.mp4" type="video/mp4">
+            </video>
+            <video class="hidden" autoplay muted loop playsinline id="vid-skin">
+                <source src="https://videos.pexels.com/video-files/5501198/5501198-hd_1920_1080_25fps.mp4" type="video/mp4">
+            </video>
+        </div>
+        
+        <div class="mode-switch">
+            <button class="switch-btn active" onclick="switchMode('women')">WOMEN'S BOUTIQUE</button>
+            <button class="switch-btn" onclick="switchMode('skin')">AESTHETIC SUITE</button>
+        </div>
+
+        <div class="hero-overlay">
+            <span class="hero-sub">PRIVATE MEDICAL LOUNGE</span>
+            <h1 class="hero-tit">The Art of <br><span class="italic gold">Natural Beauty</span></h1>
+            <p class="hero-desc">당신만의 고유한 아름다움을 찾아드리는<br>오마쥬 의원의 프라이빗 솔루션을 만나보세요.</p>
+        </div>
+        
+        <div class="scroll-hint">
+            <div class="scroll-line"></div>
+            <span style="font-size:10px; letter-spacing:2px; color:#fff; margin-top:10px;">SCROLL</span>
+        </div>
+    </section>
+
+    <section class="section-philo">
+        <div class="philo-container">
+            <div class="philo-img reveal-img">
+                <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2068&auto=format&fit=crop" alt="Interior">
+            </div>
+            <div class="philo-txt">
+                <span class="gold" style="font-size:13px; letter-spacing:2px; font-weight:700; display:block; margin-bottom:20px;">OUR PHILOSOPHY</span>
+                <h2 class="serif">아름다움은 만들어내는 것이 아니라,<br>발견하는 것입니다.</h2>
+                <p class="philo-desc">오마쥬 의원은 공장형 시술을 지양합니다. <br>갤러리 같은 공간에서, 오직 당신만을 위한 프라이빗한 의학적 예술을 경험하세요. <br>가장 우아하고 자연스러운 아름다움을 디자인합니다.</p>
+                <div class="philo-sign">Medical Director. Hong Gil Dong</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="content-wrapper">
+        
+        <section id="section-women" class="content-sec active">
+            <div class="sec-head">
+                <span class="gold">PRIVATE CURATION</span>
+                <h3>Women's Boutique</h3>
+                <p>보이지 않는 라인까지 찾아내는 바디 컨투어링 & 프라이빗 케어</p>
+            </div>
+            <div class="card-grid">
+                <div class="lux-card hover-trigger" onclick="location.href='sub_archive.html?filter=body'">
+                    <div class="c-img"><img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=2500&auto=format&fit=crop" alt="Body"></div>
+                    <div class="c-body">
+                        <div>
+                            <h4 class="c-tit">Body Contouring</h4>
+                            <p class="c-desc">매끄러운 바디 라인을 위한 토탈 솔루션</p>
+                            <div class="c-tags"><span class="tag">튠바디</span><span class="tag">인모드</span><span class="tag">울핏</span></div>
+                        </div>
+                        <div class="btn-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+                <div class="lux-card hover-trigger" onclick="location.href='sub_archive.html?filter=petit'">
+                    <div class="c-img"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop" alt="Volume"></div>
+                    <div class="c-body">
+                        <div>
+                            <h4 class="c-tit">Volume & Shape</h4>
+                            <p class="c-desc">부족한 볼륨은 채우고, 불필요한 지방은 정리합니다.</p>
+                            <div class="c-tags"><span class="tag">쥬비덤</span><span class="tag">엘란쎄</span><span class="tag">윤곽주사</span></div>
+                        </div>
+                        <div class="btn-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+                <div class="lux-card hover-trigger" onclick="location.href='sub_archive.html?filter=private'">
+                    <div class="c-img"><img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?q=80&w=2670&auto=format&fit=crop" alt="Private"></div>
+                    <div class="c-body">
+                        <div>
+                            <h4 class="c-tit">Private Care</h4>
+                            <p class="c-desc">여성만을 위한 프라이빗 리쥬버네이션</p>
+                            <div class="c-tags"><span class="tag">브이올렛</span><span class="tag">질쎄라</span><span class="tag">제모</span></div>
+                        </div>
+                        <div class="btn-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-skin" class="content-sec">
+            <div class="sec-head">
+                <span class="gold">SKIN ARCHITECTURE</span>
+                <h3>Aesthetic Suite</h3>
+                <p>피부 본연의 빛을 되살리는 하이엔드 리프팅 & 스킨케어</p>
+            </div>
+            <div class="card-grid">
+                <div class="lux-card hover-trigger" onclick="location.href='sub_archive.html?filter=lifting'">
+                    <div class="c-img"><img src="https://images.unsplash.com/photo-1552693673-1bf958298935?q=80&w=2673&auto=format&fit=crop" alt="Lifting"></div>
+                    <div class="c-body">
+                        <div>
+                            <h4 class="c-tit">Premium Lifting</h4>
+                            <p class="c-desc">중력에 저항하는 강력한 리프팅 에너지</p>
+                            <div class="c-tags"><span class="tag">울쎄라</span><span class="tag">써마지</span><span class="tag">티타늄</span></div>
+                        </div>
+                        <div class="btn-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+                <div class="lux-card hover-trigger" onclick="location.href='sub_archive.html?filter=skin'">
+                    <div class="c-img"><img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=2670&auto=format&fit=crop" alt="Booster"></div>
+                    <div class="c-body">
+                        <div>
+                            <h4 class="c-tit">Skin Booster</h4>
+                            <p class="c-desc">피부 깊숙이 차오르는 수분과 영양</p>
+                            <div class="c-tags"><span class="tag">리쥬란</span><span class="tag">쥬베룩</span><span class="tag">엑소좀</span></div>
+                        </div>
+                        <div class="btn-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+                <div class="lux-card hover-trigger" onclick="location.href='sub_archive.html?filter=laser'">
+                    <div class="c-img"><img src="https://images.unsplash.com/photo-1506812574058-fc75fa93fead?q=80&w=2670&auto=format&fit=crop" alt="Laser"></div>
+                    <div class="c-body">
+                        <div>
+                            <h4 class="c-tit">Laser Toning</h4>
+                            <p class="c-desc">기미, 잡티 없이 맑고 투명한 피부</p>
+                            <div class="c-tags"><span class="tag">피코토닝</span><span class="tag">포텐자</span><span class="tag">클라리티</span></div>
+                        </div>
+                        <div class="btn-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <section class="db-section">
+        <div class="db-container">
+            <div class="db-head">
+                <span class="gold" style="letter-spacing:2px; font-weight:700;">QUICK CONSULTATION</span>
+                <h3 class="serif">Begin Your Journey</h3>
+            </div>
+            <form class="db-form">
+                <div class="form-group">
+                    <input type="text" class="form-input" placeholder="성함">
+                </div>
+                <div class="form-group">
+                    <input type="tel" class="form-input" placeholder="연락처">
+                </div>
+                <div class="form-group form-full">
+                    <select class="form-select">
+                        <option>관심 시술을 선택해주세요</option>
+                        <option>프리미엄 리프팅 (울쎄라/써마지)</option>
+                        <option>스킨부스터</option>
+                        <option>바디 컨투어링</option>
+                        <option>기타 문의</option>
+                    </select>
+                </div>
+                <div class="form-group form-full">
+                    <textarea class="form-input" placeholder="문의사항을 남겨주세요"></textarea>
+                </div>
+                <button type="button" class="btn-submit hover-trigger">상담 신청하기</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="f-grid">
+            <div class="f-brand">
+                <a href="#" class="f-logo logo-font">HOMMAGE</a>
+                <p>서울 강남구 도산대로 123, 오마쥬타워 3F</p>
+                <p>TEL: 02-1234-5678</p>
+            </div>
+            <div>
+                <p class="f-tit">ABOUT</p>
+                <ul class="f-menu">
+                    <li><a href="#">브랜드 스토리</a></li>
+                    <li><a href="#">의료진 소개</a></li>
+                    <li><a href="#">오시는 길</a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="f-tit">PROGRAM</p>
+                <ul class="f-menu">
+                    <li><a href="sub_archive.html?f=lifting">리프팅 센터</a></li>
+                    <li><a href="sub_archive.html?f=skin">스킨 센터</a></li>
+                    <li><a href="sub_archive.html?f=body">바디 센터</a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="f-tit">HOURS</p>
+                <div class="f-info">
+                    <p>평일: 10:00 - 20:00</p>
+                    <p>토요일: 10:00 - 16:00</p>
+                    <p>일요일/공휴일 휴무</p>
+                </div>
+            </div>
+        </div>
+        <div class="copy">
+            COPYRIGHT © HOMMAGE CLINIC. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <div class="quick-float">
+        <a href="#" class="q-btn hover-trigger"><i class="far fa-calendar-check"></i></a>
+        <a href="#" class="q-btn hover-trigger"><i class="fas fa-comment"></i></a>
+        <a href="#" class="q-btn main hover-trigger"><i class="fas fa-phone"></i></a>
+    </div>
+
+    <div class="m-sticky-bar">
+        <div class="m-grid-bar">
+            <a href="tel:02-1234-5678" class="m-bar-btn"><i class="fas fa-phone-alt"></i> 전화상담</a>
+            <a href="#" class="m-bar-btn"><i class="fas fa-comment"></i> 카톡문의</a>
+            <a href="sub_archive.html" class="m-bar-btn reserve"><i class="far fa-clock"></i> 빠른예약</a>
+        </div>
+    </div>
+
+    <script>
+        // 1. Lenis Smooth Scroll
+        const lenis = new Lenis({ duration: 1.2, smooth: true });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // 2. Cursor
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorCircle = document.querySelector('.cursor-circle');
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0.1 });
+            gsap.to(cursorCircle, { x: e.clientX, y: e.clientY, duration: 0.4 });
+        });
+        document.querySelectorAll('.hover-trigger, a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+
+        // 3. Header Scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if(window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+
+        // 4. Mobile Menu
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        }
+        function toggleAcc(el) {
+            const sub = el.nextElementSibling;
+            const icon = el.querySelector('i');
+            if(sub.style.display === 'block') {
+                sub.style.display = 'none';
+                el.classList.remove('active');
+            } else {
+                document.querySelectorAll('.m-sub-list').forEach(s => s.style.display = 'none');
+                document.querySelectorAll('.m-depth1').forEach(d => d.classList.remove('active'));
+                sub.style.display = 'block';
+                el.classList.add('active');
+            }
+        }
+
+        // 5. Toggle Switcher
+        function switchMode(mode) {
+            const btns = document.querySelectorAll('.switch-btn');
+            const vidWomen = document.getElementById('vid-women');
+            const vidSkin = document.getElementById('vid-skin');
+            const secWomen = document.getElementById('section-women');
+            const secSkin = document.getElementById('section-skin');
+            const curtain = document.querySelector('.transition-curtain');
+
+            btns.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const tl = gsap.timeline();
+            tl.to(curtain, { scaleY: 1, transformOrigin: 'bottom', duration: 0.6, ease: "circ.inOut" })
+              .add(() => {
+                  if(mode === 'women') {
+                      vidWomen.classList.remove('hidden'); vidWomen.classList.add('active');
+                      vidSkin.classList.remove('active'); vidSkin.classList.add('hidden');
+                      secWomen.classList.add('active'); secSkin.classList.remove('active');
+                  } else {
+                      vidWomen.classList.remove('active'); vidWomen.classList.add('hidden');
+                      vidSkin.classList.remove('hidden'); vidSkin.classList.add('active');
+                      secWomen.classList.remove('active'); secSkin.classList.add('active');
+                  }
+                  lenis.scrollTo('.content-wrapper', { offset: -100 });
+              })
+              .to(curtain, { scaleY: 0, transformOrigin: 'top', duration: 0.6, ease: "circ.inOut" });
+        }
+
+        // 6. Scroll Reveal
+        gsap.utils.toArray('.reveal-text').forEach(text => {
+            gsap.from(text, {
+                scrollTrigger: { trigger: text, start: "top 80%" },
+                y: 30, opacity: 0, duration: 1.2, ease: "power3.out"
+            });
+        });
+    </script>
+</body>
+</html>

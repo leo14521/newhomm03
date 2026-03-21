@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HOMMAGE | Signature Zero Wrinkle</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Italiana&family=Noto+Serif+KR:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'hm-black': '#111111',
+                        'hm-charcoal': '#1E1E1E',
+                        'hm-gold': '#BFA47F',       
+                        'hm-gold-dark': '#8C7350',  
+                        'hm-gold-light': '#D6C4A8', 
+                        'hm-beige': '#F5F3F0',      
+                        'hm-gray': '#888888',
+                        'hm-line': 'rgba(255,255,255,0.1)' /* 다크 테마용 라인 */
+                    },
+                    fontFamily: {
+                        sans: ['Pretendard', 'sans-serif'],
+                        serif: ['Noto Serif KR', 'serif'],
+                        display: ['Italiana', 'serif'],
+                        eng: ['Cormorant Garamond', 'serif']
+                    },
+                    spacing: {
+                        'header': '90px',
+                        'sidebar': '80px'
+                    },
+                    transitionTimingFunction: {
+                        'lux': 'cubic-bezier(0.22, 1, 0.36, 1)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base & Reset */
+        :root {
+            --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
+            --header-h: 90px;
+            --sidebar-w: 80px;
+        }
+        body { background-color: #1E1E1E; color: #F5F3F0; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        
+        /* Fonts */
+        .txt-display { font-family: 'Italiana', serif; letter-spacing: -0.02em; }
+        .txt-eng { font-family: 'Cormorant Garamond', serif; }
+        .txt-serif { font-family: 'Noto Serif KR', serif; }
+        ::selection { background: #BFA47F; color: #fff; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1E1E1E; }
+        ::-webkit-scrollbar-thumb { background: #BFA47F; border-radius: 3px; }
+
+        /* Components */
+        .sec-pad { padding: 160px 0; position: relative; }
+        .container-lux { max-width: 1600px; margin: 0 auto; padding: 0 6vw; }
+        
+        .btn-lux {
+            position: relative; display: inline-flex; align-items: center; justify-content: center;
+            padding: 1.2rem 3rem; border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent; color: #fff;
+            font-family: 'Pretendard'; font-size: 14px; font-weight: 500; letter-spacing: 0.05em;
+            overflow: hidden; transition: all 0.5s var(--ease-lux); cursor: pointer;
+        }
+        .btn-lux::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: #BFA47F; transform: scaleX(0); transform-origin: right;
+            transition: transform 0.5s var(--ease-lux); z-index: -1;
+        }
+        .btn-lux:hover { border-color: #BFA47F; color: #111; }
+        .btn-lux:hover::before { transform: scaleX(1); transform-origin: left; }
+
+        /* Custom Grids */
+        .grid-border { border-left: 1px solid rgba(255,255,255,0.1); border-top: 1px solid rgba(255,255,255,0.1); }
+        .grid-item { border-right: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+        @media (min-width: 1024px) { body { padding-left: var(--sidebar-w); padding-top: var(--header-h); } }
+        @media (max-width: 1024px) { :root { --header-h: 70px; --sidebar-w: 0px; } .sec-pad { padding: 100px 0; } }
+    </style>
+</head>
+<body class="antialiased">
+
+    <aside class="hidden lg:flex fixed top-0 left-0 w-[80px] h-screen bg-hm-charcoal border-r border-white/10 z-50 flex-col justify-between items-center py-10">
+        <a href="#" class="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center text-white/50 hover:bg-hm-gold hover:text-white hover:border-hm-gold transition-all duration-300"><i class="fas fa-home text-xs"></i></a>
+        <div class="flex flex-col gap-8 items-center">
+            <span class="writing-vertical transform rotate-180 text-[10px] tracking-[0.3em] text-white/30 font-eng">SCROLL</span>
+            <div class="h-20 w-[1px] bg-white/10 overflow-hidden relative"><div class="absolute top-0 left-0 w-full h-1/2 bg-hm-gold animate-bounce"></div></div>
+        </div>
+        <div class="flex flex-col gap-4">
+            <a href="#" class="w-10 h-10 flex items-center justify-center text-white/50 hover:text-hm-gold transition-colors"><i class="fas fa-search"></i></a>
+            <a href="#reservation" class="w-10 h-10 bg-white/10 text-white flex items-center justify-center rounded-full hover:bg-hm-gold transition-colors"><i class="far fa-calendar-alt text-xs"></i></a>
+        </div>
+    </aside>
+<header class="fixed top-0 left-0 lg:left-[80px] right-0 h-[var(--header-h)] bg-hm-charcoal/90 backdrop-blur-md z-40 border-b border-white/10 flex items-center justify-between px-6 lg:px-12 transition-transform duration-500" id="main-header">
+        <div class="flex items-center gap-6">
+            <a href="index.html" class="txt-display text-2xl lg:text-3xl tracking-widest text-white hover:text-hm-gold transition-colors">HOMMAGE</a>
+            
+            <div class="hidden lg:flex items-center gap-4">
+                <span class="w-[1px] h-4 bg-white/20"></span>
+                <span class="text-[10px] tracking-[0.2em] text-hm-gold uppercase">Signature Program</span>
+            </div>
+        </div>
+
+        <nav class="hidden lg:flex items-center gap-12">
+            <a href="#intro" class="text-sm font-medium text-white/70 hover:text-hm-gold transition-colors relative group">
+                CONCEPT
+                <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-hm-gold transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#targets" class="text-sm font-medium text-white/70 hover:text-hm-gold transition-colors relative group">
+                TARGETS
+                <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-hm-gold transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#materials" class="text-sm font-medium text-white/70 hover:text-hm-gold transition-colors relative group">
+                MATERIALS
+                <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-hm-gold transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#reservation" class="text-sm font-medium text-white/70 hover:text-hm-gold transition-colors relative group">
+                BOOKING
+                <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-hm-gold transition-all duration-300 group-hover:w-full"></span>
+            </a>
+        </nav>
+
+        <button class="lg:hidden text-2xl text-white">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+   
+
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
+            
+            <section id="intro" class="relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-hm-charcoal pt-[var(--header-h)]">
+                <div class="absolute inset-0 z-0">
+                    <img src="https://images.unsplash.com/photo-1505312899479-7923769c2d7e?q=80&w=2070&auto=format&fit=crop" 
+                         alt="Silk Texture Background" 
+                         class="w-full h-full object-cover opacity-20 parallax-img">
+                    <div class="absolute inset-0 bg-gradient-to-b from-hm-charcoal via-transparent to-hm-charcoal"></div>
+                </div>
+
+                <div class="container-lux w-full relative z-10 text-center">
+                    <span class="inline-block txt-eng text-hm-gold text-lg tracking-[0.3em] uppercase mb-6 reveal-text">
+                        The Signature Anti-Aging
+                    </span>
+                    <h1 class="txt-display text-[15vw] lg:text-[160px] leading-[0.85] text-white mb-8">
+                        <div class="overflow-hidden"><span class="block reveal-text">ZERO</span></div>
+                        <div class="overflow-hidden"><span class="block text-hm-gold reveal-text delay-100">WRINKLE</span></div>
+                    </h1>
+                    <p class="txt-serif text-white/60 text-lg lg:text-xl font-light max-w-2xl mx-auto leading-relaxed break-keep reveal-text delay-200">
+                        주름, 채우는 것이 아니라 지우는 것입니다.<br>
+                        오마쥬만의 독창적인 레시피로 당신의 시간을 되돌립니다.
+                    </p>
+                    <div class="mt-12 reveal-text delay-300">
+                        <a href="#targets" class="btn-lux"><span>Discover Solution</span></a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="targets" class="sec-pad bg-hm-charcoal relative">
+                <div class="container-lux">
+                    <div class="flex flex-col lg:flex-row justify-between items-end mb-20 border-b border-white/10 pb-8">
+                        <div class="mb-8 lg:mb-0 reveal-text">
+                            <span class="text-hm-gold text-xs tracking-[0.3em] uppercase mb-4 block">Target Areas</span>
+                            <h2 class="txt-display text-5xl lg:text-6xl text-white">
+                                Precision <span class="txt-eng italic text-hm-gray">Targeting</span>
+                            </h2>
+                        </div>
+                        <p class="text-white/50 max-w-md text-right lg:text-left leading-relaxed break-keep reveal-text delay-100">
+                            표정 주름부터 깊게 패인 노화 주름까지.<br> 
+                            부위별 주름의 깊이와 원인을 분석하여 1:1 맞춤 시술을 진행합니다.
+                        </p>
+                    </div>
+
+                    <div class="grid lg:grid-cols-3 gap-8">
+                        
+                        <div class="group cursor-pointer reveal-text">
+                            <div class="relative overflow-hidden aspect-[4/3] mb-6 rounded-sm bg-black">
+                                <img src="https://img.freepik.com/free-photo/close-up-woman-checking-wrinkles_23-2149347892.jpg?t=st=1738734000~exp=1738737600~hmac=50a98b0a70f08990c732292f707f7c00f0c088f000c0f0f0c0f0f0c0f0f0c0f0" 
+                                     alt="Forehead Wrinkles" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                                <div class="absolute top-4 left-4 w-2 h-2 bg-hm-gold rounded-full"></div>
+                            </div>
+                            <div class="flex justify-between items-baseline border-t border-white/20 pt-4 group-hover:border-hm-gold transition-colors">
+                                <h3 class="txt-display text-2xl text-white">Forehead & Glabella</h3>
+                                <span class="text-hm-gold txt-eng italic">01</span>
+                            </div>
+                            <p class="text-white/40 text-sm mt-3 font-light leading-relaxed">
+                                이마 가로 주름과 미간의 내천(川)자 주름을 부드럽게 이완시키고 볼륨을 채웁니다.
+                            </p>
+                        </div>
+
+                        <div class="group cursor-pointer reveal-text delay-100">
+                            <div class="relative overflow-hidden aspect-[4/3] mb-6 rounded-sm bg-black">
+                                <img src="https://img.freepik.com/free-photo/close-up-woman-face-skin-care_23-2149156094.jpg" 
+                                     alt="Eye Wrinkles" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                                <div class="absolute top-4 left-4 w-2 h-2 bg-hm-gold rounded-full"></div>
+                            </div>
+                            <div class="flex justify-between items-baseline border-t border-white/20 pt-4 group-hover:border-hm-gold transition-colors">
+                                <h3 class="txt-display text-2xl text-white">Eye Corners</h3>
+                                <span class="text-hm-gold txt-eng italic">02</span>
+                            </div>
+                            <p class="text-white/40 text-sm mt-3 font-light leading-relaxed">
+                                얇고 예민한 눈가 피부의 잔주름을 개선하고, 눈꼬리 처짐을 리프팅합니다.
+                            </p>
+                        </div>
+
+                        <div class="group cursor-pointer reveal-text delay-200">
+                            <div class="relative overflow-hidden aspect-[4/3] mb-6 rounded-sm bg-black">
+                                <img src="https://img.freepik.com/free-photo/young-woman-touching-her-neck_23-2148946788.jpg" 
+                                     alt="Neck Lines" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                                <div class="absolute top-4 left-4 w-2 h-2 bg-hm-gold rounded-full"></div>
+                            </div>
+                            <div class="flex justify-between items-baseline border-t border-white/20 pt-4 group-hover:border-hm-gold transition-colors">
+                                <h3 class="txt-display text-2xl text-white">Neck Lines</h3>
+                                <span class="text-hm-gold txt-eng italic">03</span>
+                            </div>
+                            <p class="text-white/40 text-sm mt-3 font-light leading-relaxed">
+                                나이테처럼 깊어진 목 가로 주름과 탄력을 잃은 세로 주름을 동시에 케어합니다.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="materials" class="sec-pad bg-white text-hm-black">
+                <div class="container-lux">
+                    <div class="text-center mb-20 reveal-text">
+                        <span class="text-hm-gold text-xs tracking-[0.3em] uppercase mb-4 block">Premium Materials</span>
+                        <h2 class="txt-serif text-4xl mb-4">정품, 정량의 원칙</h2>
+                        <p class="text-gray-500 font-light">오마쥬 제로링클은 검증된 글로벌 프리미엄 제품만을 사용합니다.</p>
+                    </div>
+
+                    <div class="border-l border-t border-gray-200 grid grid-cols-2 lg:grid-cols-4 reveal-text delay-100">
+                        <div class="border-r border-b border-gray-200 p-12 flex items-center justify-center group hover:bg-gray-50 transition-colors relative overflow-hidden">
+                            <div class="absolute inset-0 border-2 border-hm-gold scale-95 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500"></div>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Allergan_logo.svg/2560px-Allergan_logo.svg.png" alt="Allergan" class="h-8 opacity-60 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0">
+                        </div>
+                        <div class="border-r border-b border-gray-200 p-12 flex items-center justify-center group hover:bg-gray-50 transition-colors relative overflow-hidden">
+                            <div class="absolute inset-0 border-2 border-hm-gold scale-95 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500"></div>
+                            <img src="https://www.merz.com/wp-content/themes/merz-aesthetics/assets/img/logo.svg" alt="Merz" class="h-8 opacity-60 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0">
+                        </div>
+                        <div class="border-r border-b border-gray-200 p-12 flex items-center justify-center group hover:bg-gray-50 transition-colors relative overflow-hidden">
+                            <div class="absolute inset-0 border-2 border-hm-gold scale-95 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500"></div>
+                            <img src="https://www.galderma.com/themes/custom/galderma/logo.svg" alt="Galderma" class="h-8 opacity-60 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0">
+                        </div>
+                        <div class="border-r border-b border-gray-200 p-12 flex items-center justify-center group hover:bg-gray-50 transition-colors relative overflow-hidden">
+                            <div class="absolute inset-0 border-2 border-hm-gold scale-95 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500"></div>
+                            <img src="https://www.teoxane.com/themes/custom/teoxane/logo.svg" alt="Teoxane" class="h-8 opacity-60 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0">
+                        </div>
+                        </div>
+                    
+                    <div class="mt-16 flex flex-col lg:flex-row gap-12 items-start justify-center">
+                        <div class="flex gap-4 items-start max-w-sm">
+                            <span class="txt-eng text-4xl text-hm-gold italic">01</span>
+                            <div>
+                                <h4 class="font-bold mb-2">Relax</h4>
+                                <p class="text-sm text-gray-500 leading-relaxed">과도하게 수축된 근육을 이완시켜 깊은 주름이 생기는 원인을 차단합니다.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start max-w-sm">
+                            <span class="txt-eng text-4xl text-hm-gold italic">02</span>
+                            <div>
+                                <h4 class="font-bold mb-2">Fill</h4>
+                                <p class="text-sm text-gray-500 leading-relaxed">꺼진 부위에 미세한 입자의 필러와 콜라겐 부스터를 채워 매끈한 라인을 만듭니다.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start max-w-sm">
+                            <span class="txt-eng text-4xl text-hm-gold italic">03</span>
+                            <div>
+                                <h4 class="font-bold mb-2">Tighten</h4>
+                                <p class="text-sm text-gray-500 leading-relaxed">늘어진 피부 표면을 타이트닝하여 잔주름 없는 쫀쫀한 피부결을 완성합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="reservation" class="sec-pad bg-hm-charcoal text-white relative overflow-hidden">
+                <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
+                <div class="container-lux relative z-10">
+                    <div class="grid lg:grid-cols-2 gap-20 lg:gap-40">
+                        <div class="flex flex-col justify-center reveal-text">
+                            <span class="text-hm-gold text-xs tracking-[0.4em] uppercase mb-8 block">Private Booking</span>
+                            <h2 class="txt-display text-6xl lg:text-7xl leading-tight mb-10">
+                                Reset <br> <span class="text-hm-gold italic txt-eng">Your Time</span>
+                            </h2>
+                            <p class="text-white/60 text-lg leading-relaxed mb-12 max-w-md break-keep">
+                                제로링클 프로그램은 개인의 주름 상태에 따라 <br>
+                                1:1 맞춤형으로 디자인됩니다.
+                            </p>
+                            <div class="space-y-6 text-sm text-white/40 font-light pl-2 border-l border-hm-gold/20">
+                                <p class="flex items-center gap-4"><i class="fa-solid fa-location-dot w-4 text-hm-gold"></i> 서울 강남구 도산대로 67길 13-5</p>
+                                <p class="flex items-center gap-4"><i class="fa-solid fa-phone w-4 text-hm-gold"></i> 02-543-4842</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-sm p-10 lg:p-16 border border-white/10 reveal-text delay-200 shadow-2xl">
+                            <form class="space-y-10">
+                                <div class="space-y-2 group">
+                                    <label class="text-xs text-hm-gold tracking-widest uppercase ml-1 opacity-70">Name</label>
+                                    <input type="text" class="w-full bg-transparent border-b border-white/20 py-4 text-xl text-white focus:border-hm-gold outline-none transition-colors placeholder-white/10" placeholder="성함을 입력해주세요">
+                                </div>
+                                <div class="space-y-2 group">
+                                    <label class="text-xs text-hm-gold tracking-widest uppercase ml-1 opacity-70">Contact</label>
+                                    <input type="tel" class="w-full bg-transparent border-b border-white/20 py-4 text-xl text-white focus:border-hm-gold outline-none transition-colors placeholder-white/10" placeholder="연락처를 입력해주세요">
+                                </div>
+                                <div class="space-y-2 group">
+                                    <label class="text-xs text-hm-gold tracking-widest uppercase ml-1 opacity-70">Program</label>
+                                    <div class="relative">
+                                        <select class="w-full bg-transparent border-b border-white/20 py-4 text-xl text-white focus:border-hm-gold outline-none transition-colors cursor-pointer appearance-none rounded-none">
+                                            <option class="bg-hm-charcoal text-white" value="">관심 시술 선택</option>
+                                            <option class="bg-hm-charcoal text-white" value="zero_face">제로링클 (얼굴 전체)</option>
+                                            <option class="bg-hm-charcoal text-white" value="zero_neck">제로링클 (목 주름)</option>
+                                            <option class="bg-hm-charcoal text-white" value="zero_eye">제로링클 (눈가 집중)</option>
+                                        </select>
+                                        <i class="fas fa-chevron-down absolute right-2 top-1/2 -translate-y-1/2 text-white/30 pointer-events-none"></i>
+                                    </div>
+                                </div>
+                                <div class="pt-8">
+                                    <button type="button" class="btn-lux w-full border-white/30 text-white hover:bg-white hover:text-hm-black hover:border-white">
+                                        <span>REQUEST CONSULTATION</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="bg-hm-black text-white/40 pt-20 pb-10 border-t border-white/5 text-xs font-light tracking-wide">
+                <div class="container-lux">
+                    <div class="flex flex-col lg:flex-row justify-between items-start gap-12 mb-20">
+                        <div class="space-y-6 max-w-md">
+                            <h2 class="txt-display text-3xl text-white tracking-widest">HOMMAGE</h2>
+                            <p class="leading-relaxed text-white/50">
+                                <strong>오마쥬 의원</strong> | 대표원장: 김이름<br>
+                                사업자등록번호: 123-45-67890 | 서울시 강남구 도산대로 67길 Hommage Bldg.
+                            </p>
+                        </div>
+                        <div class="flex gap-16">
+                            <ul class="space-y-3">
+                                <li class="text-white uppercase tracking-widest text-[10px] mb-2 text-hm-gold">Brand</li>
+                                <li><a href="#" class="hover:text-white transition-colors">Philosophy</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors">Doctors</a></li>
+                            </ul>
+                            <ul class="space-y-3">
+                                <li class="text-white uppercase tracking-widest text-[10px] mb-2 text-hm-gold">Social</li>
+                                <li><a href="#" class="hover:text-white transition-colors">Instagram</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors">Youtube</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex flex-col lg:flex-row justify-between items-center gap-4 pt-10 border-t border-white/5">
+                        <p>COPYRIGHT © 2026 HOMMAGE CLINIC. ALL RIGHTS RESERVED.</p>
+                        <p class="opacity-50">Designed by Luxury Creative</p>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <script>
+        // Lenis Smooth Scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+        });
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        const parallaxImages = document.querySelectorAll(".parallax-img");
+        parallaxImages.forEach((img) => {
+            gsap.to(img, {
+                yPercent: 20,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: img.parentElement,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+        });
+
+        const revealElements = document.querySelectorAll(".reveal-text");
+        revealElements.forEach(el => {
+            gsap.fromTo(el, 
+                { y: 50, opacity: 0 },
+                {
+                    y: 0, opacity: 1, duration: 1.2, ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // Header Hide/Show
+        let lastScrollTop = 0;
+        const header = document.getElementById("main-header");
+        window.addEventListener("scroll", function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                header.style.transform = "translateY(-100%)";
+            } else {
+                header.style.transform = "translateY(0)";
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const style = document.createElement('style');
+            style.innerHTML = `
+                /* 흑백 톤 & 낮은 채도로 고급스러움 유지 */
+                main img {
+                    filter: grayscale(80%) contrast(110%) brightness(0.9);
+                    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+                    mix-blend-mode: normal;
+                }
+                
+                /* 호버 시 본연의 색상 은은하게 복구 */
+                main img:hover,
+                .group:hover img {
+                    filter: grayscale(0%) contrast(100%) brightness(100%);
+                    transform: scale(1.03);
+                }
+
+                /* 로고 이미지는 기본적으로 그레이스케일 */
+                #materials img {
+                    filter: grayscale(100%) opacity(0.6);
+                    transition: all 0.4s ease;
+                }
+                #materials .group:hover img {
+                    filter: grayscale(0%) opacity(1);
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>
