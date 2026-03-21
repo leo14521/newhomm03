@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { CLINIC_TEL, CLINIC_TEL_DIGITS } from "@/config/brand";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,7 +24,6 @@ function useScrollY() {
   return y;
 }
 
-const QUICK_PHONE = "02-543-4842";
 const QUICK_LINKS = [
   { label: "카톡상담", href: "#" },
   { label: "네이버예약", href: "#", highlight: true },
@@ -181,10 +181,10 @@ export function QuickLink() {
           </button>
           <p className="mb-1 text-sm text-[#666]">오마쥬 의원 전화 문의</p>
           <a
-            href={`tel:${QUICK_PHONE.replace(/-/g, "")}`}
+            href={`tel:${CLINIC_TEL_DIGITS}`}
             className="font-[family-name:var(--font-display)] text-2xl font-medium text-[#1a1918] hover:text-[var(--color-accent)]"
           >
-            {QUICK_PHONE}
+            {CLINIC_TEL}
           </a>
         </div>
       </div>

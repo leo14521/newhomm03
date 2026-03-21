@@ -28,6 +28,7 @@ import {
   CLINIC_ADDRESS_EN,
   CLINIC_ADDRESS_KR,
   CLINIC_MAP_QUERY,
+  CLINIC_TEL,
 } from "@/config/brand";
 import { CONTENT_SECTIONS, IMAGE_POOL, SCROLL_ANIMATION } from "@/config/homeContent";
 import { CONTENT_SECTIONS_EN } from "@/config/homeContent.en";
@@ -1226,7 +1227,7 @@ export default function HomePage() {
                 </li>
                 <li>
                   <span className="text-white/70">Tel</span>
-                  <span className="ml-2 text-white">02-543-4842</span>
+                  <span className="ml-2 text-white">{CLINIC_TEL}</span>
                 </li>
                 <li className="pt-2 text-[12px] text-white/60">{t("home.mapClosed")}</li>
               </ul>

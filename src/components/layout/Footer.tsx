@@ -9,6 +9,8 @@ import {
   CLINIC_ADDRESS_EN,
   CLINIC_ADDRESS_KR,
   CLINIC_DIRECTOR_NAME_KR,
+  CLINIC_TEL,
+  CLINIC_TEL_DIGITS,
   CLINIC_TRANSIT_HINT_EN,
   CLINIC_TRANSIT_HINT_KR,
 } from "@/config/brand";
@@ -86,10 +88,10 @@ export default function Footer() {
                 <p className="text-[var(--text-secondary)]">{address}</p>
                 <p>
                   <a
-                    href="tel:025434842"
+                    href={`tel:${CLINIC_TEL_DIGITS}`}
                     className="text-[var(--accent-terracotta)] hover:text-[var(--accent-terracotta-dark)]"
                   >
-                    02-543-4842
+                    {CLINIC_TEL}
                   </a>
                   <span className="mx-1.5 text-[var(--border-page)]">|</span>
                   <a

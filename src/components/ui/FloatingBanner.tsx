@@ -6,10 +6,9 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLocale } from "@/i18n/LocaleProvider";
+import { CLINIC_TEL, CLINIC_TEL_DIGITS } from "@/config/brand";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const TEL = "02-543-4842";
 
 /**
  * 통합 플로팅: 예약·상담 + SNS 그룹화, TOP 버튼
@@ -25,7 +24,7 @@ export default function FloatingBanner() {
   const consultLinks = useMemo(
     () =>
       [
-        { icon: "fa-phone", label: t("floating.phone"), href: `tel:${TEL.replace(/-/g, "")}`, type: "tel" as const },
+        { icon: "fa-phone", label: t("floating.phone"), href: `tel:${CLINIC_TEL_DIGITS}`, type: "tel" as const },
         { icon: "fa-comment", label: t("floating.kakao"), href: "#", color: "#FEE500", type: "link" as const },
         {
           icon: "fa-calendar-check",
@@ -239,8 +238,8 @@ export default function FloatingBanner() {
             <span className="absolute block h-px w-4 -rotate-45 bg-current" />
           </button>
           <p className="mb-1 text-sm text-[#666]">오마쥬 의원 전화 문의</p>
-          <a href={`tel:${TEL.replace(/-/g, "")}`} className="text-xl font-semibold text-[#1a1918] hover:text-[var(--hip-accent)]">
-            {TEL}
+          <a href={`tel:${CLINIC_TEL_DIGITS}`} className="text-xl font-semibold text-[#1a1918] hover:text-[var(--hip-accent)]">
+            {CLINIC_TEL}
           </a>
         </div>
       </div>

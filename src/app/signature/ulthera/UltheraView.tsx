@@ -2,7 +2,12 @@
 
 import Link from 'next/link';
 import { getLandingImage } from '@/utils/landingImages';
-import { CLINIC_ADDRESS_KR, CLINIC_DIRECTOR_NAME_KR } from '@/config/brand';
+import {
+    CLINIC_ADDRESS_KR,
+    CLINIC_BUSINESS_REG,
+    CLINIC_DIRECTOR_NAME_KR,
+    CLINIC_TEL,
+} from '@/config/brand';
 
 const IMG = {
     hero: getLandingImage(0),
@@ -540,7 +545,7 @@ export default function UltheraView() {
                                     <span className="w-4 text-[var(--hm-gold)]">📍</span> {CLINIC_ADDRESS_KR}
                                 </p>
                                 <p className="flex items-center gap-4">
-                                    <span className="w-4 text-[var(--hm-gold)]">📞</span> 02-543-4842
+                                    <span className="w-4 text-[var(--hm-gold)]">📞</span> {CLINIC_TEL}
                                 </p>
                                 <p className="flex items-center gap-4">
                                     <span className="w-4 text-[var(--hm-gold)]">🕐</span> Mon - Fri : 10:00 - 20:00
@@ -602,7 +607,7 @@ export default function UltheraView() {
                             <p className="leading-relaxed text-white/50">
                                 <strong>오마쥬 의원</strong> | 대표원장: {CLINIC_DIRECTOR_NAME_KR}
                                 <br />
-                                사업자등록번호: 123-45-67890 | 의료기관개설신고증: 제 2023-서울강남-0000호
+                                사업자등록번호: {CLINIC_BUSINESS_REG} | 의료기관개설신고증: 제 2023-서울강남-0000호
                                 <br />
                                 {CLINIC_ADDRESS_KR}
                             </p>

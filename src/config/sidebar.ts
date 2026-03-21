@@ -1,3 +1,5 @@
+import { CLINIC_TEL_DIGITS } from "@/config/brand";
+
 /**
  * HOMMAGE: 사이드바 sb-nav (sb-btn-link + sb-circle + sb-label, sb-divider)
  * 그룹 사이에 sb-divider 표시
@@ -11,7 +13,7 @@ export type SidebarLink = {
 
 export const SIDEBAR_GROUPS: SidebarLink[][] = [
   [
-    { label: "전화상담", href: "tel:02-543-4842", icon: "phone-alt" },
+    { label: "전화상담", href: `tel:${CLINIC_TEL_DIGITS}`, icon: "phone-alt" },
     { label: "카톡상담", href: "#", icon: "comment" },
     { label: "네이버예약", href: "#", icon: "calendar-check", highlight: true },
   ],
