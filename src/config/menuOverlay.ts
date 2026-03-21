@@ -1,6 +1,12 @@
 /**
  * 메뉴 오버레이: 어바웃 오마쥬, 시그니처, 여성성형(통합), 리프팅/스킨/콜라겐
  */
+import {
+  MENU_OVERLAY_ITEMS_JA,
+  MENU_OVERLAY_ITEMS_RU,
+  MENU_OVERLAY_ITEMS_ZH,
+} from "./menuOverlay.i18n";
+
 export type MenuOverlaySub = { title: string; subtitle: string; link: string; children?: MenuOverlaySub[] };
 
 export type MenuOverlayItem = {
@@ -181,5 +187,18 @@ export const MENU_OVERLAY_ITEMS_EN: MenuOverlayItem[] = [
 export type MenuLocale = "ko" | "en" | "ja" | "zh" | "ru";
 
 export function getMenuOverlayItems(locale: MenuLocale): MenuOverlayItem[] {
-  return locale === "ko" ? MENU_OVERLAY_ITEMS : MENU_OVERLAY_ITEMS_EN;
+  switch (locale) {
+    case "ko":
+      return MENU_OVERLAY_ITEMS;
+    case "en":
+      return MENU_OVERLAY_ITEMS_EN;
+    case "ja":
+      return MENU_OVERLAY_ITEMS_JA;
+    case "zh":
+      return MENU_OVERLAY_ITEMS_ZH;
+    case "ru":
+      return MENU_OVERLAY_ITEMS_RU;
+    default:
+      return MENU_OVERLAY_ITEMS_EN;
+  }
 }

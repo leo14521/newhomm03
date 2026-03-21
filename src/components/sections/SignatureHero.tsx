@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { getLandingImage } from "@/utils/landingImages";
+import { useLocale } from "@/i18n/LocaleProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,6 +28,7 @@ export function SignatureHero({
   showBackgroundImage = true,
   imageIndex = 0,
 }: SignatureHeroProps) {
+  const { t } = useLocale();
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -87,7 +89,7 @@ export function SignatureHero({
       <div ref={textRef} className="relative z-10 w-full px-6 pb-20 pt-28 lg:px-[var(--pad-global)] lg:pb-28 lg:pt-36">
         <div className="max-w-[900px]">
           <span className="sec-label mb-4 block uppercase">
-            SIGNATURE
+            {t("pages.signatureBadge")}
           </span>
           <h1 className="sec-title font-[family-name:var(--font-en-display)] text-[clamp(36px,5.5vw,56px)] font-light leading-[1.2] tracking-tight">
             {title}

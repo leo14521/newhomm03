@@ -24,6 +24,7 @@ export default async function AdminDashboardPage() {
     message: r.message,
     status: r.status,
     createdAt: r.createdAt.toISOString(),
+    privacyConsentAt: r.privacyConsentAt?.toISOString() ?? null,
   }));
 
   return (

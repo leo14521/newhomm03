@@ -11,6 +11,7 @@ export type ConsultRow = {
   message: string | null;
   status: string;
   createdAt: string;
+  privacyConsentAt: string | null;
 };
 
 const STATUS_LABEL: Record<string, string> = {
@@ -67,6 +68,9 @@ export default function AdminConsultTable({ items }: { items: ConsultRow[] }) {
               </td>
               <td className="max-w-[180px] truncate px-3 py-2 text-[var(--text-secondary)]" title={row.message ?? ""}>
                 {row.message || "—"}
+              </td>
+              <td className="whitespace-nowrap px-3 py-2 text-[var(--text-secondary)]">
+                {row.privacyConsentAt ? new Date(row.privacyConsentAt).toLocaleString("ko-KR") : "—"}
               </td>
               <td className="px-3 py-2">
                 <select

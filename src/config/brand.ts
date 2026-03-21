@@ -4,6 +4,8 @@
  * — "미술품을 감상하듯 홈페이지를 감상할 수 있는" 경험
  */
 
+import type { Locale } from "@/i18n/messages";
+
 /** 브랜드 메시지 라벨 (상단 작은 표기) */
 export const BRAND_MESSAGE_LABEL = "BRAND MESSAGE";
 
@@ -44,3 +46,85 @@ export const CLINIC_TRANSIT_HINT_KR =
 
 export const CLINIC_TRANSIT_HINT_EN =
   "Near Sinnonhyeon Station (Lines 9 & Shinbundang) · Gangnam-daero bus stops";
+
+/** 일본어 */
+export const BRAND_SLOGAN_JA = "私たちはあなたの美しさに\n敬意を表します";
+export const BRAND_SERVICES_JA = "女性医療・皮膚・ボディクリニック";
+export const CLINIC_ADDRESS_JA =
+  "ソウル特別市瑞草区江南大路509 オマージュクリニック A棟 4階";
+export const CLINIC_TRANSIT_HINT_JA =
+  "地下鉄9号線・新盆唐線 新論峴駅 徒歩圏内 · 江南大路バス停周辺";
+
+/** 简体中文 */
+export const BRAND_SLOGAN_ZH = "我们向你的美\n致以敬意";
+export const BRAND_SERVICES_ZH = "女性健康、皮肤与身体诊疗";
+export const CLINIC_ADDRESS_ZH = "首尔瑞草区江南大路509号 Hommage 诊所 A栋 4层";
+export const CLINIC_TRANSIT_HINT_ZH = "地铁9号线·新盆唐线新论岘站步行可达 · 江南大路公交站附近";
+
+/** Русский */
+export const BRAND_SLOGAN_RU = "Мы отдаём дань\nвашей красоте";
+export const BRAND_SERVICES_RU = "Гинекология, дерматология, эстетика тела";
+export const CLINIC_ADDRESS_RU =
+  "Сеул, район Сочхо, Кангнам-даэро 509, клиника Hommage, корпус A, 4 этаж";
+export const CLINIC_TRANSIT_HINT_RU =
+  "Рядом со ст. Синнонхён (линии 9 и Shinbundang) · остановки у Кангнам-даэро";
+
+const BRAND_MESSAGE_BY_LOCALE: Record<Locale, string> = {
+  ko: BRAND_MESSAGE_LABEL,
+  en: "BRAND MESSAGE",
+  ja: "ブランドメッセージ",
+  zh: "品牌理念",
+  ru: "БРЕНД",
+};
+
+const SLOGAN_BY_LOCALE: Record<Locale, string> = {
+  ko: BRAND_SLOGAN_KR,
+  en: BRAND_SLOGAN_EN,
+  ja: BRAND_SLOGAN_JA,
+  zh: BRAND_SLOGAN_ZH,
+  ru: BRAND_SLOGAN_RU,
+};
+
+const ADDRESS_BY_LOCALE: Record<Locale, string> = {
+  ko: CLINIC_ADDRESS_KR,
+  en: CLINIC_ADDRESS_EN,
+  ja: CLINIC_ADDRESS_JA,
+  zh: CLINIC_ADDRESS_ZH,
+  ru: CLINIC_ADDRESS_RU,
+};
+
+const TRANSIT_BY_LOCALE: Record<Locale, string> = {
+  ko: CLINIC_TRANSIT_HINT_KR,
+  en: CLINIC_TRANSIT_HINT_EN,
+  ja: CLINIC_TRANSIT_HINT_JA,
+  zh: CLINIC_TRANSIT_HINT_ZH,
+  ru: CLINIC_TRANSIT_HINT_RU,
+};
+
+const SERVICES_BY_LOCALE: Record<Locale, string> = {
+  ko: BRAND_SERVICES_KR,
+  en: "Women’s health, dermatology, and body aesthetics",
+  ja: BRAND_SERVICES_JA,
+  zh: BRAND_SERVICES_ZH,
+  ru: BRAND_SERVICES_RU,
+};
+
+export function getBrandMessageLabel(locale: Locale): string {
+  return BRAND_MESSAGE_BY_LOCALE[locale] ?? BRAND_MESSAGE_BY_LOCALE.en;
+}
+
+export function getBrandSloganForLocale(locale: Locale): string {
+  return SLOGAN_BY_LOCALE[locale] ?? SLOGAN_BY_LOCALE.en;
+}
+
+export function getClinicAddressForLocale(locale: Locale): string {
+  return ADDRESS_BY_LOCALE[locale] ?? ADDRESS_BY_LOCALE.en;
+}
+
+export function getClinicTransitHintForLocale(locale: Locale): string {
+  return TRANSIT_BY_LOCALE[locale] ?? TRANSIT_BY_LOCALE.en;
+}
+
+export function getBrandServicesForLocale(locale: Locale): string {
+  return SERVICES_BY_LOCALE[locale] ?? SERVICES_BY_LOCALE.en;
+}

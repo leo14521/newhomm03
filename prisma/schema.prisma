@@ -35,13 +35,15 @@ model PhoneVerification {
 }
 
 model Consultation {
-  id        String   @id @default(cuid())
-  name      String
-  phone     String
-  interest  String?
-  message   String?
-  status    String   @default("NEW")
-  createdAt DateTime @default(now())
-  userId    String?
-  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  id                 String    @id @default(cuid())
+  name               String
+  phone              String
+  interest           String?
+  message            String?
+  status             String    @default("NEW")
+  /// 웹 상담 폼 개인정보 수집·이용 동의 시각
+  privacyConsentAt   DateTime?
+  createdAt          DateTime  @default(now())
+  userId             String?
+  user               User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
 }

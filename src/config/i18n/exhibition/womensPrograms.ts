@@ -1,0 +1,451 @@
+import type { ExhibitionCopyByLocale } from "./types";
+
+export const INTIMATE_WHITENING_COPY: ExhibitionCopyByLocale = {
+  ko: {
+    heroTitle: "Intimate Whitening",
+    heroTitleKr: "인티메이트 미백",
+    heroDescription: "레이저와 고주파를 활용한 전문적인 인티메이트 미백 시술",
+    showHeroBackground: false,
+    imageIndex: 4,
+    introTitle: "Tone Balancing Program",
+    introBody:
+      "인티메이트 미백은 단순히 톤을 밝게 만드는 시술이 아니라, 피부 상태·자극 이력·색소 양상을 함께 읽어내는 정밀 케어입니다. 오마쥬는 밝기보다 조화로운 결과를 목표로 큐레이션합니다.",
+    exhibitionLabel: "Women's program · 02",
+    exhibitionHeadline: "Light, Refined. Never Overdone.",
+    exhibitionBody:
+      "과한 대비보다 자연스러운 톤 업, 빠른 결과보다 안정적인 경과를 지향합니다. 시술 강도와 템포를 단계적으로 조정해 일상 복귀와 만족도를 모두 고려합니다.",
+    keywords: ["Whitening", "Tone", "Refined", "Non-surgical", "Harmony"],
+    featuresTitle: "Whitening Methods",
+    features: [
+      {
+        title: "레이저 미백",
+        description: "비침습 레이저를 이용하여 멜라닌 색소를 제거하고 자연스러운 미백 효과를 제공합니다.",
+      },
+      {
+        title: "고주파 미백",
+        description: "고주파 에너지를 이용하여 피부 재생을 촉진하고 미백 효과를 제공합니다.",
+      },
+      {
+        title: "비수술 시술",
+        description: "수술 없이 레이저와 고주파를 활용하여 안전하고 효과적인 미백을 제공합니다.",
+      },
+      {
+        title: "자연스러운 결과",
+        description: "자연스러운 미백 효과로 자신감 있는 삶을 만들어드립니다.",
+      },
+    ],
+    ctaTitle: "밝기보다 조화로운 미백",
+    ctaBody: "피부의 현재 상태를 충분히 분석한 뒤, 자극을 최소화한 맞춤 계획으로 자연스럽고 깔끔한 인상을 완성합니다.",
+    primaryHref: "/#curation",
+    secondaryHref: "/#map",
+  },
+  en: {
+    heroTitle: "Intimate Whitening",
+    heroTitleKr: "Intimate brightening",
+    heroDescription: "Professional laser- and RF-based intimate brightening",
+    showHeroBackground: false,
+    imageIndex: 4,
+    introTitle: "Tone balancing programme",
+    introBody:
+      "Intimate brightening is precision care: we read skin condition, irritation history, and pigment pattern—not only “lighter”. Harmony over harsh contrast is our aim.",
+    exhibitionLabel: "Women's program · 02",
+    exhibitionHeadline: "Light, refined—never overdone",
+    exhibitionBody:
+      "We favour natural tone-up and steady course over abrupt change. Intensity and pace are stepped to balance downtime and satisfaction.",
+    keywords: ["Whitening", "Tone", "Refined", "Non-surgical", "Harmony"],
+    featuresTitle: "Methods",
+    features: [
+      {
+        title: "Laser brightening",
+        description: "Non-invasive laser targets melanin for a natural brightening effect.",
+      },
+      {
+        title: "RF brightening",
+        description: "Radiofrequency supports regeneration alongside brightening goals.",
+      },
+      {
+        title: "Non-surgical",
+        description: "Laser and RF combinations without surgery when appropriate.",
+      },
+      {
+        title: "Natural-looking results",
+        description: "Aim for confidence with a harmonious, not artificial, shift in tone.",
+      },
+    ],
+    ctaTitle: "Harmony over harsh brightness",
+    ctaBody: "After thorough analysis, a low-irritation tailored plan for a clean, natural impression.",
+    primaryHref: "/#curation",
+    secondaryHref: "/#map",
+  },
+  ja: {
+    heroTitle: "Intimate Whitening",
+    heroTitleKr: "インティメート美白",
+    heroDescription: "レーザーと高周波による専門的なデリケートゾーン美白",
+    showHeroBackground: false,
+    imageIndex: 4,
+    introTitle: "トーンバランスプログラム",
+    introBody:
+      "単に明るくするだけでなく、肌状態・刺激歴・色素パターンを読み解く精密ケアです。極端なコントラストより調和を重視します。",
+    exhibitionLabel: "Women's program · 02",
+    exhibitionHeadline: "明るく、洗練—やりすぎない",
+    exhibitionBody:
+      "急激な変化より自然なトーンアップと安定した経過を優先。強度とペースを段階的に調整します。",
+    keywords: ["Whitening", "Tone", "Refined", "Non-surgical", "Harmony"],
+    featuresTitle: "方法",
+    features: [
+      { title: "レーザー美白", description: "非侵襲レーザーでメラニンにアプローチし自然な明るさへ。" },
+      { title: "高周波美白", description: "再生を促しながらトーン改善をサポート。" },
+      { title: "非手術", description: "手術を伴わずレーザーと高周波を組み合わせます。" },
+      { title: "自然な仕上がり", description: "不自然さのない調和のとれた印象を目指します。" },
+    ],
+    ctaTitle: "明るさより調和",
+    ctaBody: "状態を十分に分析し、刺激を抑えたオーダーメイドで自然な印象に。",
+    primaryHref: "/#curation",
+    secondaryHref: "/#map",
+  },
+  zh: {
+    heroTitle: "Intimate Whitening",
+    heroTitleKr: "私密美白",
+    heroDescription: "激光与射频的专业私密美白护理",
+    showHeroBackground: false,
+    imageIndex: 4,
+    introTitle: "肤色平衡方案",
+    introBody:
+      "不仅是“更白”，而是综合解读皮肤状态、刺激史与色素分布的精细护理。我们更看重和谐而非强烈对比。",
+    exhibitionLabel: "Women's program · 02",
+    exhibitionHeadline: "明亮、精致、不过度",
+    exhibitionBody:
+      "倾向自然提亮与稳定过程，分阶段调节强度与节奏，兼顾恢复与满意度。",
+    keywords: ["Whitening", "Tone", "Refined", "Non-surgical", "Harmony"],
+    featuresTitle: "方式",
+    features: [
+      { title: "激光美白", description: "非侵入激光针对黑色素，呈现自然提亮。" },
+      { title: "射频美白", description: "射频促进再生并辅助肤色改善。" },
+      { title: "非手术", description: "在合适情况下联合激光与射频，无需手术。" },
+      { title: "自然效果", description: "追求和谐、自信，而非生硬对比。" },
+    ],
+    ctaTitle: "和谐优于刺眼亮白",
+    ctaBody: "充分评估后，以低刺激定制方案完成自然清爽的印象。",
+    primaryHref: "/#curation",
+    secondaryHref: "/#map",
+  },
+  ru: {
+    heroTitle: "Intimate Whitening",
+    heroTitleKr: "Осветление интимной зоны",
+    heroDescription: "Профессиональное осветление на лазере и радиочастоте",
+    showHeroBackground: false,
+    imageIndex: 4,
+    introTitle: "Баланс тона",
+    introBody:
+      "Это не только «светлее», а точный уход: состояние кожи, история раздражения и пигментация. Гармония важнее резкого контраста.",
+    exhibitionLabel: "Women's program · 02",
+    exhibitionHeadline: "Светло, утончённо — без перебора",
+    exhibitionBody:
+      "Естественное осветление и стабильный курс важнее мгновенного эффекта. Интенсивность и темп наращиваем поэтапно.",
+    keywords: ["Whitening", "Tone", "Refined", "Non-surgical", "Harmony"],
+    featuresTitle: "Методы",
+    features: [
+      { title: "Лазер", description: "Безинвазивно работает с меланином для естественного результата." },
+      { title: "RF", description: "Поддержка регенерации вместе с задачей по тону." },
+      { title: "Без операции", description: "Сочетание лазера и RF без хирургии, когда это уместно." },
+      { title: "Естественность", description: "Уверенность за счёт гармонии, а не «театрального» контраста." },
+    ],
+    ctaTitle: "Гармония ярче «белизны»",
+    ctaBody: "После анализа — щадящий индивидуальный план для аккуратного, естественного вида.",
+    primaryHref: "/#curation",
+    secondaryHref: "/#map",
+  },
+};
+
+export const HYMEN_RESTORATION_COPY: ExhibitionCopyByLocale = {
+  ko: {
+    heroTitle: "Hymen Restoration",
+    heroTitleKr: "처녀막 재생",
+    heroDescription: "전문적인 의료진이 안전하고 정확한 처녀막 재생 시술",
+    showHeroBackground: false,
+    imageIndex: 1,
+    introTitle: "Private Reconstruction",
+    introBody:
+      "처녀막 재생은 매우 섬세한 판단과 숙련된 술기가 요구되는 시술입니다. 오마쥬는 개인의 상황과 심리적 맥락을 함께 고려한 프라이빗 프로토콜로 안전하고 자연스러운 결과를 설계합니다.",
+    exhibitionLabel: "Women's program · 01",
+    exhibitionHeadline: "A Quiet Restoration of Confidence",
+    exhibitionBody:
+      "수술의 목적은 단순한 재현이 아니라, 균형과 안정입니다. 상담부터 회복까지 노출을 최소화한 동선과 여백 있는 안내 방식으로 심리적 부담을 낮추고 집중도 높은 케어를 제공합니다.",
+    keywords: ["Private", "Precision", "Reconstruction", "Healing", "Balance"],
+    featuresTitle: "Clinical Features",
+    features: [
+      {
+        title: "전문 시술",
+        description: "여성 성형 전문 의료진이 안전하고 정확한 시술을 진행합니다.",
+      },
+      {
+        title: "자연스러운 결과",
+        description: "자연스러운 처녀막 재생을 통해 원하는 결과를 얻을 수 있습니다.",
+      },
+      {
+        title: "안전한 시술",
+        description: "최신 의료 기술과 장비를 사용하여 안전한 시술을 보장합니다.",
+      },
+      {
+        title: "사후 관리",
+        description: "시술 후 전문적인 사후 관리를 통해 최적의 회복을 돕습니다.",
+      },
+    ],
+    ctaTitle: "조용하고 안전한 프라이빗 케어",
+    ctaBody: "민감한 시술일수록 디테일과 신뢰가 중요합니다. 의료진과 1:1로 충분히 상담한 뒤, 본인에게 맞는 계획으로 진행하세요.",
+    primaryHref: "/#curation",
+    secondaryHref: "/#map",
+  },
+  en: {
+    heroTitle: "Hymen Restoration",
+    heroTitleKr: "Hymen restoration",
+    heroDescription: "Discreet, precise care led by experienced specialists",
+    showHeroBackground: false,
+    imageIndex: 1,
+    introTitle: "Private reconstruction",
+    introBody:
+      "Hymen restoration demands fine judgement and skilled technique. We design a private protocol that respects your context and aims for safe, natural outcomes.",
+    exhibitionLabel: "Women's program · 01",
+    exhibitionHeadline: "A quiet restoration of confidence",
+    exhibitionBody:
+      "The goal is balance and stability, not mere replication. From consultation through recovery, discreet flow and calm guidance reduce stress and support focus.",
+    keywords: ["Private", "Precision", "Reconstruction", "Healing", "Balance"],
+    featuresTitle: "Clinical features",
+    features: [
+      { title: "Specialist-led care", description: "Women’s-health specialists perform procedures with precision and safety." },
+      { title: "Natural outcomes", description: "Aim for restoration that aligns with your goals and anatomy." },
+      { title: "Safety focus", description: "Current techniques and equipment to protect your wellbeing." },
+      { title: "Aftercare", description: "Structured follow-up to support optimal healing." },
+    ],
+    ctaTitle: "Quiet, safe private care",
+    ctaBody: "Sensitive procedures need trust and detail—consult fully 1:1 before any plan.",
+    primaryHref: "/#curation",
+    secondaryHref: "/#map",
+  },
+  ja: {
+    heroTitle: "Hymen Restoration",
+    heroTitleKr: "処女膜再生",
+    heroDescription: "経験豊かな専門医による慎重で正確なケア",
+    showHeroBackground: false,
+    imageIndex: 1,
+    introTitle: "プライベートな再建",
+    introBody:
+      "処女膜再生には繊細な判断と熟練が求められます。個々の状況と心理的文脈を踏まえ、安全で自然な結果を目指すプライベートプロトコルを設計します。",
+    exhibitionLabel: "Women's program · 01",
+    exhibitionHeadline: "静かな自信の回復",
+    exhibitionBody:
+      "目的は単なる再現ではなく均衡と安定です。相談から回復まで露出を抑えた動線と落ち着いた案内で心理的負担を下げます。",
+    keywords: ["Private", "Precision", "Reconstruction", "Healing", "Balance"],
+    featuresTitle: "臨床の特徴",
+    features: [
+      { title: "専門施術", description: "女性形成に精通した医療チームが安全かつ正確に進行します。" },
+      { title: "自然な結果", description: "ご希望と解剖に沿った再生を目指します。" },
+      { title: "安全性", description: "最新の技術と機器で安全性に配慮します。" },
+      { title: "アフターケア", description: "最適な回復を支えるフォロー。" },
+    ],
+    ctaTitle: "静かで安全なプライベートケア",
+    ctaBody: "デリケートな施術ほど信頼と細部が重要です。1対1で十分にご相談のうえ計画します。",
+    primaryHref: "/#curation",
+    secondaryHref: "/#map",
+  },
+  zh: {
+    heroTitle: "Hymen Restoration",
+    heroTitleKr: "处女膜修复",
+    heroDescription: "由经验丰富的专科医师提供谨慎、精准的治疗",
+    showHeroBackground: false,
+    imageIndex: 1,
+    introTitle: "私密重建",
+    introBody:
+      "处女膜修复需要细致判断与熟练技术。我们结合个人情况与心理情境，制定私密方案，追求安全、自然的结果。",
+    exhibitionLabel: "Women's program · 01",
+    exhibitionHeadline: "安静而自信地恢复",
+    exhibitionBody:
+      "目标不仅是形态再现，更是平衡与稳定。从咨询到恢复，尽量减少暴露与压力，以从容的引导支持您。",
+    keywords: ["Private", "Precision", "Reconstruction", "Healing", "Balance"],
+    featuresTitle: "临床特点",
+    features: [
+      { title: "专科施术", description: "女性整形专科团队安全、精准执行。" },
+      { title: "自然结果", description: "兼顾您的期望与解剖特点。" },
+      { title: "安全优先", description: "采用合适的技术与设备保障安全。" },
+      { title: "术后管理", description: "结构化随访助力恢复。" },
+    ],
+    ctaTitle: "安静、安全的私密护理",
+    ctaBody: "越敏感的治疗越需要信任与细节——请先充分一对一咨询再决定方案。",
+    primaryHref: "/#curation",
+    secondaryHref: "/#map",
+  },
+  ru: {
+    heroTitle: "Hymen Restoration",
+    heroTitleKr: "Восстановление девственной плевы",
+    heroDescription: "Деликатный и точный уход у опытных специалистов",
+    showHeroBackground: false,
+    imageIndex: 1,
+    introTitle: "Приватная реконструкция",
+    introBody:
+      "Требуются тонкая оценка и навык. Мы учитываем ваш контекст и проектируем приватный протокол с упором на безопасность и естественность.",
+    exhibitionLabel: "Women's program · 01",
+    exhibitionHeadline: "Тихое восстановление уверенности",
+    exhibitionBody:
+      "Цель — баланс и стабильность, а не просто «копия». От консультации до восстановления — деликатный маршрут и спокойные объяснения.",
+    keywords: ["Private", "Precision", "Reconstruction", "Healing", "Balance"],
+    featuresTitle: "Особенности",
+    features: [
+      { title: "Специалисты", description: "Команда с фокусом на женское здоровье — точность и безопасность." },
+      { title: "Естественность", description: "Восстановление в соответствии с целями и анатомией." },
+      { title: "Безопасность", description: "Актуальные методы и оборудование." },
+      { title: "Послеуход", description: "Структурированное наблюдение для заживления." },
+    ],
+    ctaTitle: "Тихий, безопасный приватный уход",
+    ctaBody: "Чем деликатнее процедура, тем важнее доверие и детали — сначала полная индивидуальная консультация.",
+    primaryHref: "/#curation",
+    secondaryHref: "/#map",
+  },
+};
+
+export const VAGINAL_FILLER_COPY: ExhibitionCopyByLocale = {
+  ko: {
+    heroTitle: "Vaginal Filler",
+    heroTitleKr: "질필러",
+    heroDescription:
+      "질 건조증·위축 개선과 볼륨·탄력 보강을 위한 필러 시술입니다. 간단한 주사로 부담 없이 케어하며, 여의사 1:1 전담 진료로 프라이빗하게 진행합니다.",
+    showHeroBackground: false,
+    imageIndex: 2,
+    introTitle: "Volume & Comfort Design",
+    introBody:
+      "질필러는 볼륨만 채우는 시술이 아니라 컨디션과 촉감을 함께 개선하는 섬세한 설계입니다. 오마쥬는 주입 포인트와 용량을 개인 상태에 맞춰 조절해 자연스러운 결과를 추구합니다.",
+    exhibitionLabel: "Women's program · 06",
+    exhibitionHeadline: "Soft Volume, Elevated Comfort",
+    exhibitionBody:
+      "건조감·위축으로 인한 불편을 완화하고, 과하지 않은 볼륨감을 통해 자연스러운 만족도를 목표로 합니다. 짧은 시술 시간과 빠른 회복 흐름도 함께 고려합니다.",
+    keywords: ["Filler", "Volume", "Hydration", "Comfort", "Private"],
+    featuresTitle: "Filler Curation",
+    features: [
+      {
+        title: "볼륨 보강",
+        description: "부족한 볼륨을 보강해 편안함과 탄력감을 회복할 수 있도록 설계합니다.",
+      },
+      {
+        title: "건조·위축 개선",
+        description: "건조감과 위축으로 인한 불편함을 줄이고 컨디션 회복을 돕습니다.",
+      },
+      {
+        title: "비수술 주사 시술",
+        description: "절개 없이 진행되며 일상 복귀 부담이 낮아 빠른 케어가 가능합니다.",
+      },
+      {
+        title: "1:1 프라이빗 진료",
+        description: "민감한 상담부터 시술 계획까지 여의사 전담으로 섬세하게 진행합니다.",
+      },
+    ],
+    ctaTitle: "자연스럽고 섬세한 볼륨 케어",
+    ctaBody: "상태를 정밀하게 확인한 뒤, 필요한 만큼만 채우는 맞춤 디자인으로 부담은 줄이고 만족도는 높입니다.",
+    primaryHref: "/#curation",
+    secondaryHref: "/#map",
+  },
+  en: {
+    heroTitle: "Vaginal Filler",
+    heroTitleKr: "Vaginal filler",
+    heroDescription:
+      "Filler for dryness, atrophy, volume, and elasticity—simple injections, low burden, female physician-led private care.",
+    showHeroBackground: false,
+    imageIndex: 2,
+    introTitle: "Volume & comfort design",
+    introBody:
+      "Filler here is not only volume—it refines comfort and sensation. Points and dose are tuned to you for a natural outcome.",
+    exhibitionLabel: "Women's program · 06",
+    exhibitionHeadline: "Soft volume, elevated comfort",
+    exhibitionBody:
+      "Ease dryness and atrophy-related bother with modest volume for natural satisfaction. Short sessions and a light recovery curve.",
+    keywords: ["Filler", "Volume", "Hydration", "Comfort", "Private"],
+    featuresTitle: "Filler curation",
+    features: [
+      { title: "Volume support", description: "Restore fullness for comfort and elasticity." },
+      { title: "Dryness & atrophy", description: "Reduce bother from dryness and tissue changes." },
+      { title: "Non-surgical injections", description: "No incision; easier return to routine." },
+      { title: "Private 1:1 care", description: "Female physician from consultation through planning." },
+    ],
+    ctaTitle: "Subtle, precise volume care",
+    ctaBody: "Assess precisely, add only what you need—less burden, higher satisfaction.",
+    primaryHref: "/#curation",
+    secondaryHref: "/#map",
+  },
+  ja: {
+    heroTitle: "Vaginal Filler",
+    heroTitleKr: "膣フィラー",
+    heroDescription: "乾燥・萎縮の改善とボリューム・弾力のサポート。注射で負担を抑え、女医1対1のプライベート診療。",
+    showHeroBackground: false,
+    imageIndex: 2,
+    introTitle: "ボリュームと快適さの設計",
+    introBody:
+      "膣フィラーは量だけでなくコンディションと触感も整える繊細な設計です。注入部位と用量を個別に調整し自然な結果を目指します。",
+    exhibitionLabel: "Women's program · 06",
+    exhibitionHeadline: "柔らかなボリューム、高まる快適さ",
+    exhibitionBody:
+      "乾燥や萎縮による不快感を和らげ、過剰でないボリュームで自然な満足度へ。短時間施術と軽い回復も考慮します。",
+    keywords: ["Filler", "Volume", "Hydration", "Comfort", "Private"],
+    featuresTitle: "フィラー キュレーション",
+    features: [
+      { title: "ボリューム補強", description: "不足を補い快適さと弾力感の回復をサポート。" },
+      { title: "乾燥・萎縮", description: "不快感を減らしコンディション改善へ。" },
+      { title: "非手術注射", description: "切開なし、日常復帰がしやすい。" },
+      { title: "1対1プライベート", description: "女医が相談から計画まで担当。" },
+    ],
+    ctaTitle: "自然で繊細なボリュームケア",
+    ctaBody: "状態を精密に見たうえで必要な分だけ。負担を抑え満足度を高めます。",
+    primaryHref: "/#curation",
+    secondaryHref: "/#map",
+  },
+  zh: {
+    heroTitle: "Vaginal Filler",
+    heroTitleKr: "阴道填充",
+    heroDescription: "改善干涩、萎缩并补充容积与弹性；注射完成，女医师一对一私密诊疗。",
+    showHeroBackground: false,
+    imageIndex: 2,
+    introTitle: "容积与舒适设计",
+    introBody:
+      "阴道填充不仅是容积，也兼顾状态与触感。注射点位与剂量因人而异，追求自然。",
+    exhibitionLabel: "Women's program · 06",
+    exhibitionHeadline: "柔和容积，更高舒适",
+    exhibitionBody:
+      "缓解干涩与萎缩带来的不适，以适度容积追求自然满意；疗程短、恢复轻。",
+    keywords: ["Filler", "Volume", "Hydration", "Comfort", "Private"],
+    featuresTitle: "填充策展",
+    features: [
+      { title: "容积补充", description: "补足缺失，帮助恢复舒适与弹性感。" },
+      { title: "干涩与萎缩", description: "减轻不适，促进状态改善。" },
+      { title: "非手术注射", description: "无切口，更易回归日常。" },
+      { title: "一对一私密", description: "女医师全程负责咨询与方案。" },
+    ],
+    ctaTitle: "自然精细的容积护理",
+    ctaBody: "精准评估后按需填充，降低负担、提升满意度。",
+    primaryHref: "/#curation",
+    secondaryHref: "/#map",
+  },
+  ru: {
+    heroTitle: "Vaginal Filler",
+    heroTitleKr: "Вагинальный филлер",
+    heroDescription:
+      "Филлер при сухости и атрофии, объём и упругость — инъекции без разреза, приватно с врачом-женщиной 1:1.",
+    showHeroBackground: false,
+    imageIndex: 2,
+    introTitle: "Объём и комфорт",
+    introBody:
+      "Не только объём — улучшаем комфорт и ощущения. Точки и доза подбираются индивидуально для естественного результата.",
+    exhibitionLabel: "Women's program · 06",
+    exhibitionHeadline: "Мягкий объём, больше комфорта",
+    exhibitionBody:
+      "Смягчаем дискомфорт от сухости и атрофии умеренным объёмом. Короткий приём и щадящее восстановление.",
+    keywords: ["Filler", "Volume", "Hydration", "Comfort", "Private"],
+    featuresTitle: "Подбор филлера",
+    features: [
+      { title: "Объём", description: "Восполнение для комфорта и упругости." },
+      { title: "Сухость и атрофия", description: "Меньше беспокойства, лучше состояние." },
+      { title: "Инъекции", description: "Без разреза, проще вернуться к делам." },
+      { title: "Приватно 1:1", description: "Врач-женщина от консультации до плана." },
+    ],
+    ctaTitle: "Тонкий, точный объёмный уход",
+    ctaBody: "Точная оценка и только нужный объём — меньше нагрузки, выше удовлетворённость.",
+    primaryHref: "/#curation",
+    secondaryHref: "/#map",
+  },
+};

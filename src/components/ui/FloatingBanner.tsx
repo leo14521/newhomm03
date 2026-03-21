@@ -19,7 +19,6 @@ export default function FloatingBanner() {
   const { t } = useLocale();
   const [isExpanded, setIsExpanded] = useState(false);
   const [scrollVisible, setScrollVisible] = useState(false);
-  const [callPopOpen, setCallPopOpen] = useState(false);
 
   const consultLinks = useMemo(
     () =>
@@ -75,18 +74,17 @@ export default function FloatingBanner() {
             <div className="flex flex-1 items-center justify-around border-r border-black/5 py-3">
               {consultLinks.map((link, idx) =>
                 link.type === "tel" ? (
-                  <button
+                  <a
                     key={idx}
-                    type="button"
-                    onClick={() => setCallPopOpen(true)}
+                    href={`tel:${CLINIC_TEL_DIGITS}`}
                     className="flex flex-col items-center gap-1 p-2 rounded-lg transition-all active:scale-95"
-                    aria-label={link.label}
+                    aria-label={`${link.label} ${CLINIC_TEL}`}
                   >
                     <div className="w-9 h-9 rounded-full flex items-center justify-center text-white bg-[#1a1918]">
                       <i className={`fa-solid ${link.icon as string} text-sm`} />
                     </div>
                     <span className="text-[10px] text-[#333] font-medium">{link.label}</span>
-                  </button>
+                  </a>
                 ) : (
                   <Link
                     key={idx}
@@ -161,17 +159,17 @@ export default function FloatingBanner() {
               <div className="flex flex-col gap-1.5 mb-4">
                 {consultLinks.map((link, idx) =>
                   link.type === "tel" ? (
-                    <button
+                    <a
                       key={idx}
-                      type="button"
-                      onClick={() => setCallPopOpen(true)}
+                      href={`tel:${CLINIC_TEL_DIGITS}`}
                       className="flex items-center gap-2.5 w-full rounded-lg py-2.5 px-3 text-left text-sm text-[#333] hover:bg-black/5 transition-colors"
+                      aria-label={`${link.label} ${CLINIC_TEL}`}
                     >
                       <div className="w-8 h-8 rounded-full bg-[#1a1918] flex items-center justify-center text-white flex-shrink-0">
                         <i className={`fa-solid ${link.icon} text-xs`} />
                       </div>
                       <span>{link.label}</span>
-                    </button>
+                    </a>
                   ) : (
                     <Link
                       key={idx}
@@ -218,37 +216,6 @@ export default function FloatingBanner() {
           </div>
         </div>
       </div>
-
-      {/* 전화 문의 팝업 (모바일/PC 공통) */}
-      <div
-        className={`fixed left-1/2 top-1/2 z-[10000] -translate-x-1/2 -translate-y-1/2 transition-all duration-300 md:left-auto md:right-8 md:top-auto md:bottom-28 md:translate-x-0 md:translate-y-0 ${
-          callPopOpen ? "visible opacity-100 scale-100" : "invisible opacity-0 scale-95 pointer-events-none"
-        }`}
-        role="dialog"
-        aria-label="전화 문의"
-      >
-        <div className="relative rounded-2xl border border-black/10 bg-white p-6 shadow-xl">
-          <button
-            type="button"
-            onClick={() => setCallPopOpen(false)}
-            className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-[#999] hover:bg-black/5 hover:text-[#333]"
-            aria-label="닫기"
-          >
-            <span className="block h-px w-4 rotate-45 bg-current" />
-            <span className="absolute block h-px w-4 -rotate-45 bg-current" />
-          </button>
-          <p className="mb-1 text-sm text-[#666]">오마쥬 의원 전화 문의</p>
-          <a href={`tel:${CLINIC_TEL_DIGITS}`} className="text-xl font-semibold text-[#1a1918] hover:text-[var(--hip-accent)]">
-            {CLINIC_TEL}
-          </a>
-        </div>
-      </div>
-      <button
-        type="button"
-        aria-hidden
-        onClick={() => setCallPopOpen(false)}
-        className={`fixed inset-0 z-[9999] bg-black/20 transition-opacity duration-300 ${callPopOpen ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"}`}
-      />
     </>
   );
 }

@@ -6,34 +6,24 @@ import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { YT_MAIN_ID, YT_MAIN_CUSTOM_POSTER } from "@/config/homePage";
 import {
-  CURATION_WOMEN,
-  CURATION_SKIN,
-  REP_ITEMS,
-  YT_MAIN_ID,
-  YT_MAIN_DISPLAY_CAPTION,
-  YT_MAIN_CUSTOM_POSTER,
-  YT_VIDEOS,
-} from "@/config/homePage";
-import {
-  CURATION_SKIN_EN,
-  CURATION_WOMEN_EN,
-  YT_MAIN_DISPLAY_CAPTION_EN,
-  YT_VIDEOS_EN,
-} from "@/config/homePage.en";
-import {
-  BRAND_MESSAGE_LABEL,
-  BRAND_SLOGAN_EN,
-  BRAND_SLOGAN_KR,
-  CLINIC_ADDRESS_EN,
-  CLINIC_ADDRESS_KR,
+  getBrandMessageLabel,
+  getBrandSloganForLocale,
+  getClinicAddressForLocale,
   CLINIC_MAP_QUERY,
   CLINIC_TEL,
 } from "@/config/brand";
-import { CONTENT_SECTIONS, IMAGE_POOL, SCROLL_ANIMATION } from "@/config/homeContent";
-import { CONTENT_SECTIONS_EN } from "@/config/homeContent.en";
-import { HOME_DOCTORS } from "@/config/homeDoctors";
-import { HOME_DOCTORS_EN } from "@/config/homeDoctors.en";
+import { IMAGE_POOL, SCROLL_ANIMATION } from "@/config/homeContent";
+import {
+  getCurationSkin,
+  getCurationWomen,
+  getHomeContentSections,
+  getHomeDoctors,
+  getYtMainDisplayCaption,
+  getYtVideos,
+} from "@/config/homeLocaleData";
+import { REP_GRID_BY_LOCALE } from "@/config/homeRepItems";
 import { localeToMapHl } from "@/i18n/localeHtml";
 import { useLocale } from "@/i18n/LocaleProvider";
 import HeroVideo from "@/components/ui/HeroVideo";
@@ -43,11 +33,12 @@ gsap.registerPlugin(ScrollTrigger);
 export default function HomePage() {
   const { locale, t } = useLocale();
   const isKo = locale === "ko";
-  const content = isKo ? CONTENT_SECTIONS : CONTENT_SECTIONS_EN;
-  const doctors = isKo ? HOME_DOCTORS : HOME_DOCTORS_EN;
-  const curationWomenList = isKo ? CURATION_WOMEN : CURATION_WOMEN_EN;
-  const curationSkinList = isKo ? CURATION_SKIN : CURATION_SKIN_EN;
-  const ytList = isKo ? YT_VIDEOS : YT_VIDEOS_EN;
+  const content = getHomeContentSections(locale);
+  const doctors = getHomeDoctors(locale);
+  const curationWomenList = getCurationWomen(locale);
+  const curationSkinList = getCurationSkin(locale);
+  const ytList = getYtVideos(locale);
+  const repGrid = REP_GRID_BY_LOCALE[locale] ?? REP_GRID_BY_LOCALE.en;
 
   const [baWipOpen, setBaWipOpen] = useState(false);
   const [loaderVisible, setLoaderVisible] = useState(true);
@@ -57,6 +48,7 @@ export default function HomePage() {
   const [cInterest, setCInterest] = useState("");
   const [cMessage, setCMessage] = useState("");
   const [formError, setFormError] = useState("");
+  const [privacyAgreed, setPrivacyAgreed] = useState(false);
   /** null → 메인 영상(YT_MAIN_ID). 값 있음 → 사이드 목록에서 선택한 id */
   const [ytListPick, setYtListPick] = useState<string | null>(null);
   /** 메인 영상 ID를 바꾼 뒤에도 예전에 고른 사이드 id에 묶이지 않도록 초기화 */
@@ -65,9 +57,9 @@ export default function HomePage() {
   }, [YT_MAIN_ID]);
   const ytActiveId = ytListPick ?? YT_MAIN_ID;
   const ytDisplayCaption = useMemo(() => {
-    if (ytActiveId !== YT_MAIN_ID) return isKo ? "오마쥬 의원" : "Hommage Clinic";
-    return isKo ? YT_MAIN_DISPLAY_CAPTION : YT_MAIN_DISPLAY_CAPTION_EN;
-  }, [ytActiveId, isKo]);
+    if (ytActiveId !== YT_MAIN_ID) return locale === "ko" ? "오마쥬 의원" : "Hommage Clinic";
+    return getYtMainDisplayCaption(locale);
+  }, [ytActiveId, locale]);
   const ytCustomPosterConfigured = useMemo(() => {
     if (ytActiveId === YT_MAIN_ID && YT_MAIN_CUSTOM_POSTER) return YT_MAIN_CUSTOM_POSTER;
     const row = ytList.find((v) => v.id === ytActiveId);
@@ -528,14 +520,14 @@ export default function HomePage() {
             <div className="hero-seq-text absolute inset-0 z-[11] flex items-center justify-center px-6" data-seq-text>
               <div className="text-center">
                 <span className="hero-phase-label block font-[family-name:var(--font-en-title)] text-[11px] font-normal tracking-[0.42em] text-[var(--text-secondary)] uppercase mb-6 sm:text-[10px] sm:tracking-[0.4em]">
-                  {BRAND_MESSAGE_LABEL}
+                  {getBrandMessageLabel(locale)}
                 </span>
                 <p className="hero-artisan-title home-hero-title text-[clamp(38px,8.5vw,76px)] font-normal uppercase leading-[1.05]">
                   HOMMAGE
                 </p>
                 <span className="hero-phase-rule mt-6 block h-px w-20 mx-auto bg-[var(--border-subtle)]" aria-hidden />
                 <p className="hero-artisan-body hero-phase-slogan text-[clamp(15px,2.2vw,20px)] font-light leading-relaxed whitespace-pre-line text-[var(--text-primary)]">
-                  {isKo ? BRAND_SLOGAN_KR : BRAND_SLOGAN_EN}
+                  {getBrandSloganForLocale(locale)}
                 </p>
               </div>
             </div>
@@ -638,9 +630,9 @@ export default function HomePage() {
               <p className="mt-4 font-[family-name:var(--font-kr-body)] text-[15px] text-[var(--color-text-muted)]">{content.rep.lead}</p>
             </div>
             <div className="rep-grid rep-text-only grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
-              {REP_ITEMS.map((item, i) => (
+              {repGrid.map((item, i) => (
                 <Link
-                  key={i}
+                  key={item.href}
                   href={item.href}
                   className="rep-card group relative flex flex-col items-center justify-center overflow-hidden rounded-xl border border-[#EAE3DE] bg-[var(--bg-card)] py-8 px-5 text-center transition-all duration-300 shadow-[var(--shadow-card)] hover:border-[var(--hip-accent)] hover:shadow-[var(--shadow-hip)] hover:-translate-y-1"
                 >
@@ -648,10 +640,10 @@ export default function HomePage() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="mb-2 font-[family-name:var(--font-en-title)] text-[10px] tracking-[0.25em] text-[var(--color-text-muted)] uppercase" style={{ fontWeight: 400 }}>
-                    {!isKo ? item.title : item.en}
+                    {item.lineUpper}
                   </span>
                   <h4 className="font-[family-name:var(--font-kr-body)] text-[15px] font-semibold tracking-tight text-[var(--color-text-primary)] transition-colors group-hover:text-[var(--color-accent)] lg:text-[16px]">
-                    {!isKo ? item.en : item.title}
+                    {item.lineMain}
                   </h4>
                   <span className="mt-3 inline-block text-[12px] text-[var(--color-text-muted)] opacity-0 transition-all duration-300 group-hover:opacity-100">
                     {t("home.repViewMore")}
@@ -1135,6 +1127,10 @@ export default function HomePage() {
               onSubmit={async (e) => {
                 e.preventDefault();
                 setFormError("");
+                if (!privacyAgreed) {
+                  setFormError(t("home.formPrivacyError"));
+                  return;
+                }
                 try {
                   const res = await fetch("/api/consultations", {
                     method: "POST",
@@ -1144,6 +1140,7 @@ export default function HomePage() {
                       phone: cPhone.trim(),
                       interest: cInterest,
                       message: cMessage.trim(),
+                      privacyConsent: true,
                     }),
                   });
                   const data = (await res.json().catch(() => ({}))) as { error?: string };
@@ -1185,10 +1182,9 @@ export default function HomePage() {
                 disabled={formSubmitted}
               >
                 <option value="">{t("home.formInterest")}</option>
-                <option value="lifting">{t("home.formLift")}</option>
-                <option value="skin">{t("home.formSkin")}</option>
-                <option value="body">{t("home.formBody")}</option>
-                <option value="etc">{t("home.formEtc")}</option>
+                <option value="women">{t("home.formInterestWomen")}</option>
+                <option value="skin">{t("home.formInterestSkin")}</option>
+                <option value="etc">{t("home.formInterestEtc")}</option>
               </select>
               <textarea
                 rows={3}
@@ -1198,9 +1194,31 @@ export default function HomePage() {
                 className="form-field form-full col-span-1 w-full border-b border-[var(--border-page)] bg-transparent py-4 text-[16px] text-[var(--text-primary)] md:col-span-2 focus:border-[var(--hip-accent)] disabled:opacity-60"
                 disabled={formSubmitted}
               />
+              <label className="form-full col-span-1 flex cursor-pointer items-start gap-3 md:col-span-2">
+                <input
+                  type="checkbox"
+                  checked={privacyAgreed}
+                  onChange={(e) => {
+                    setPrivacyAgreed(e.target.checked);
+                    if (e.target.checked) setFormError("");
+                  }}
+                  disabled={formSubmitted}
+                  className="mt-1 h-4 w-4 shrink-0 rounded border-[var(--border-page)] text-[var(--hip-accent)] focus:ring-[var(--hip-accent)] disabled:opacity-60"
+                />
+                <span className="text-left text-[14px] leading-relaxed text-[var(--text-secondary)]">
+                  <span className="text-[var(--text-primary)]">{t("home.formPrivacyAgree")}</span>{" "}
+                  <Link href="/privacy" className="text-[var(--accent-terracotta)] underline underline-offset-2 hover:text-[var(--accent-terracotta-dark)]">
+                    {t("footer.privacyPolicy")}
+                  </Link>
+                  <span className="mx-1 text-[var(--text-secondary)]/50">·</span>
+                  <Link href="/terms" className="text-[var(--accent-terracotta)] underline underline-offset-2 hover:text-[var(--accent-terracotta-dark)]">
+                    {t("footer.termsOfService")}
+                  </Link>
+                </span>
+              </label>
               <button
                 type="submit"
-                disabled={formSubmitted}
+                disabled={formSubmitted || !privacyAgreed}
                 className="btn-submit col-span-1 mt-6 w-full rounded-sm bg-[var(--hip-accent)] py-5 text-center text-[16px] font-semibold tracking-[0.1em] text-white transition-all duration-300 hover:bg-[var(--hip-accent-dark)] hover:shadow-lg disabled:opacity-60 disabled:cursor-default md:col-span-2"
               >
                 {formSubmitted ? t("home.formDone") : t("home.formSubmit")}
@@ -1231,7 +1249,7 @@ export default function HomePage() {
                 </li>
                 <li className="pt-2 text-[12px] text-white/60">{t("home.mapClosed")}</li>
               </ul>
-              <p className="mt-8 text-[14px] leading-relaxed text-white/70">{isKo ? CLINIC_ADDRESS_KR : CLINIC_ADDRESS_EN}</p>
+              <p className="mt-8 text-[14px] leading-relaxed text-white/70">{getClinicAddressForLocale(locale)}</p>
             </div>
             <div className="relative h-[360px] w-full overflow-hidden bg-[var(--text-primary)] lg:h-[480px]">
               <div className="relative h-full w-full grayscale [&>iframe]:grayscale">

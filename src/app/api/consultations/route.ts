@@ -10,9 +10,14 @@ export async function POST(req: Request) {
     const phone = typeof body.phone === "string" ? body.phone.trim() : "";
     const interest = typeof body.interest === "string" ? body.interest.trim() : "";
     const message = typeof body.message === "string" ? body.message.trim() : "";
+    const privacyConsent = body.privacyConsent === true;
 
     if (!name || !phone) {
       return NextResponse.json({ error: "성함과 연락처는 필수입니다." }, { status: 400 });
+    }
+
+    if (!privacyConsent) {
+      return NextResponse.json({ error: "개인정보 수집·이용에 동의해 주세요." }, { status: 400 });
     }
 
     const session = await getServerSession(authOptions);
@@ -24,6 +29,7 @@ export async function POST(req: Request) {
         phone,
         interest: interest || null,
         message: message || null,
+        privacyConsentAt: new Date(),
         userId: userId ?? null,
       },
     });

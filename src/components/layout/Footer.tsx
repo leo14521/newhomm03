@@ -2,17 +2,14 @@
 
 import Link from "next/link";
 import {
-  BRAND_MESSAGE_LABEL,
-  BRAND_SLOGAN_EN,
-  BRAND_SLOGAN_KR,
-  BRAND_SERVICES_KR,
-  CLINIC_ADDRESS_EN,
-  CLINIC_ADDRESS_KR,
   CLINIC_DIRECTOR_NAME_KR,
   CLINIC_TEL,
   CLINIC_TEL_DIGITS,
-  CLINIC_TRANSIT_HINT_EN,
-  CLINIC_TRANSIT_HINT_KR,
+  getBrandMessageLabel,
+  getBrandServicesForLocale,
+  getBrandSloganForLocale,
+  getClinicAddressForLocale,
+  getClinicTransitHintForLocale,
 } from "@/config/brand";
 import Logo from "@/components/ui/Logo";
 import { useLocale } from "@/i18n/LocaleProvider";
@@ -23,15 +20,13 @@ const SNS_LINKS = [
   { href: "#", label: "Kakao Talk" },
 ] as const;
 
-const BRAND_SERVICES_EN = "Women’s health, dermatology, and body aesthetics";
-
 export default function Footer() {
   const { locale, t } = useLocale();
   const isKo = locale === "ko";
-  const slogan = isKo ? BRAND_SLOGAN_KR : BRAND_SLOGAN_EN;
-  const address = isKo ? CLINIC_ADDRESS_KR : CLINIC_ADDRESS_EN;
-  const services = isKo ? BRAND_SERVICES_KR : BRAND_SERVICES_EN;
-  const transit = isKo ? CLINIC_TRANSIT_HINT_KR : CLINIC_TRANSIT_HINT_EN;
+  const slogan = getBrandSloganForLocale(locale);
+  const address = getClinicAddressForLocale(locale);
+  const services = getBrandServicesForLocale(locale);
+  const transit = getClinicTransitHintForLocale(locale);
 
   return (
     <footer className="relative border-t border-[color-mix(in_srgb,var(--accent-terracotta)_20%,transparent)] bg-white px-4 py-10 text-[13px] text-[var(--text-secondary)] sm:px-6 lg:px-[var(--pad-global)] lg:py-12">
@@ -44,7 +39,7 @@ export default function Footer() {
               className="mb-3 w-[88px] opacity-95 transition-opacity hover:opacity-100 sm:w-[96px]"
             />
             <p className="mb-0.5 text-[10px] tracking-[0.28em] text-[var(--text-secondary)] uppercase">
-              {BRAND_MESSAGE_LABEL}
+              {getBrandMessageLabel(locale)}
             </p>
             <p className="font-[family-name:var(--font-kr-cinematic-serif)] text-[14px] font-light leading-snug text-[var(--text-primary)] sm:text-[15px] sm:leading-relaxed whitespace-pre-line">
               {slogan}
@@ -129,9 +124,26 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className="mt-8 border-t border-[var(--border-page)] pt-5 text-center text-[10px] tracking-[0.14em] text-[var(--text-secondary)] sm:text-[11px]">
-          {t("footer.copyright")}
-        </p>
+        <div className="mt-8 border-t border-[var(--border-page)] pt-5 text-center text-[11px] text-[var(--text-secondary)] sm:text-[12px]">
+          <nav aria-label={t("footer.legalNavAria")} className="mb-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+            <Link
+              href="/terms"
+              className="text-[var(--text-primary)] underline decoration-[color-mix(in_srgb,var(--accent-terracotta)_45%,transparent)] underline-offset-[4px] hover:text-[var(--accent-terracotta)]"
+            >
+              {t("footer.termsOfService")}
+            </Link>
+            <span className="text-[var(--text-secondary)]/40" aria-hidden>
+              |
+            </span>
+            <Link
+              href="/privacy"
+              className="text-[var(--text-primary)] underline decoration-[color-mix(in_srgb,var(--accent-terracotta)_45%,transparent)] underline-offset-[4px] hover:text-[var(--accent-terracotta)]"
+            >
+              {t("footer.privacyPolicy")}
+            </Link>
+          </nav>
+          <p className="text-[10px] tracking-[0.14em] sm:text-[11px]">{t("footer.copyright")}</p>
+        </div>
       </div>
     </footer>
   );

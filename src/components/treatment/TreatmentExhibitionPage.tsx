@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { SignatureHero } from "@/components/sections/SignatureHero";
+import { useLocale } from "@/i18n/LocaleProvider";
 
 type FeatureItem = {
   title: string;
@@ -55,6 +56,7 @@ export default function TreatmentExhibitionPage({
   secondaryHref,
   secondaryLabel,
 }: TreatmentExhibitionPageProps) {
+  const { t } = useLocale();
   return (
     <main className="min-h-screen pt-[var(--header-height)] lg:pt-[var(--header-h)]">
       <SignatureHero
@@ -67,7 +69,7 @@ export default function TreatmentExhibitionPage({
 
       <section className="section-block relative border-t border-[var(--border-page)] bg-[var(--bg-page)]">
         <div className="mx-auto max-w-[860px]">
-          <p className="sec-label mb-3 text-center uppercase">Treatment Curation</p>
+          <p className="sec-label mb-3 text-center uppercase">{t("pages.treatmentCuration")}</p>
           <h2 className="sec-title text-center font-[family-name:var(--font-en-display)] text-[clamp(24px,3.4vw,40px)] font-light">
             {introTitle}
           </h2>
@@ -109,7 +111,7 @@ export default function TreatmentExhibitionPage({
               <div className="h-24 rounded-sm border border-[var(--border-page)] bg-[var(--text-primary)]/[0.04]" aria-hidden />
               {programNote ? (
                 <div className="rounded-sm border border-[var(--border-page)] bg-[var(--bg-page)] p-6">
-                  <p className="sec-label !text-[10px] uppercase">Clinic note</p>
+                  <p className="sec-label !text-[10px] uppercase">{t("pages.clinicNote")}</p>
                   <p className="mt-3 text-[15px] leading-relaxed text-[var(--text-secondary)] break-keep">{programNote}</p>
                 </div>
               ) : null}
@@ -142,7 +144,7 @@ export default function TreatmentExhibitionPage({
 
       <section className="section-block section-dark relative border-t border-white/10 text-center">
         <div className="mx-auto max-w-[700px]">
-          <p className="sec-label text-white/60">Next step</p>
+          <p className="sec-label text-white/60">{t("pages.nextStep")}</p>
           <h3 className="sec-title mt-5 text-[clamp(24px,3.2vw,36px)] text-white">{ctaTitle}</h3>
           <p className="mx-auto mt-5 max-w-[620px] text-[15px] leading-relaxed text-white/75 lg:text-[16px] break-keep">{ctaBody}</p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
