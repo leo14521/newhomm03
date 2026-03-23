@@ -11,11 +11,11 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        identifier: { label: "아이디 또는 이메일", type: "text" },
+        email: { label: "아이디 또는 이메일", type: "text" },
         password: { label: "비밀번호", type: "password" },
       },
       async authorize(credentials) {
-        const identifier = credentials?.identifier?.trim().toLowerCase();
+        const identifier = credentials?.email?.trim().toLowerCase();
         const password = credentials?.password;
         if (!identifier || !password) return null;
 

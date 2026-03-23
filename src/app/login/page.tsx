@@ -23,7 +23,7 @@ function LoginForm() {
     setLoading(true);
     try {
       const res = await signIn("credentials", {
-        identifier: identifier.trim().toLowerCase(),
+        email: identifier.trim().toLowerCase(),
         password,
         redirect: false,
       });
