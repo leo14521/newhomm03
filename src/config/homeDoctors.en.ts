@@ -8,7 +8,7 @@ export const HOME_DOCTORS_EN: HomeDoctor[] = [
     position: "Medical director",
     nameKo: "박유나",
     nameEn: "Park Yuna",
-    image: "/dr-park.png",
+    image: "/dr-park.jpg",
     catchCopy: "OB-GYN specialist in women’s health\nand labiaplasty — Dr. Park Yuna",
     points: [
       "Board-certified OB-GYN supporting women’s health and aesthetics together.",
@@ -24,7 +24,7 @@ export const HOME_DOCTORS_EN: HomeDoctor[] = [
     position: "Associate director",
     nameKo: "김현빈",
     nameEn: "Kim Hyunbin",
-    image: "/dr-kim.png",
+    image: "/dr-kim.jpg",
     catchCopy: "Dermatology procedures specialist\nDr. Kim Hyunbin, associate director",
     points: [
       "Lead associate for lifting, botulinum toxin, fillers, lasers, and more.",

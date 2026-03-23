@@ -6,7 +6,7 @@ export const HOME_DOCTORS_RU: HomeDoctor[] = [
     position: "Главный врач",
     nameKo: "박유나",
     nameEn: "Park Yuna",
-    image: "/dr-park.png",
+    image: "/dr-park.jpg",
     catchCopy: "Акушер-гинеколог, специалист по интимной эстетике\nд-р Пак Юна",
     points: [
       "Врач акушер-гинеколог: здоровье и эстетика женщины вместе.",
@@ -22,7 +22,7 @@ export const HOME_DOCTORS_RU: HomeDoctor[] = [
     position: "Заместитель главного врача",
     nameKo: "김현빈",
     nameEn: "Kim Hyunbin",
-    image: "/dr-kim.png",
+    image: "/dr-kim.jpg",
     catchCopy: "Специалист по дерматологическим процедурам\nд-р Ким Хёнбин",
     points: [
       "Лифтинг, ботулотоксин, филлеры, лазер и другое — ведущий ассоциированный специалист.",

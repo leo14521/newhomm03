@@ -19,7 +19,7 @@ export const HOME_DOCTORS: HomeDoctor[] = [
     position: "원장",
     nameKo: "박유나",
     nameEn: "Park Yuna",
-    image: "/dr-park.png",
+    image: "/dr-park.jpg",
     catchCopy: "산부인과 진료와 소음순 성형의 전문가\n박유나 원장",
     points: [
       "산부인과 전문의로서 여성 건강과 아름다움을 함께 케어합니다.",
@@ -35,7 +35,7 @@ export const HOME_DOCTORS: HomeDoctor[] = [
     position: "부원장",
     nameKo: "김현빈",
     nameEn: "Kim Hyunbin",
-    image: "/dr-kim.png",
+    image: "/dr-kim.jpg",
     catchCopy: "피부과 시술의 전문가\n김현빈 부원장",
     points: [
       "피부과 시술 전담 부원장으로 리프팅·보톡스·필러·레이저 등 다수의 시술 경험.",

@@ -30,6 +30,88 @@ import HeroVideo from "@/components/ui/HeroVideo";
 import Logo from "@/components/ui/Logo";
 gsap.registerPlugin(ScrollTrigger);
 
+type TourZone = {
+  id: "exterior" | "desk" | "lounge" | "operation" | "recovery" | "powder";
+  label: string;
+  desc: string;
+  images: readonly string[];
+};
+
+const HOSPITAL_TOUR_ZONES: readonly TourZone[] = [
+  {
+    id: "exterior",
+    label: "외관/입구",
+    desc: "클리닉의 첫 인상을 만드는 입구 및 진입 동선",
+    images: [
+      "/images/interior/079A4367-HDR.jpg",
+      "/images/interior/079A4450.jpg",
+      "/images/interior/079A4453.jpg",
+      "/images/interior/079A4456.jpg",
+      "/images/interior/079A4473.jpg",
+    ],
+  },
+  {
+    id: "desk",
+    label: "데스크",
+    desc: "도착 직후 맞이하는 프런트 리셉션 존",
+    images: [
+      "/images/interior/079A4342-HDR.jpg",
+      "/images/interior/079A4345-HDR.jpg",
+      "/images/interior/079A4348-HDR.jpg",
+      "/images/interior/079A4370-HDR.jpg",
+      "/images/interior/079A4455.jpg",
+    ],
+  },
+  {
+    id: "lounge",
+    label: "대기실",
+    desc: "상담 전후 편안히 머무는 라운지 공간",
+    images: [
+      "/images/interior/079A4351-HDR.jpg",
+      "/images/interior/079A4361-HDR.jpg",
+      "/images/interior/079A4364-HDR.jpg",
+      "/images/interior/079A4452.jpg",
+      "/images/interior/079A4466.jpg",
+    ],
+  },
+  {
+    id: "operation",
+    label: "수술방",
+    desc: "정밀 시술을 위한 프로시저 룸",
+    images: [
+      "/images/interior/079A4396-HDR.jpg",
+      "/images/interior/079A4399-HDR.jpg",
+      "/images/interior/079A4405-HDR.jpg",
+      "/images/interior/079A4408-HDR-Pano.jpg",
+      "/images/interior/079A4469.jpg",
+    ],
+  },
+  {
+    id: "recovery",
+    label: "회복실",
+    desc: "시술 후 안정적인 휴식을 위한 회복 존",
+    images: [
+      "/images/interior/079A4417-HDR.jpg",
+      "/images/interior/079A4420-HDR.jpg",
+      "/images/interior/079A4435-HDR.jpg",
+      "/images/interior/079A4438-HDR.jpg",
+      "/images/interior/079A4441-HDR.jpg",
+    ],
+  },
+  {
+    id: "powder",
+    label: "파우더룸",
+    desc: "프라이빗하게 정돈 가능한 파우더룸",
+    images: [
+      "/images/interior/079A4426-HDR.jpg",
+      "/images/interior/079A4429-HDR.jpg",
+      "/images/interior/079A4444-HDR.jpg",
+      "/images/interior/079A4462.jpg",
+      "/images/interior/079A4472.jpg",
+    ],
+  },
+] as const;
+
 export default function HomePage() {
   const { locale, t } = useLocale();
   const isKo = locale === "ko";
@@ -67,10 +149,19 @@ export default function HomePage() {
   }, [ytActiveId, ytList]);
   const [ytPlayerOpen, setYtPlayerOpen] = useState(false);
   const [ytPosterImgFailed, setYtPosterImgFailed] = useState(false);
+  const [activeTourZoneId, setActiveTourZoneId] = useState<TourZone["id"]>("desk");
+  const [activeTourIndex, setActiveTourIndex] = useState(0);
   useEffect(() => {
     setYtPlayerOpen(false);
     setYtPosterImgFailed(false);
   }, [ytActiveId]);
+  const activeTourZone =
+    HOSPITAL_TOUR_ZONES.find((zone) => zone.id === activeTourZoneId) ?? HOSPITAL_TOUR_ZONES[0];
+  const activeTourImages = activeTourZone.images;
+  const safeActiveTourIndex = Math.min(activeTourIndex, Math.max(activeTourImages.length - 1, 0));
+  useEffect(() => {
+    setActiveTourIndex(0);
+  }, [activeTourZoneId]);
 
   useEffect(() => {
     if (!baWipOpen) return;
@@ -97,6 +188,8 @@ export default function HomePage() {
   const mediaRef = useRef<HTMLElement>(null);
   const formRef = useRef<HTMLElement>(null);
   const heroAuroraRef = useRef<HTMLDivElement>(null);
+  const tourRef = useRef<HTMLElement>(null);
+  const tourStageRef = useRef<HTMLDivElement>(null);
   const [solutionChoice, setSolutionChoice] = useState<"women" | "skin" | null>(null);
   /** 로더 타임라인이 끝까지 도달하지 못할 때(React Strict Mode 등) 백지 방지 */
   const loaderFallbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -394,6 +487,57 @@ export default function HomePage() {
   );
   useGSAP(
     () => {
+      if (loaderVisible) return;
+      const section = tourRef.current;
+      if (!section) return;
+      const revealTargets = section.querySelectorAll<HTMLElement>(".tour-reveal");
+      const cardTargets = section.querySelectorAll<HTMLElement>(".tour-card");
+      gsap.set(revealTargets, { autoAlpha: 0, y: 24 });
+      gsap.set(cardTargets, { autoAlpha: 0, y: 16 });
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 78%",
+          once: true,
+        },
+      });
+      tl.to(revealTargets, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.9,
+        stagger: 0.08,
+        ease: "power3.out",
+      }).to(
+        cardTargets,
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.05,
+          ease: "power2.out",
+        },
+        "-=0.5"
+      );
+      return () => {
+        tl.scrollTrigger?.kill();
+        tl.kill();
+      };
+    },
+    { dependencies: [loaderVisible] }
+  );
+  useGSAP(
+    () => {
+      if (loaderVisible) return;
+      const stage = tourStageRef.current;
+      if (!stage) return;
+      const tl = gsap.timeline();
+      tl.fromTo(stage, { autoAlpha: 0.55, scale: 1.04 }, { autoAlpha: 1, scale: 1, duration: 0.7, ease: "power3.out" });
+      return () => tl.kill();
+    },
+    { dependencies: [activeTourIndex, loaderVisible] }
+  );
+  useGSAP(
+    () => {
       if (loaderVisible || !SCROLL_ANIMATION.stats.enabled) return;
       const cards = statsRef.current?.querySelectorAll<HTMLElement>(".stats-card");
       if (cards?.length) {
@@ -609,6 +753,117 @@ export default function HomePage() {
               <p className="font-[family-name:var(--font-en-title)] text-[13px] tracking-[0.12em] text-[var(--color-text-light)] uppercase" style={{ fontWeight: 400 }}>
                 Park Yuna, Representative Director, Hommage Clinic
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* 병원투어 — gallery rail + stage view */}
+        <section
+          id="hospital-tour"
+          ref={tourRef}
+          className="section-block relative overflow-hidden border-y border-[var(--border-page)] bg-[var(--bg-page)]"
+        >
+          <div
+            className="pointer-events-none absolute inset-0 opacity-70"
+            aria-hidden
+            style={{
+              background:
+                "radial-gradient(circle at 10% 10%, rgba(201,137,102,0.12), transparent 38%), radial-gradient(circle at 90% 85%, rgba(201,137,102,0.08), transparent 42%)",
+            }}
+          />
+          <div className="relative mx-auto max-w-[1280px]">
+            <div className="tour-reveal max-w-[760px]">
+              <span className="sec-label block">HOSPITAL TOUR</span>
+              <h3 className="mt-3 font-[family-name:var(--font-kr-cinematic-serif)] text-[clamp(24px,3.4vw,38px)] leading-[1.34] tracking-tight text-[var(--text-primary)]">
+                공간을 감상하듯, 오마쥬를 걷다
+              </h3>
+              <p className="mt-4 max-w-[680px] font-[family-name:var(--font-kr-body)] text-[14px] leading-relaxed text-[var(--text-secondary)] sm:text-[15px]">
+                상담부터 케어까지 이어지는 동선을 작품처럼 설계했습니다. 차분한 톤과 섬세한 디테일이 머무는 시간을 더욱 편안하게 만듭니다.
+              </p>
+            </div>
+
+            <div className="tour-reveal mt-10 grid gap-5 lg:mt-12 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-7">
+              <div
+                ref={tourStageRef}
+                className="group relative aspect-[16/10] overflow-hidden rounded-2xl border border-[var(--border-page)] bg-[var(--bg-card)] shadow-[0_30px_70px_rgba(45,42,38,0.12)]"
+              >
+                <Image
+                  src={activeTourImages[safeActiveTourIndex]}
+                  alt={`${activeTourZone.label} ${safeActiveTourIndex + 1}`}
+                  fill
+                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  sizes="(max-width: 1024px) 100vw, 780px"
+                />
+                <div
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgba(24,20,18,0.35)] via-transparent to-transparent"
+                  aria-hidden
+                />
+                <p className="absolute bottom-5 left-5 rounded-full border border-white/30 bg-black/15 px-3 py-1.5 font-[family-name:var(--font-en-title)] text-[10px] tracking-[0.18em] text-white/90 uppercase backdrop-blur">
+                  {String(safeActiveTourIndex + 1).padStart(2, "0")} / {String(activeTourImages.length).padStart(2, "0")}
+                </p>
+              </div>
+
+              <div className="relative rounded-2xl border border-[var(--border-page)] bg-[var(--bg-card)] p-4 shadow-[var(--shadow-card)] sm:p-5">
+                <div className="mb-4 flex flex-wrap gap-2 px-1">
+                  {HOSPITAL_TOUR_ZONES.map((zone) => (
+                    <button
+                      key={zone.id}
+                      type="button"
+                      onClick={() => setActiveTourZoneId(zone.id)}
+                      className={`rounded-full border px-3 py-1.5 text-[12px] transition-all ${
+                        activeTourZoneId === zone.id
+                          ? "border-[var(--accent-terracotta)] bg-[color-mix(in_srgb,var(--accent-terracotta)_12%,white)] text-[var(--text-primary)]"
+                          : "border-[var(--border-page)] text-[var(--text-secondary)] hover:border-[var(--text-primary)]/30"
+                      }`}
+                    >
+                      {zone.label}
+                    </button>
+                  ))}
+                </div>
+                <p className="mb-3 px-1 font-[family-name:var(--font-kr-body)] text-[12px] leading-relaxed text-[var(--text-secondary)]">
+                  {activeTourZone.desc}
+                </p>
+                <div className="grid grid-cols-3 gap-3 px-1 pb-1 pt-0.5 sm:grid-cols-4">
+                  {activeTourImages.map((src, idx) => (
+                    <button
+                      key={src}
+                      type="button"
+                      onClick={() => setActiveTourIndex(idx)}
+                      className={`tour-card group relative block aspect-[4/5] w-full overflow-hidden rounded-xl border transition-all duration-300 ${
+                        safeActiveTourIndex === idx
+                          ? "border-[var(--accent-terracotta)] shadow-[0_14px_30px_rgba(201,137,102,0.28)]"
+                          : "border-[var(--border-page)] hover:border-[var(--text-primary)]/35"
+                      }`}
+                      aria-label={`${activeTourZone.label} ${idx + 1}`}
+                      aria-pressed={safeActiveTourIndex === idx}
+                    >
+                      <Image
+                        src={src}
+                        alt={`${activeTourZone.label} 썸네일 ${idx + 1}`}
+                        fill
+                        className={`object-cover object-center transition duration-500 ${
+                          safeActiveTourIndex === idx ? "scale-[1.04]" : "group-hover:scale-[1.04]"
+                        }`}
+                        sizes="165px"
+                      />
+                      <div
+                        className={`absolute inset-0 transition ${
+                          safeActiveTourIndex === idx
+                            ? "bg-gradient-to-t from-black/25 via-transparent to-transparent"
+                            : "bg-black/20 group-hover:bg-black/10"
+                        }`}
+                        aria-hidden
+                      />
+                      <span className="absolute bottom-2 left-2 rounded bg-black/25 px-2 py-1 font-[family-name:var(--font-en-title)] text-[9px] tracking-[0.16em] text-white/90 uppercase backdrop-blur-sm">
+                        {String(idx + 1).padStart(2, "0")}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+                <p className="mt-4 px-1 font-[family-name:var(--font-kr-body)] text-[12px] leading-relaxed text-[var(--text-secondary)]">
+                  공간 카테고리를 선택하면 해당 영역 사진만 모아볼 수 있습니다. 썸네일을 누르면 메인 뷰로 크게 확인됩니다.
+                </p>
+              </div>
             </div>
           </div>
         </section>

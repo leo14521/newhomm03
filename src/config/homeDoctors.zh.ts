@@ -6,7 +6,7 @@ export const HOME_DOCTORS_ZH: HomeDoctor[] = [
     position: "院长",
     nameKo: "박유나",
     nameEn: "Park Yuna",
-    image: "/dr-park.png",
+    image: "/dr-park.jpg",
     catchCopy: "妇产科与私密整形专家\n朴裕娜院长",
     points: [
       "妇产科专科医师，兼顾女性健康与美学需求。",
@@ -22,7 +22,7 @@ export const HOME_DOCTORS_ZH: HomeDoctor[] = [
     position: "副院长",
     nameKo: "김현빈",
     nameEn: "Kim Hyunbin",
-    image: "/dr-kim.png",
+    image: "/dr-kim.jpg",
     catchCopy: "皮肤医美治疗专家\n金铉斌副院长",
     points: [
       "主导提拉、肉毒、填充、激光等多项皮肤治疗。",
