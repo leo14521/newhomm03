@@ -16,12 +16,14 @@ export default async function AdminDashboardPage() {
     | Awaited<ReturnType<typeof prisma.consultation.findMany>>
     | null = null;
   let loadError = false;
+  let loadErrorMessage = "";
   try {
     rows = await prisma.consultation.findMany({
       orderBy: { createdAt: "desc" },
     });
-  } catch {
+  } catch (error) {
     loadError = true;
+    if (error instanceof Error) loadErrorMessage = error.message;
   }
 
   if (loadError || rows == null) {
@@ -31,6 +33,11 @@ export default async function AdminDashboardPage() {
         <p className="mt-3 rounded-sm border border-[var(--border-page)] bg-[var(--bg-card)] px-4 py-3 text-[13px] text-[var(--text-secondary)]">
           관리자 DB 연결 상태를 확인해 주세요. (운영 환경의 DATABASE_URL/Prisma 설정 필요)
         </p>
+        {loadErrorMessage ? (
+          <p className="mt-2 rounded-sm border border-red-200 bg-red-50 px-4 py-3 font-mono text-[12px] text-red-700">
+            {loadErrorMessage}
+          </p>
+        ) : null}
       </div>
     );
   }
