@@ -1,6 +1,7 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
+import { AUTH_SECRET } from "@/lib/auth-secret";
 
 const ADMIN_EMAIL = "admin@hommageclinic.com";
 const ADMIN_DEFAULT_PASSWORD = "1234";
@@ -73,7 +74,5 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60,
   },
-  // 운영 환경변수 누락 시 /api/auth/* 전체가 죽는 것을 방지하는 안전 fallback.
-  // 배포 환경에서는 반드시 NEXTAUTH_SECRET를 설정해 이 값을 대체하세요.
-  secret: process.env.NEXTAUTH_SECRET || "hommageclinic-fallback-secret-change-this",
+  secret: AUTH_SECRET,
 };
