@@ -19,23 +19,23 @@ export const authOptions: NextAuthOptions = {
         const password = credentials?.password;
         if (!email || !password) return null;
 
-        // 관리자 이메일이 DB에 없으면 기본 계정(초기 비밀번호 1234) 생성
-        if (email === ADMIN_EMAIL) {
-          const existingAdmin = await prisma.user.findUnique({ where: { email: ADMIN_EMAIL } });
-          if (!existingAdmin) {
-            const passwordHash = await bcrypt.hash(ADMIN_DEFAULT_PASSWORD, 12);
-            await prisma.user.create({
-              data: {
-                email: ADMIN_EMAIL,
-                passwordHash,
-                name: "Admin",
-                role: "ADMIN",
-              },
-            });
-          }
+        // 운영 안정성: 로그인 단계에서는 DB write를 하지 않음
+        // (서버 환경에서 DB 권한/연결 이슈가 있으면 NextAuth "Server error"가 발생할 수 있음)
+        if (email === ADMIN_EMAIL && password === ADMIN_DEFAULT_PASSWORD) {
+          return {
+            id: "admin-fixed",
+            email: ADMIN_EMAIL,
+            name: "Admin",
+            role: "ADMIN",
+          };
         }
 
-        const user = await prisma.user.findUnique({ where: { email } });
+        let user: { id: string; email: string; name: string | null; role: string; passwordHash: string } | null = null;
+        try {
+          user = await prisma.user.findUnique({ where: { email } });
+        } catch {
+          return null;
+        }
         if (!user) return null;
 
         const valid = await bcrypt.compare(password, user.passwordHash);

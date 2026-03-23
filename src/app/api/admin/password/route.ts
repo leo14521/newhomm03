@@ -9,6 +9,12 @@ export async function POST(req: Request) {
   if (!session?.user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+  if (session.user.id === "admin-fixed") {
+    return NextResponse.json(
+      { error: "기본 관리자 계정은 비밀번호 변경 대상이 아닙니다. 별도 관리자 계정을 생성해 사용해 주세요." },
+      { status: 400 }
+    );
+  }
 
   const body = (await req.json().catch(() => null)) as
     | { currentPassword?: string; nextPassword?: string }
