@@ -14,6 +14,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
             <Link href="/admin/users" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:underline">
               회원
             </Link>
+            <Link href="/admin/password" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:underline">
+              비밀번호 변경
+            </Link>
             <Link href="/" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)]">
               사이트
             </Link>

@@ -3,33 +3,39 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 
-const ADMIN_LOGIN_ID = "admin";
-const ADMIN_LOGIN_PASSWORD = "hommage1@";
+const ADMIN_EMAIL = "admin@hommageclinic.com";
+const ADMIN_DEFAULT_PASSWORD = "1234";
 
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        email: { label: "아이디 또는 이메일", type: "text" },
+        email: { label: "이메일", type: "email" },
         password: { label: "비밀번호", type: "password" },
       },
       async authorize(credentials) {
-        const identifier = credentials?.email?.trim().toLowerCase();
+        const email = credentials?.email?.trim().toLowerCase();
         const password = credentials?.password;
-        if (!identifier || !password) return null;
+        if (!email || !password) return null;
 
-        // 요청사항: 관리자 계정은 admin / hommage1@
-        if (identifier === ADMIN_LOGIN_ID && password === ADMIN_LOGIN_PASSWORD) {
-          return {
-            id: "admin-fixed",
-            email: "admin@hommage.local",
-            name: "Admin",
-            role: "ADMIN",
-          };
+        // 관리자 이메일이 DB에 없으면 기본 계정(초기 비밀번호 1234) 생성
+        if (email === ADMIN_EMAIL) {
+          const existingAdmin = await prisma.user.findUnique({ where: { email: ADMIN_EMAIL } });
+          if (!existingAdmin) {
+            const passwordHash = await bcrypt.hash(ADMIN_DEFAULT_PASSWORD, 12);
+            await prisma.user.create({
+              data: {
+                email: ADMIN_EMAIL,
+                passwordHash,
+                name: "Admin",
+                role: "ADMIN",
+              },
+            });
+          }
         }
 
-        const user = await prisma.user.findUnique({ where: { email: identifier } });
+        const user = await prisma.user.findUnique({ where: { email } });
         if (!user) return null;
 
         const valid = await bcrypt.compare(password, user.passwordHash);
