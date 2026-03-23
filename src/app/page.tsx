@@ -12,6 +12,7 @@ import {
   getBrandSloganForLocale,
   getClinicAddressForLocale,
   CLINIC_MAP_QUERY,
+  CLINIC_NAVER_PLACE_URL,
   CLINIC_TEL,
 } from "@/config/brand";
 import { IMAGE_POOL, SCROLL_ANIMATION } from "@/config/homeContent";
@@ -1533,7 +1534,7 @@ export default function HomePage() {
                     {t("home.mapOpen")}
                   </a>
                   <a
-                    href="https://m.place.naver.com/hospital/1547796366/home"
+                    href={CLINIC_NAVER_PLACE_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="rounded-sm border-2 border-[#03C75A] bg-[#03C75A] px-5 py-3 text-sm font-semibold tracking-[0.06em] text-white transition-all duration-300 hover:brightness-95"

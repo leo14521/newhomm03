@@ -36,7 +36,7 @@ export const CONTENT_SECTIONS_JA = {
     items: [
       { num: "2", unit: "名", label: "専門医院長", sub: "産婦人科・皮膚科の連携" },
       { num: "5", unit: "段階", label: "ケアの流れ", sub: "初診 → 検査 → 計画・準備 → 施術 → フォロー" },
-      { num: "25", unit: "年", label: "臨床経験", sub: "女性の健康、インティメート、エステティック" },
+      { num: "20", unit: "年", label: "臨床経験", sub: "女性の健康、インティメート、エステティック" },
       { num: "30", unit: "K+", label: "ケア実績", sub: "データに基づく個別計画" },
     ],
   },

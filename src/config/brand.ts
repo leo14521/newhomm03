@@ -29,10 +29,13 @@ export const CLINIC_ADDRESS_EN =
 export const CLINIC_MAP_QUERY = "서울 서초구 강남대로 509 오마쥬클리닉 A동 4층";
 
 /** 대표 전화 (표기용) */
-export const CLINIC_TEL = "070-4144-7125";
+export const CLINIC_TEL = "02-517-7125";
 
 /** `tel:` 링크용 숫자만 */
 export const CLINIC_TEL_DIGITS = CLINIC_TEL.replace(/\D/g, "");
+
+/** 네이버 예약/플레이스 링크 */
+export const CLINIC_NAVER_PLACE_URL = "https://map.naver.com/p/entry/place/1547796366";
 
 /** 사업자등록번호 (하이픈 표기) */
 export const CLINIC_BUSINESS_REG = "141-19-00808";

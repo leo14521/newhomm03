@@ -29,7 +29,7 @@ export const CONTENT_SECTIONS_ZH = {
     items: [
       { num: "2", unit: "位", label: "专科院长", sub: "妇产科与皮肤科协作" },
       { num: "5", unit: "步", label: "护理流程", sub: "咨询 → 检查 → 方案与准备 → 治疗 → 随访" },
-      { num: "25", unit: "年", label: "临床经验", sub: "女性健康、私密护理、医美" },
+      { num: "20", unit: "年", label: "临床经验", sub: "女性健康、私密护理、医美" },
       { num: "30", unit: "K+", label: "护理案例", sub: "数据驱动的个性化规划" },
     ],
   },

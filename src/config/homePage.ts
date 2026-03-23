@@ -140,7 +140,7 @@ export const REP_ITEMS = [
 export const STATS = [
   { num: "2", unit: "인", label: "전문의 원장", sub: "산부인과·피부과 협진 진료" },
   { num: "5", unit: "단계", label: "케어 단계", sub: "초진 상담 → 진찰·검사 → 시술 설계·준비 → 시술·처치 → 경과·애프터케어" },
-  { num: "25", unit: "년", label: "원장 경력", sub: "산부인과·여성성형·피부관리 전문" },
+  { num: "20", unit: "년", label: "원장 경력", sub: "산부인과·여성성형·피부관리 전문" },
   { num: "30", unit: "K+", label: "누적 케어", sub: "맞춤 설계 데이터 기반" },
 ];
 

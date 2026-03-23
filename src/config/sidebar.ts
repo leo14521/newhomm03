@@ -1,4 +1,4 @@
-import { CLINIC_TEL_DIGITS } from "@/config/brand";
+import { CLINIC_NAVER_PLACE_URL, CLINIC_TEL_DIGITS } from "@/config/brand";
 
 /**
  * HOMMAGE: 사이드바 sb-nav (sb-btn-link + sb-circle + sb-label, sb-divider)
@@ -15,7 +15,7 @@ export const SIDEBAR_GROUPS: SidebarLink[][] = [
   [
     { label: "전화상담", href: `tel:${CLINIC_TEL_DIGITS}`, icon: "phone-alt" },
     { label: "카톡상담", href: "#", icon: "comment" },
-    { label: "네이버예약", href: "#", icon: "calendar-check", highlight: true },
+    { label: "네이버예약", href: CLINIC_NAVER_PLACE_URL, icon: "calendar-check", highlight: true },
   ],
   [
     { label: "블로그", href: "#", icon: "pen-square" },

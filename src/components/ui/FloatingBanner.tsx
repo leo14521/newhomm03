@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLocale } from "@/i18n/LocaleProvider";
-import { CLINIC_TEL, CLINIC_TEL_DIGITS } from "@/config/brand";
+import { CLINIC_NAVER_PLACE_URL, CLINIC_TEL, CLINIC_TEL_DIGITS } from "@/config/brand";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,7 +28,7 @@ export default function FloatingBanner() {
         {
           icon: "fa-calendar-check",
           label: t("floating.naver"),
-          href: "#",
+          href: CLINIC_NAVER_PLACE_URL,
           color: "#03C75A",
           highlight: true,
           type: "link" as const,

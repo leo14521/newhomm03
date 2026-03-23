@@ -42,7 +42,7 @@ export const CONTENT_SECTIONS_EN = {
     items: [
       { num: "2", unit: "", label: "Specialist directors", sub: "OB-GYN & dermatology collaboration" },
       { num: "5", unit: "", label: "Care steps", sub: "Consultation → exam → plan & prep → treatment → follow-up" },
-      { num: "25", unit: "+ yrs", label: "Clinical experience", sub: "Women’s health, intimate care, aesthetics" },
+      { num: "20", unit: "+ yrs", label: "Clinical experience", sub: "Women’s health, intimate care, aesthetics" },
       { num: "30", unit: "K+", label: "Care journeys", sub: "Data-informed personalised planning" },
     ],
   },

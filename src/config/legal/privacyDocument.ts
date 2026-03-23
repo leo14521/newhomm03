@@ -48,7 +48,7 @@ const KO: LegalDocument = {
       heading: "제7조 (개인정보 보호책임자)",
       paragraphs: [
         "의원은 개인정보 처리에 관한 업무를 총괄하는 책임자를 지정합니다.",
-        "• 상호: 오마쥬클리닉\n• 주소: 서울특별시 서초구 강남대로 509, A동 4층\n• 대표전화: 070-4144-7125\n• 이메일: master@hommage.com",
+        "• 상호: 오마쥬클리닉\n• 주소: 서울특별시 서초구 강남대로 509, A동 4층\n• 대표전화: 02-517-7125\n• 이메일: master@hommage.com",
       ],
     },
     {
@@ -106,7 +106,7 @@ const EN: LegalDocument = {
     {
       heading: "7. Data protection contact",
       paragraphs: [
-        "• Name: Hommage Clinic\n• Address: 509 Gangnam-daero, Seocho-gu, Seoul, Building A, 4F\n• Phone: 070-4144-7125\n• Email: master@hommage.com",
+        "• Name: Hommage Clinic\n• Address: 509 Gangnam-daero, Seocho-gu, Seoul, Building A, 4F\n• Phone: 02-517-7125\n• Email: master@hommage.com",
       ],
     },
     {
