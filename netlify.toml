@@ -11,5 +11,8 @@
 [build.environment]
   NODE_VERSION = "20"
 
+[context.production.environment]
+  NEXTAUTH_URL = "https://hommageclinic.com"
+
 [[plugins]]
   package = "@netlify/plugin-nextjs"
