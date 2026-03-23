@@ -121,6 +121,7 @@ export default function HomePage() {
   const curationSkinList = getCurationSkin(locale);
   const ytList = getYtVideos(locale);
   const repGrid = REP_GRID_BY_LOCALE[locale] ?? REP_GRID_BY_LOCALE.en;
+  const doctorsVisible = useMemo(() => doctors.filter((doc) => doc.id !== "kim"), [doctors]);
 
   const [baWipOpen, setBaWipOpen] = useState(false);
   const [loaderVisible, setLoaderVisible] = useState(true);
@@ -647,7 +648,7 @@ export default function HomePage() {
             ref={heroSequenceRef}
             className="hero-sequence relative h-screen w-full overflow-hidden"
           >
-            {/* Phase 0: 조각 영상 (hero-sculpture.mp4 우선 → 없으면 hero.mp4, 오버레이 완화해 영상 노출) */}
+            {/* Phase 0: 메인 히어로 영상 (hero_2.mp4 우선, 실패 시 fallback) */}
             <HeroVideo vivid />
 
             <div
@@ -926,7 +927,7 @@ export default function HomePage() {
           </div>
 
           <div className="doctor-ensemble mx-auto max-w-[1080px] overflow-hidden rounded-2xl border border-[var(--border-page)] bg-[var(--bg-card)] shadow-[var(--shadow-card)] sm:rounded-3xl">
-            {doctors.map((doc, docIndex) => (
+            {doctorsVisible.map((doc, docIndex) => (
               <div key={doc.id}>
                 {docIndex > 0 ? (
                   <div className="doctor-connector border-y border-[color-mix(in_srgb,var(--border-page)_85%,transparent)] bg-[color-mix(in_srgb,var(--bg-page)_55%,var(--bg-card))] px-4 py-7 sm:py-9">
@@ -1489,14 +1490,20 @@ export default function HomePage() {
               <h3 className="mb-8 font-[family-name:var(--font-display)] text-[18px] tracking-[0.12em] text-white">{t("home.mapTitle")}</h3>
               <ul className="space-y-5 text-[14px] text-white/80">
                 <li>
-                  <span className="text-white/60">{t("home.mapWeekday")}</span>
-                  <span className="ml-2">AM 10:00 ~ PM 07:30</span>
+                  <span className="text-white/60">월 · 금</span>
+                  <span className="ml-2">AM 10:00 ~ PM 08:00</span>
                   <br />
-                  <small className="text-[12px] text-white/60">{t("home.mapNight")}</small>
+                  <small className="text-[12px] text-white/60">야간진료</small>
+                </li>
+                <li>
+                  <span className="text-white/60">화 · 수 · 목</span>
+                  <span className="ml-2">AM 10:00 ~ PM 07:00</span>
                 </li>
                 <li>
                   <span className="text-white/60">{t("home.mapSat")}</span>
                   <span className="ml-2">AM 10:00 ~ PM 03:00</span>
+                  <br />
+                  <small className="text-[12px] text-white/60">점심시간 없음</small>
                 </li>
                 <li>
                   <span className="text-white/70">Tel</span>
@@ -1521,9 +1528,17 @@ export default function HomePage() {
                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CLINIC_MAP_QUERY)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-sm border-2 border-white/90 bg-[var(--text-primary)] px-6 py-3 text-sm tracking-[0.08em] text-white transition-all duration-300 hover:opacity-90 hover:border-white"
+                    className="rounded-sm border-2 border-white/70 bg-[var(--text-primary)] px-5 py-3 text-sm tracking-[0.08em] text-white transition-all duration-300 hover:opacity-90 hover:border-white"
                   >
                     {t("home.mapOpen")}
+                  </a>
+                  <a
+                    href="https://m.place.naver.com/hospital/1547796366/home"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-sm border-2 border-[#03C75A] bg-[#03C75A] px-5 py-3 text-sm font-semibold tracking-[0.06em] text-white transition-all duration-300 hover:brightness-95"
+                  >
+                    NAVER PLACE
                   </a>
                 </div>
               </div>
