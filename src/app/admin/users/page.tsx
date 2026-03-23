@@ -13,7 +13,13 @@ export default async function AdminUsersPage() {
   }
 
   let rows:
-    | Awaited<ReturnType<typeof prisma.user.findMany>>
+    | Array<{
+        id: string;
+        email: string;
+        name: string | null;
+        role: string;
+        createdAt: Date;
+      }>
     | null = null;
   let loadError = false;
   try {
