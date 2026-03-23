@@ -10,6 +10,7 @@ export type ConsultRow = {
   interest: string | null;
   message: string | null;
   status: string;
+  visitType: string;
   createdAt: string;
   privacyConsentAt: string | null;
 };
@@ -19,18 +20,23 @@ const STATUS_LABEL: Record<string, string> = {
   CONTACTED: "연락함",
   DONE: "완료",
 };
+const VISIT_LABEL: Record<string, string> = {
+  NEW_PATIENT: "신환",
+  FIRST_VISIT: "초진",
+  RETURN_VISIT: "재진",
+};
 
 export default function AdminConsultTable({ items }: { items: ConsultRow[] }) {
   const router = useRouter();
   const [busyId, setBusyId] = useState<string | null>(null);
 
-  async function updateStatus(id: string, status: string) {
+  async function updateRow(id: string, payload: { status?: string; visitType?: string }) {
     setBusyId(id);
     try {
       const res = await fetch(`/api/admin/consultations/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status }),
+        body: JSON.stringify(payload),
       });
       if (res.ok) router.refresh();
     } finally {
@@ -52,7 +58,9 @@ export default function AdminConsultTable({ items }: { items: ConsultRow[] }) {
             <th className="px-3 py-2 font-medium">연락처</th>
             <th className="px-3 py-2 font-medium">관심</th>
             <th className="px-3 py-2 font-medium">문의</th>
+            <th className="px-3 py-2 font-medium">개인정보동의</th>
             <th className="px-3 py-2 font-medium">상태</th>
+            <th className="px-3 py-2 font-medium">내원구분</th>
           </tr>
         </thead>
         <tbody>
@@ -76,10 +84,24 @@ export default function AdminConsultTable({ items }: { items: ConsultRow[] }) {
                 <select
                   value={row.status}
                   disabled={busyId === row.id}
-                  onChange={(e) => updateStatus(row.id, e.target.value)}
+                  onChange={(e) => updateRow(row.id, { status: e.target.value })}
                   className="w-full max-w-[120px] border border-[var(--border-page)] bg-[var(--bg-page)] px-2 py-1 text-[12px]"
                 >
                   {Object.entries(STATUS_LABEL).map(([k, lab]) => (
+                    <option key={k} value={k}>
+                      {lab}
+                    </option>
+                  ))}
+                </select>
+              </td>
+              <td className="px-3 py-2">
+                <select
+                  value={row.visitType}
+                  disabled={busyId === row.id}
+                  onChange={(e) => updateRow(row.id, { visitType: e.target.value })}
+                  className="w-full max-w-[120px] border border-[var(--border-page)] bg-[var(--bg-page)] px-2 py-1 text-[12px]"
+                >
+                  {Object.entries(VISIT_LABEL).map(([k, lab]) => (
                     <option key={k} value={k}>
                       {lab}
                     </option>

@@ -31,6 +31,7 @@ export async function POST(req: Request) {
       phone,
       interest: interest || null,
       message: message || null,
+      visitType: "NEW_PATIENT",
       privacyConsentAt: new Date(),
       userId,
     };

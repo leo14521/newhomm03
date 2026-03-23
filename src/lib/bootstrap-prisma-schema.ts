@@ -46,10 +46,15 @@ export async function ensureHommageSchema() {
       "interest" TEXT,
       "message" TEXT,
       "status" TEXT NOT NULL DEFAULT 'NEW',
+      "visitType" TEXT NOT NULL DEFAULT 'NEW_PATIENT',
       "privacyConsentAt" TIMESTAMPTZ,
       "createdAt" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       "userId" TEXT
     );
+  `);
+  await prisma.$executeRawUnsafe(`
+    ALTER TABLE "Consultation"
+    ADD COLUMN IF NOT EXISTS "visitType" TEXT NOT NULL DEFAULT 'NEW_PATIENT';
   `);
 
   await prisma.$executeRawUnsafe(`

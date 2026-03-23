@@ -41,6 +41,7 @@ model Consultation {
   interest           String?
   message            String?
   status             String    @default("NEW")
+  visitType          String    @default("NEW_PATIENT")
   /// 웹 상담 폼 개인정보 수집·이용 동의 시각
   privacyConsentAt   DateTime?
   createdAt          DateTime  @default(now())

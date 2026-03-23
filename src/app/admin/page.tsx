@@ -64,6 +64,7 @@ export default async function AdminDashboardPage() {
     interest: r.interest,
     message: r.message,
     status: r.status,
+    visitType: r.visitType,
     createdAt: r.createdAt.toISOString(),
     privacyConsentAt: r.privacyConsentAt?.toISOString() ?? null,
   }));
