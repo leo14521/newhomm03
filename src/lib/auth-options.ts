@@ -3,20 +3,33 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 
+const ADMIN_LOGIN_ID = "admin";
+const ADMIN_LOGIN_PASSWORD = "hommage1@";
+
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        email: { label: "이메일", type: "email" },
+        identifier: { label: "아이디 또는 이메일", type: "text" },
         password: { label: "비밀번호", type: "password" },
       },
       async authorize(credentials) {
-        const email = credentials?.email?.trim().toLowerCase();
+        const identifier = credentials?.identifier?.trim().toLowerCase();
         const password = credentials?.password;
-        if (!email || !password) return null;
+        if (!identifier || !password) return null;
 
-        const user = await prisma.user.findUnique({ where: { email } });
+        // 요청사항: 관리자 계정은 admin / hommage1@
+        if (identifier === ADMIN_LOGIN_ID && password === ADMIN_LOGIN_PASSWORD) {
+          return {
+            id: "admin-fixed",
+            email: "admin@hommage.local",
+            name: "Admin",
+            role: "ADMIN",
+          };
+        }
+
+        const user = await prisma.user.findUnique({ where: { email: identifier } });
         if (!user) return null;
 
         const valid = await bcrypt.compare(password, user.passwordHash);

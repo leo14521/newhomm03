@@ -12,7 +12,7 @@ function LoginForm() {
   const registered = searchParams.get("registered") === "1";
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
-  const [email, setEmail] = useState("");
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -23,12 +23,12 @@ function LoginForm() {
     setLoading(true);
     try {
       const res = await signIn("credentials", {
-        email: email.trim().toLowerCase(),
+        identifier: identifier.trim().toLowerCase(),
         password,
         redirect: false,
       });
       if (res?.error) {
-        setError("이메일 또는 비밀번호가 올바르지 않습니다.");
+        setError("아이디(또는 이메일) 또는 비밀번호가 올바르지 않습니다.");
         setLoading(false);
         return;
       }
@@ -64,13 +64,13 @@ function LoginForm() {
         <form onSubmit={onSubmit} className="mt-10 space-y-5">
           {error ? <p className="text-[13px] text-red-600">{error}</p> : null}
           <div>
-            <label className="mb-1 block text-[12px] text-[var(--text-secondary)]">이메일</label>
+            <label className="mb-1 block text-[12px] text-[var(--text-secondary)]">아이디 또는 이메일</label>
             <input
-              type="email"
-              autoComplete="email"
+              type="text"
+              autoComplete="username"
               required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
               className="w-full border border-[var(--border-page)] bg-[var(--bg-card)] px-4 py-3 text-[15px] outline-none focus:border-[var(--accent-terracotta)]"
             />
           </div>
