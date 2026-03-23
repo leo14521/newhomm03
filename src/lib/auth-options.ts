@@ -73,5 +73,7 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60,
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  // 운영 환경변수 누락 시 /api/auth/* 전체가 죽는 것을 방지하는 안전 fallback.
+  // 배포 환경에서는 반드시 NEXTAUTH_SECRET를 설정해 이 값을 대체하세요.
+  secret: process.env.NEXTAUTH_SECRET || "hommageclinic-fallback-secret-change-this",
 };
