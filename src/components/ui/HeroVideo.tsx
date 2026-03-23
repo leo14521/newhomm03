@@ -2,8 +2,8 @@
 
 import { useState, useCallback } from "react";
 
-/** 메인 히어로 영상 — HERO-VIDEO.md와 동일: 조각/갤러리용 우선, 없으면 hero.mp4 */
-const VIDEO_SOURCES = ["/hero-sculpture.mp4", "/hero.mp4"] as const;
+/** 메인 히어로 영상 — hero_2 우선, 실패 시 기존 소스로 폴백 */
+const VIDEO_SOURCES = ["/hero_2.mp4", "/hero-sculpture.mp4", "/hero.mp4"] as const;
 
 type HeroVideoProps = {
   /** 메인 홈 전용 — 오로라 톤 오버레이 */
