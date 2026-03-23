@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth-options";
 import { prisma } from "@/lib/prisma";
+import { ensureHommageSchema } from "@/lib/bootstrap-prisma-schema";
 
 export async function POST(req: Request) {
   try {
@@ -21,21 +22,38 @@ export async function POST(req: Request) {
     }
 
     const session = await getServerSession(authOptions);
-    const userId = session?.user?.id;
+    // 고정 관리자 세션(admin-fixed)은 DB User FK 대상이 아니므로 userId를 비워 저장
+    const sessionUserId = session?.user?.id;
+    const userId = sessionUserId && sessionUserId !== "admin-fixed" ? sessionUserId : null;
 
-    await prisma.consultation.create({
-      data: {
-        name,
-        phone,
-        interest: interest || null,
-        message: message || null,
-        privacyConsentAt: new Date(),
-        userId: userId ?? null,
-      },
-    });
+    const payload = {
+      name,
+      phone,
+      interest: interest || null,
+      message: message || null,
+      privacyConsentAt: new Date(),
+      userId,
+    };
+
+    try {
+      await prisma.consultation.create({ data: payload });
+    } catch (error) {
+      const messageText = error instanceof Error ? error.message : "";
+      // 운영 DB에 테이블이 아직 없는 경우 자동 복구 후 1회 재시도
+      if (messageText.toLowerCase().includes("does not exist")) {
+        await ensureHommageSchema();
+        await prisma.consultation.create({ data: payload });
+      } else {
+        throw error;
+      }
+    }
 
     return NextResponse.json({ ok: true });
-  } catch {
-    return NextResponse.json({ error: "상담 신청 처리 중 오류가 발생했습니다." }, { status: 500 });
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : "";
+    return NextResponse.json(
+      { error: msg ? `상담 신청 처리 중 오류가 발생했습니다. (${msg})` : "상담 신청 처리 중 오류가 발생했습니다." },
+      { status: 500 }
+    );
   }
 }
