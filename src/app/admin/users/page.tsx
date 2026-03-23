@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth-options";
 import { prisma } from "@/lib/prisma";
 import AdminUserTable, { type UserRow } from "./AdminUserTable";
+import { ensureHommageSchema } from "@/lib/bootstrap-prisma-schema";
 
 export const dynamic = "force-dynamic";
 
@@ -29,8 +30,22 @@ export default async function AdminUsersPage() {
       select: { id: true, email: true, name: true, role: true, createdAt: true },
     });
   } catch (error) {
-    loadError = true;
-    if (error instanceof Error) loadErrorMessage = error.message;
+    const msg = error instanceof Error ? error.message : "";
+    if (msg.toLowerCase().includes("does not exist")) {
+      try {
+        await ensureHommageSchema();
+        rows = await prisma.user.findMany({
+          orderBy: { createdAt: "desc" },
+          select: { id: true, email: true, name: true, role: true, createdAt: true },
+        });
+      } catch (e2) {
+        loadError = true;
+        if (e2 instanceof Error) loadErrorMessage = e2.message;
+      }
+    } else {
+      loadError = true;
+      if (error instanceof Error) loadErrorMessage = error.message;
+    }
   }
 
   if (loadError || rows == null) {

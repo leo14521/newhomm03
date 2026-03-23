@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth-options";
 import { prisma } from "@/lib/prisma";
 import AdminConsultTable, { type ConsultRow } from "./AdminConsultTable";
+import { ensureHommageSchema } from "@/lib/bootstrap-prisma-schema";
 
 export const dynamic = "force-dynamic";
 
@@ -22,8 +23,22 @@ export default async function AdminDashboardPage() {
       orderBy: { createdAt: "desc" },
     });
   } catch (error) {
-    loadError = true;
-    if (error instanceof Error) loadErrorMessage = error.message;
+    const msg = error instanceof Error ? error.message : "";
+    // 테이블이 아직 생성되지 않은 경우(Neon 스키마 미반영) admin 진입 시 자동 복구 시도
+    if (msg.toLowerCase().includes("does not exist")) {
+      try {
+        await ensureHommageSchema();
+        rows = await prisma.consultation.findMany({
+          orderBy: { createdAt: "desc" },
+        });
+      } catch (e2) {
+        loadError = true;
+        if (e2 instanceof Error) loadErrorMessage = e2.message;
+      }
+    } else {
+      loadError = true;
+      if (error instanceof Error) loadErrorMessage = error.message;
+    }
   }
 
   if (loadError || rows == null) {
