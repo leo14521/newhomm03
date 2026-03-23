@@ -1,7 +1,6 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import { prisma } from "@/lib/prisma";
 
 const ADMIN_EMAIL = "admin@hommageclinic.com";
 const ADMIN_DEFAULT_PASSWORD = "1234";
@@ -32,6 +31,7 @@ export const authOptions: NextAuthOptions = {
 
         let user: { id: string; email: string; name: string | null; role: string; passwordHash: string } | null = null;
         try {
+          const { prisma } = await import("@/lib/prisma");
           user = await prisma.user.findUnique({ where: { email } });
         } catch {
           return null;
