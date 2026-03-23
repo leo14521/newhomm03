@@ -12,9 +12,28 @@ export default async function AdminDashboardPage() {
     redirect("/login?callbackUrl=/admin");
   }
 
-  const rows = await prisma.consultation.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+  let rows:
+    | Awaited<ReturnType<typeof prisma.consultation.findMany>>
+    | null = null;
+  let loadError = false;
+  try {
+    rows = await prisma.consultation.findMany({
+      orderBy: { createdAt: "desc" },
+    });
+  } catch {
+    loadError = true;
+  }
+
+  if (loadError || rows == null) {
+    return (
+      <div>
+        <h1 className="font-[family-name:var(--font-kr-heading)] text-[20px] font-medium">상담 신청</h1>
+        <p className="mt-3 rounded-sm border border-[var(--border-page)] bg-[var(--bg-card)] px-4 py-3 text-[13px] text-[var(--text-secondary)]">
+          관리자 DB 연결 상태를 확인해 주세요. (운영 환경의 DATABASE_URL/Prisma 설정 필요)
+        </p>
+      </div>
+    );
+  }
 
   const items: ConsultRow[] = rows.map((r) => ({
     id: r.id,
