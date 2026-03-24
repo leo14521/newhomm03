@@ -5,12 +5,20 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, Suspense } from "react";
 
+function getLoginErrorMessage(errorCode: string) {
+  if (errorCode === "AUTH_SERVER_ERROR") {
+    return "로그인 서버 설정 오류가 발생했습니다. 관리자에게 문의해 주세요.";
+  }
+  return "이메일 또는 비밀번호가 올바르지 않습니다.";
+}
+
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const fromBa = searchParams.get("from") === "ba";
   const registered = searchParams.get("registered") === "1";
   const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const isAdminLoginAttempt = callbackUrl.startsWith("/admin");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +36,7 @@ function LoginForm() {
         redirect: false,
       });
       if (res?.error) {
-        setError("이메일 또는 비밀번호가 올바르지 않습니다.");
+        setError(getLoginErrorMessage(res.error));
         setLoading(false);
         return;
       }
@@ -58,6 +66,11 @@ function LoginForm() {
         {registered ? (
           <p className="mt-4 rounded-sm border border-[var(--border-page)] bg-[var(--bg-card)] px-4 py-3 text-[13px] text-[var(--text-secondary)]">
             회원가입이 완료되었습니다. 로그인해 주세요.
+          </p>
+        ) : null}
+        {isAdminLoginAttempt ? (
+          <p className="mt-4 rounded-sm border border-[var(--border-page)] bg-[var(--bg-card)] px-4 py-3 text-[13px] text-[var(--text-secondary)]">
+            관리자 페이지 접근 중입니다. 운영 도메인으로 접속 중인지 확인해 주세요.
           </p>
         ) : null}
 

@@ -7,6 +7,8 @@ const ADMIN_EMAIL = "admin@hommageclinic.com";
 const ADMIN_DEFAULT_PASSWORD = "1234";
 
 export const authOptions: NextAuthOptions = {
+  // 여러 도메인/프록시 환경에서도 요청 Host를 신뢰해 인증 URL을 계산
+  trustHost: true,
   providers: [
     CredentialsProvider({
       name: "credentials",
@@ -35,7 +37,7 @@ export const authOptions: NextAuthOptions = {
           const { prisma } = await import("@/lib/prisma");
           user = await prisma.user.findUnique({ where: { email } });
         } catch {
-          return null;
+          throw new Error("AUTH_SERVER_ERROR");
         }
         if (!user) return null;
 
