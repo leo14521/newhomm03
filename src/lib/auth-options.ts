@@ -9,6 +9,9 @@ const ADMIN_DEFAULT_PASSWORD = "1234";
 export const authOptions: NextAuthOptions = {
   // 여러 도메인/프록시 환경에서도 요청 Host를 신뢰해 인증 URL을 계산
   trustHost: true,
+  // 운영 환경에서 http로 접속(내부 IP/로컬 등)하면 secure 쿠키가 저장되지 않아 로그인 후에도 세션이 유지되지 않을 수 있음.
+  // 필요 시 환경변수로만 예외적으로 허용: NEXTAUTH_ALLOW_INSECURE_COOKIES=1
+  useSecureCookies: process.env.NEXTAUTH_ALLOW_INSECURE_COOKIES === "1" ? false : process.env.NODE_ENV === "production",
   providers: [
     CredentialsProvider({
       name: "credentials",

@@ -38,6 +38,8 @@ const ko: Catalog = {
   footer: {
     hoursTitle: "진료시간",
     weekday: "평일",
+    monFri: "월 · 금",
+    tueThu: "화 · 수 · 목",
     saturday: "토요일",
     closedNote: "일·공휴일 휴진",
     nightNote: "매일 야간진료",
@@ -164,6 +166,8 @@ const en: Catalog = {
   footer: {
     hoursTitle: "Hours",
     weekday: "Weekdays",
+    monFri: "Mon · Fri",
+    tueThu: "Tue · Wed · Thu",
     saturday: "Saturday",
     closedNote: "Closed Sun & public holidays",
     nightNote: "Evening hours daily",
@@ -291,6 +295,8 @@ const ja: Catalog = {
   footer: {
     hoursTitle: "診療時間",
     weekday: "平日",
+    monFri: "月 · 金",
+    tueThu: "火 · 水 · 木",
     saturday: "土曜",
     closedNote: "日曜・祝日休診",
     nightNote: "毎日夜間診療",
@@ -418,6 +424,8 @@ const zh: Catalog = {
   footer: {
     hoursTitle: "诊疗时间",
     weekday: "工作日",
+    monFri: "周一 · 周五",
+    tueThu: "周二 · 周三 · 周四",
     saturday: "周六",
     closedNote: "周日及法定节假日休诊",
     nightNote: "每日夜间门诊",
@@ -544,6 +552,8 @@ const ru: Catalog = {
   footer: {
     hoursTitle: "Часы работы",
     weekday: "Будни",
+    monFri: "Пн · Пт",
+    tueThu: "Вт · Ср · Чт",
     saturday: "Суббота",
     closedNote: "Выходной: вс и праздники",
     nightNote: "Вечерние часы ежедневно",

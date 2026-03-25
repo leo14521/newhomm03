@@ -55,9 +55,12 @@ export default function Footer() {
                 </h2>
                 <ul className="space-y-0.5 text-[12px] leading-[1.65] text-[var(--text-secondary)] sm:text-[13px]">
                   <li>
-                    {t("footer.weekday")} AM 10:00 ~ PM 07:30
+                    {t("footer.monFri")} AM 10:00 ~ PM 08:00
                     <br />
                     <small className="text-[12px] text-[var(--text-secondary)]/90">{t("footer.nightNote")}</small>
+                  </li>
+                  <li>
+                    {t("footer.tueThu")} AM 10:00 ~ PM 07:00
                   </li>
                   <li>
                     {t("footer.saturday")} AM 10:00 ~ PM 03:00

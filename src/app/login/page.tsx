@@ -19,6 +19,7 @@ function LoginForm() {
   const registered = searchParams.get("registered") === "1";
   const callbackUrl = searchParams.get("callbackUrl") || "/";
   const isAdminLoginAttempt = callbackUrl.startsWith("/admin");
+  const isHttps = typeof window !== "undefined" ? window.location.protocol === "https:" : true;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -70,7 +71,10 @@ function LoginForm() {
         ) : null}
         {isAdminLoginAttempt ? (
           <p className="mt-4 rounded-sm border border-[var(--border-page)] bg-[var(--bg-card)] px-4 py-3 text-[13px] text-[var(--text-secondary)]">
-            관리자 페이지 접근 중입니다. 운영 도메인으로 접속 중인지 확인해 주세요.
+            관리자 페이지 접근 중입니다. 운영 도메인(HTTPS)으로 접속 중인지 확인해 주세요.
+            {!isHttps ? (
+              <span className="mt-1 block text-[12px] text-[var(--text-secondary)]/90">현재 접속이 HTTP라면 로그인 세션이 저장되지 않을 수 있습니다.</span>
+            ) : null}
           </p>
         ) : null}
 
