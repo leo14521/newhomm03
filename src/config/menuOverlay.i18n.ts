@@ -43,7 +43,7 @@ export const MENU_OVERLAY_ITEMS_JA: MenuOverlayItem[] = [
     subtitle: "LASER",
     link: "/signature/ulthera",
     children: [
-      { title: "Ulthera Pro Prime", subtitle: "超音波リフト", link: "/signature/ulthera-pro-prime" },
+      { title: "ULTHERAPY PRIME", subtitle: "超音波リフト", link: "/signature/ulthera-pro-prime" },
       { title: "Onda", subtitle: "マイクロ波 顔・体", link: "/signature/onda" },
       { title: "Tune Face", subtitle: "高周波リフト", link: "/signature/tune-face" },
       { title: "Correction Fit", subtitle: "細胞シナジー", link: "/signature/correction-fit" },
@@ -118,7 +118,7 @@ export const MENU_OVERLAY_ITEMS_ZH: MenuOverlayItem[] = [
     subtitle: "LASER",
     link: "/signature/ulthera",
     children: [
-      { title: "Ulthera Pro Prime", subtitle: "超声提拉", link: "/signature/ulthera-pro-prime" },
+      { title: "ULTHERAPY PRIME", subtitle: "超声提拉", link: "/signature/ulthera-pro-prime" },
       { title: "Onda", subtitle: "微波面与体", link: "/signature/onda" },
       { title: "Tune Face", subtitle: "射频提拉", link: "/signature/tune-face" },
       { title: "Correction Fit", subtitle: "细胞协同", link: "/signature/correction-fit" },
@@ -193,7 +193,7 @@ export const MENU_OVERLAY_ITEMS_RU: MenuOverlayItem[] = [
     subtitle: "LASER",
     link: "/signature/ulthera",
     children: [
-      { title: "Ulthera Pro Prime", subtitle: "УЗ-лифтинг", link: "/signature/ulthera-pro-prime" },
+      { title: "ULTHERAPY PRIME", subtitle: "УЗ-лифтинг", link: "/signature/ulthera-pro-prime" },
       { title: "Onda", subtitle: "СВЧ лицо и тело", link: "/signature/onda" },
       { title: "Tune Face", subtitle: "RF-лифтинг", link: "/signature/tune-face" },
       { title: "Correction Fit", subtitle: "Клеточная синергия", link: "/signature/correction-fit" },

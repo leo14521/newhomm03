@@ -28,9 +28,9 @@ export const CURATION_WOMEN_ZH = [
 export const CURATION_SKIN_ZH = [
   {
     title: "Recovery lifting",
-    desc: "Ulthera Pro Prime、Onda、Tune Face 直达 SMAS。多可当日回归日常，3–6 个月持续改善弹性。",
+    desc: "ULTHERAPY PRIME、Onda、Tune Face 直达 SMAS。多可当日回归日常，3–6 个月持续改善弹性。",
     image: "/images/clinic/lifting/01.jpg",
-    tags: ["Ulthera Pro Prime", "Onda", "Tune Face"],
+    tags: ["ULTHERAPY PRIME", "Onda", "Tune Face"],
     highlight: true,
     href: "/signature/ulthera-pro-prime",
   },

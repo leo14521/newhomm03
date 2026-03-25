@@ -30,9 +30,9 @@ export const CURATION_WOMEN_EN = [
 export const CURATION_SKIN_EN = [
   {
     title: "Recovery lifting",
-    desc: "Ulthera Pro Prime, Onda, Tune Face for SMAS-level lifting. Often same-day return; elasticity improves over 3–6 months.",
+    desc: "ULTHERAPY PRIME, Onda, Tune Face for SMAS-level lifting. Often same-day return; elasticity improves over 3–6 months.",
     image: "/images/clinic/lifting/01.jpg",
-    tags: ["Ulthera Pro Prime", "Onda", "Tune Face"],
+    tags: ["ULTHERAPY PRIME", "Onda", "Tune Face"],
     highlight: true,
     href: "/signature/ulthera-pro-prime",
   },

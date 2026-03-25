@@ -28,9 +28,9 @@ export const CURATION_WOMEN_RU = [
 export const CURATION_SKIN_RU = [
   {
     title: "Recovery lifting",
-    desc: "Ulthera Pro Prime, Onda, Tune Face — лифтинг до уровня SMAS. Часто можно вернуться к делам в тот же день; упругость растёт 3–6 месяцев.",
+    desc: "ULTHERAPY PRIME, Onda, Tune Face — лифтинг до уровня SMAS. Часто можно вернуться к делам в тот же день; упругость растёт 3–6 месяцев.",
     image: "/images/clinic/lifting/01.jpg",
-    tags: ["Ulthera Pro Prime", "Onda", "Tune Face"],
+    tags: ["ULTHERAPY PRIME", "Onda", "Tune Face"],
     highlight: true,
     href: "/signature/ulthera-pro-prime",
   },

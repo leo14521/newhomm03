@@ -66,7 +66,7 @@ export const MENU_OVERLAY_ITEMS: MenuOverlayItem[] = [
     subtitle: "LASER",
     link: "/signature/ulthera",
     children: [
-      { title: "울쎄라 프로 프라임", subtitle: "Ulthera Pro Prime", link: "/signature/ulthera-pro-prime" },
+      { title: "울쎄라피 프라임", subtitle: "ULTHERAPY PRIME", link: "/signature/ulthera-pro-prime" },
       { title: "온다", subtitle: "Onda", link: "/signature/onda" },
       { title: "튠페이스", subtitle: "Tune Face", link: "/signature/tune-face" },
       { title: "코레지셀핏", subtitle: "Correction Fit", link: "/signature/correction-fit" },
@@ -151,7 +151,7 @@ export const MENU_OVERLAY_ITEMS_EN: MenuOverlayItem[] = [
     subtitle: "LASER",
     link: "/signature/ulthera",
     children: [
-      { title: "Ulthera Pro Prime", subtitle: "Ultrasound lifting", link: "/signature/ulthera-pro-prime" },
+      { title: "ULTHERAPY PRIME", subtitle: "Ultrasound lifting", link: "/signature/ulthera-pro-prime" },
       { title: "Onda", subtitle: "Microwave body & face", link: "/signature/onda" },
       { title: "Tune Face", subtitle: "RF lifting", link: "/signature/tune-face" },
       { title: "Correction Fit", subtitle: "Cell synergy", link: "/signature/correction-fit" },

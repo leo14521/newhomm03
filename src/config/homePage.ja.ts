@@ -30,7 +30,7 @@ export const CURATION_SKIN_JA = [
     title: "Recovery lifting",
     desc: "ウルセラ プロ プライム・オンダ・チューンフェイスでSMAS層まで。当日復帰も可能、3〜6か月かけて弾力が向上。",
     image: "/images/clinic/lifting/01.jpg",
-    tags: ["Ulthera Pro Prime", "Onda", "Tune Face"],
+    tags: ["ULTHERAPY PRIME", "Onda", "Tune Face"],
     highlight: true,
     href: "/signature/ulthera-pro-prime",
   },

@@ -103,9 +103,9 @@ export const CURATION_WOMEN: CurationCard[] = [
 export const CURATION_SKIN: CurationCard[] = [
   {
     title: "Recovery Lifting",
-    desc: "[Best] 울쎄라 프로 프라임·온다·튠페이스로 SMAS층까지 리프팅. 당일 복귀 가능, 3~6개월에 걸쳐 탄력이 유지됩니다.",
+    desc: "[Best] 울쎄라피 프라임·온다·튠페이스로 SMAS층까지 리프팅. 당일 복귀 가능, 3~6개월에 걸쳐 탄력이 유지됩니다.",
     image: "/images/clinic/lifting/01.jpg",
-    tags: ["울쎄라 프로 프라임", "온다", "튠페이스"],
+    tags: ["울쎄라피 프라임", "온다", "튠페이스"],
     highlight: true,
     href: "/signature/ulthera-pro-prime",
   },

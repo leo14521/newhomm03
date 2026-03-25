@@ -46,7 +46,7 @@ export const HEADER_NAV: Record<HeaderMode, HeaderNavItem[]> = {
       title: "LASER",
       link: "/signature/ulthera",
       subs: [
-        { name: "울쎄라 프로 프라임", link: "/signature/ulthera-pro-prime" },
+        { name: "울쎄라피 프라임", link: "/signature/ulthera-pro-prime" },
         { name: "온다", link: "/signature/onda" },
         { name: "튠페이스", link: "/signature/tune-face" },
         { name: "코레지셀핏", link: "/signature/correction-fit" },

@@ -36,8 +36,8 @@ const SPECIALITY_ITEMS = [
 const FEATURE_ITEMS = [
   {
     num: "01",
-    title: "울쎄라 프로 프라임",
-    sub: "ULTHERA PRO PRIME",
+    title: "울쎄라피 프라임",
+    sub: "ULTHERAPY PRIME",
     description: "마이크로포커스 초음파 기술로 SMAS층까지 에너지를 전달하는 FDA 승인 리프팅 시술",
     link: "/signature/ulthera-pro-prime",
   },
@@ -123,7 +123,7 @@ export default function LiftingView() {
               </p>
               <div className="inline-flex flex-wrap justify-center items-center gap-2 pt-6 border-t border-[var(--border-page)]">
                 <span className="font-medium text-[var(--text-primary)] mr-2">주요 시술:</span>
-                {["울쎄라 프로 프라임", "온다", "튠페이스", "코레지셀핏", "실리프팅", "V라인 리프팅"].map((tag, idx) => (
+                {["울쎄라피 프라임", "온다", "튠페이스", "코레지셀핏", "실리프팅", "V라인 리프팅"].map((tag, idx) => (
                   <span key={idx} className="px-3 py-1 bg-[var(--bg-card)] border border-[var(--border-page)] text-[13px] text-[var(--text-secondary)] rounded-full">
                     {tag}
                   </span>
