@@ -16,7 +16,7 @@ export const REP_GRID_BY_LOCALE: Record<Locale, RepGridItem[]> = {
     { href: "/signature/lifting", image: "/images/clinic/lifting/01.jpg", lineUpper: "LIFTING", lineMain: "리프팅" },
     { href: "/signature/ulthera", image: "/images/clinic/device/02.jpg", lineUpper: "LASER", lineMain: "레이저" },
     { href: "/signature/mint-thread", image: "/images/clinic/lifting/02.jpg", lineUpper: "THREAD", lineMain: "실" },
-    { href: "/signature/juvegen", image: "/images/clinic/skin-booster/01.jpg", lineUpper: "SKIN", lineMain: "피부" },
+    { href: "/signature/boosting", image: "/images/clinic/skin-booster/01.jpg", lineUpper: "BOOSTING", lineMain: "부스팅" },
   ],
   en: [
     { href: "/signature/total-erase", image: "/images/clinic/lifting/01.jpg", lineUpper: "SIGNATURE", lineMain: "Signature" },
@@ -25,7 +25,7 @@ export const REP_GRID_BY_LOCALE: Record<Locale, RepGridItem[]> = {
     { href: "/signature/lifting", image: "/images/clinic/lifting/01.jpg", lineUpper: "LIFTING", lineMain: "Lifting" },
     { href: "/signature/ulthera", image: "/images/clinic/device/02.jpg", lineUpper: "LASER", lineMain: "Laser" },
     { href: "/signature/mint-thread", image: "/images/clinic/lifting/02.jpg", lineUpper: "THREAD", lineMain: "Threads" },
-    { href: "/signature/juvegen", image: "/images/clinic/skin-booster/01.jpg", lineUpper: "SKIN", lineMain: "Skin" },
+    { href: "/signature/boosting", image: "/images/clinic/skin-booster/01.jpg", lineUpper: "BOOSTING", lineMain: "Boosting" },
   ],
   ja: [
     { href: "/signature/total-erase", image: "/images/clinic/lifting/01.jpg", lineUpper: "SIGNATURE", lineMain: "シグネチャー" },
@@ -34,7 +34,7 @@ export const REP_GRID_BY_LOCALE: Record<Locale, RepGridItem[]> = {
     { href: "/signature/lifting", image: "/images/clinic/lifting/01.jpg", lineUpper: "LIFTING", lineMain: "リフティング" },
     { href: "/signature/ulthera", image: "/images/clinic/device/02.jpg", lineUpper: "LASER", lineMain: "レーザー" },
     { href: "/signature/mint-thread", image: "/images/clinic/lifting/02.jpg", lineUpper: "THREAD", lineMain: "糸リフト" },
-    { href: "/signature/juvegen", image: "/images/clinic/skin-booster/01.jpg", lineUpper: "SKIN", lineMain: "スキン" },
+    { href: "/signature/boosting", image: "/images/clinic/skin-booster/01.jpg", lineUpper: "BOOSTING", lineMain: "ブースティング" },
   ],
   zh: [
     { href: "/signature/total-erase", image: "/images/clinic/lifting/01.jpg", lineUpper: "SIGNATURE", lineMain: "招牌项目" },
@@ -43,7 +43,7 @@ export const REP_GRID_BY_LOCALE: Record<Locale, RepGridItem[]> = {
     { href: "/signature/lifting", image: "/images/clinic/lifting/01.jpg", lineUpper: "LIFTING", lineMain: "提拉" },
     { href: "/signature/ulthera", image: "/images/clinic/device/02.jpg", lineUpper: "LASER", lineMain: "激光" },
     { href: "/signature/mint-thread", image: "/images/clinic/lifting/02.jpg", lineUpper: "THREAD", lineMain: "线雕" },
-    { href: "/signature/juvegen", image: "/images/clinic/skin-booster/01.jpg", lineUpper: "SKIN", lineMain: "皮肤" },
+    { href: "/signature/boosting", image: "/images/clinic/skin-booster/01.jpg", lineUpper: "BOOSTING", lineMain: "焕活注射" },
   ],
   ru: [
     { href: "/signature/total-erase", image: "/images/clinic/lifting/01.jpg", lineUpper: "SIGNATURE", lineMain: "Сигнатура" },
@@ -52,6 +52,6 @@ export const REP_GRID_BY_LOCALE: Record<Locale, RepGridItem[]> = {
     { href: "/signature/lifting", image: "/images/clinic/lifting/01.jpg", lineUpper: "LIFTING", lineMain: "Лифтинг" },
     { href: "/signature/ulthera", image: "/images/clinic/device/02.jpg", lineUpper: "LASER", lineMain: "Лазер" },
     { href: "/signature/mint-thread", image: "/images/clinic/lifting/02.jpg", lineUpper: "THREAD", lineMain: "Нити" },
-    { href: "/signature/juvegen", image: "/images/clinic/skin-booster/01.jpg", lineUpper: "SKIN", lineMain: "Кожа" },
+    { href: "/signature/boosting", image: "/images/clinic/skin-booster/01.jpg", lineUpper: "BOOSTING", lineMain: "Бустинг" },
   ],
 };

@@ -4,6 +4,12 @@ const nextConfig = {
   async rewrites() {
     return [{ source: "/favicon.ico", destination: "/icon.svg" }];
   },
+  async redirects() {
+    return [
+      { source: "/signature/skin-booster", destination: "/signature/boosting", permanent: true },
+      { source: "/signature/collagen-booster", destination: "/signature/boosting", permanent: true },
+    ];
+  },
   images: {
     remotePatterns: [
       {

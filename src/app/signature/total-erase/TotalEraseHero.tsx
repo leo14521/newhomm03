@@ -4,6 +4,9 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLocale } from "@/i18n/LocaleProvider";
+import { localeToHtmlLang } from "@/i18n/localeHtml";
+import { getTotalEraseContent } from "@/i18n/totalEraseContent";
 import { getLandingImage } from "@/utils/landingImages";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -12,6 +15,8 @@ gsap.registerPlugin(ScrollTrigger);
  * 토탈 이레이즈 히어로 — 힙 미니멀 + 스크롤 패럴랙스
  */
 export function TotalEraseHero() {
+  const { locale } = useLocale();
+  const c = getTotalEraseContent(locale);
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -43,7 +48,7 @@ export function TotalEraseHero() {
     <section
       ref={sectionRef}
       className="relative flex min-h-[75vh] items-end overflow-hidden bg-white lg:min-h-[85vh]"
-      aria-label="토탈 이레이즈"
+      aria-label={c.heroAriaLabel}
     >
       <div
         ref={bgRef}
@@ -66,22 +71,22 @@ export function TotalEraseHero() {
             Total Erase
           </h1>
           <p className="mt-2 font-[family-name:var(--font-heading-kr)] text-[clamp(18px,2.2vw,22px)] tracking-[0.02em] text-[#111]">
-            토탈 이레이즈
+            {c.titleKr}
           </p>
           <h2 className="mt-8 max-w-[min(100%,36rem)] font-[family-name:var(--font-kr-cinematic-serif)] text-[clamp(18px,2.5vw,26px)] font-light leading-[1.45] tracking-tight text-[#1a1a1a] break-keep text-balance">
-            <span className="block">아름다움은 만들어내는 것이 아니라,</span>
+            <span className="block">{c.taglineL1}</span>
             <span className="mt-1 block sm:mt-1.5">
-              당신 안에 숨겨진{" "}
-              <span className="philo-light-shine" lang="ko">
-                빛
+              {c.taglineL2Start}
+              <span className="philo-light-shine" lang={localeToHtmlLang(locale)}>
+                {c.taglineHighlight}
               </span>
-              을 발견하는 것입니다.
+              {c.taglineL2End}
             </span>
           </h2>
           <p className="mt-6 max-w-[520px] text-[15px] leading-relaxed text-[#333] lg:text-[16px]">
-            미간, 이마, 팔자, 마리오넷, 목주름 —
+            {c.heroBodyLine1}
             <br className="hidden sm:block" />
-            오마쥬 클리닉만의 노하우로 노화의 상징인 주름을 탁월하게 개선합니다.
+            {c.heroBodyLine2}
           </p>
         </div>
       </div>

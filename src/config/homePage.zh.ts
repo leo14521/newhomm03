@@ -35,11 +35,11 @@ export const CURATION_SKIN_ZH = [
     href: "/signature/ulthera-pro-prime",
   },
   {
-    title: "Skin booster",
-    desc: "Juvegen、丽珠兰、外泌体润泽真皮。毛孔、弹性、肤色同步改善。",
+    title: "焕活注射",
+    desc: "丽珠兰、丽途欧、Juvelook、SKINVIVE、Hilo Wave，分层设计真皮补水与胶原重塑。",
     image: "/images/clinic/skin-booster/01.jpg",
-    tags: ["Juvegen", "Rejuran", "Exosome"],
-    href: "/signature/skin-booster",
+    tags: ["丽珠兰", "SKINVIVE", "Hilo Wave"],
+    href: "/signature/boosting",
   },
   {
     title: "Laser toning",

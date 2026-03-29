@@ -35,11 +35,11 @@ export const CURATION_SKIN_JA = [
     href: "/signature/ulthera-pro-prime",
   },
   {
-    title: "Skin booster",
-    desc: "ジュベジェン・リジュラン・エクソソームで真皮まで水分と栄養。毛穴・弾力・トーンを一度に。",
+    title: "ブースティング",
+    desc: "リジュラン ヒーラー、リトゥオ、ジュベルック、スキンバイブ、ヒロウェーブで真皮ケアを段階的に設計。",
     image: "/images/clinic/skin-booster/01.jpg",
-    tags: ["Juvegen", "Rejuran", "Exosome"],
-    href: "/signature/skin-booster",
+    tags: ["リジュラン", "スキンバイブ", "ヒロウェーブ"],
+    href: "/signature/boosting",
   },
   {
     title: "Laser toning",

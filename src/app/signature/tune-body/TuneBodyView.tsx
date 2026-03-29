@@ -2,38 +2,15 @@
 
 import Link from "next/link";
 import { getLandingImage } from "@/utils/landingImages";
-
-const FEATURES = [
-  {
-    title: "지방 분해",
-    description: "고주파 에너지를 이용하여 지방 세포를 분해하고 제거하여 바디 라인을 개선합니다.",
-  },
-  {
-    title: "탄력 개선",
-    description: "콜라겐 생성을 촉진하여 피부 탄력을 개선하고 처진 피부를 타이트하게 만듭니다.",
-  },
-  {
-    title: "비수술 시술",
-    description: "수술 없이 고주파를 활용하여 안전하고 효과적인 바디 컨투어링을 제공합니다.",
-  },
-  {
-    title: "회복 기간 단축",
-    description: "비수술 시술로 회복 기간이 짧고 일상생활에 지장이 없습니다.",
-  },
-];
-
-const TREATMENT_AREAS = [
-  "복부",
-  "허벅지",
-  "팔뚝",
-  "옆구리",
-  "등",
-];
+import { useLocale } from "@/i18n/LocaleProvider";
+import { getTuneBodyLanding } from "@/i18n/signatureLandingContent";
 
 export default function TuneBodyView() {
+  const { locale, t } = useLocale();
+  const copy = getTuneBodyLanding(locale);
+
   return (
     <main className="min-h-screen pt-[var(--header-height)] lg:pt-[var(--header-h)]">
-      {/* Hero */}
       <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden bg-gradient-to-br from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a]">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-30"
@@ -41,44 +18,37 @@ export default function TuneBodyView() {
             backgroundImage: `url(${getLandingImage(0)})`,
           }}
         />
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-          <h1 className="font-[family-name:var(--font-en-serif)] text-[clamp(48px,8vw,96px)] font-light tracking-wide text-white mb-6">
+        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
+          <h1 className="mb-6 font-[family-name:var(--font-en-serif)] text-[clamp(48px,8vw,96px)] font-light tracking-wide text-white">
             Tune Body
           </h1>
-          <p className="text-[clamp(18px,2.5vw,24px)] text-white/90 leading-relaxed">
-            고주파를 활용한<br />
-            바디 컨투어링 시술
+          <p className="whitespace-pre-line text-[clamp(18px,2.5vw,24px)] leading-relaxed text-white/90">
+            {copy.heroSub}
           </p>
         </div>
       </section>
 
-      {/* Intro */}
       <section className="relative border-t border-[#e8e8e8] bg-white px-6 py-16 lg:px-[var(--pad-global)] lg:py-24">
         <div className="mx-auto max-w-[720px] text-center">
           <h2 className="font-[family-name:var(--font-en-serif)] text-[clamp(20px,2.5vw,26px)] tracking-[0.06em] text-[#111]">
             Tune Body
           </h2>
-          <p className="mt-4 text-[15px] leading-relaxed text-[#666]">
-            튠바디는 고주파를 활용한 바디 컨투어링 시술로, 지방 분해와 탄력 개선에 효과적입니다.
-            고주파 에너지를 이용하여 지방 세포를 분해하고 제거하여 바디 라인을 개선하며,
-            콜라겐 생성을 촉진하여 피부 탄력을 개선하고 처진 피부를 타이트하게 만듭니다.
-          </p>
+          <p className="mt-4 text-[15px] leading-relaxed text-[#666]">{copy.intro}</p>
         </div>
       </section>
 
-      {/* Features */}
       <section className="hip-grain relative bg-[var(--hip-bg)] px-6 py-20 lg:px-[var(--pad-global)] lg:py-28">
         <div className="mx-auto max-w-[1200px]">
-          <h2 className="font-[family-name:var(--font-en-serif)] text-center text-[clamp(32px,4vw,48px)] tracking-wide text-[#111] mb-16">
-            Features
+          <h2 className="mb-16 text-center font-[family-name:var(--font-en-serif)] text-[clamp(32px,4vw,48px)] tracking-wide text-[#111]">
+            {t("signatureCommon.featuresHeading")}
           </h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {FEATURES.map((feature, idx) => (
+          <div className="grid gap-8 md:grid-cols-2">
+            {copy.features.map((feature, idx) => (
               <div
                 key={idx}
-                className="feature-card bg-white p-8 rounded-lg shadow-sm border border-[#e8e8e8]"
+                className="feature-card rounded-lg border border-[#e8e8e8] bg-white p-8 shadow-sm"
               >
-                <h3 className="text-xl font-medium text-[#111] mb-3">{feature.title}</h3>
+                <h3 className="mb-3 text-xl font-medium text-[#111]">{feature.title}</h3>
                 <p className="text-[15px] leading-relaxed text-[#666]">{feature.description}</p>
               </div>
             ))}
@@ -86,17 +56,16 @@ export default function TuneBodyView() {
         </div>
       </section>
 
-      {/* Treatment Areas */}
       <section className="relative bg-white px-6 py-20 lg:px-[var(--pad-global)] lg:py-28">
         <div className="mx-auto max-w-[800px]">
-          <h2 className="font-[family-name:var(--font-en-serif)] text-center text-[clamp(32px,4vw,48px)] tracking-wide text-[#111] mb-12">
-            시술 부위
+          <h2 className="mb-12 text-center font-[family-name:var(--font-en-serif)] text-[clamp(32px,4vw,48px)] tracking-wide text-[#111]">
+            {t("signatureCommon.treatmentAreasHeading")}
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {TREATMENT_AREAS.map((area, idx) => (
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
+            {copy.areas.map((area, idx) => (
               <div
                 key={idx}
-                className="text-center p-6 bg-[var(--hip-bg)] rounded-lg border border-[#e8e8e8]"
+                className="rounded-lg border border-[#e8e8e8] bg-[var(--hip-bg)] p-6 text-center"
               >
                 <span className="text-[16px] text-[#111]">{area}</span>
               </div>
@@ -105,21 +74,21 @@ export default function TuneBodyView() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="relative bg-[#1a1a1a] px-6 py-20 lg:px-[var(--pad-global)] lg:py-28">
         <div className="mx-auto max-w-[600px] text-center">
-          <h2 className="font-[family-name:var(--font-en-serif)] text-[clamp(32px,4vw,48px)] text-white mb-6">
-            상담 및 예약
+          <h2 className="mb-6 font-[family-name:var(--font-en-serif)] text-[clamp(32px,4vw,48px)] text-white">
+            {t("signatureCommon.consultAndBook")}
           </h2>
-          <p className="text-white/80 mb-8 leading-relaxed">
-            튠바디 시술에 대한 자세한 상담을 원하시면<br />
-            전문 상담사가 도와드리겠습니다.
+          <p className="mb-8 leading-relaxed text-white/80">
+            {copy.ctaLead}
+            <br />
+            {t("signatureCommon.staffHelpLine")}
           </p>
           <Link
-            href="/community/contact"
-            className="inline-block px-8 py-4 bg-white text-[#111] rounded-sm hover:bg-[var(--hip-accent)] hover:text-white transition-colors"
+            href="/#consult"
+            className="inline-block rounded-sm bg-white px-8 py-4 text-[#111] transition-colors hover:bg-[var(--hip-accent)] hover:text-white"
           >
-            상담 예약하기
+            {t("signatureCommon.consultBookCta")}
           </Link>
         </div>
       </section>

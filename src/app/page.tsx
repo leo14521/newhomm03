@@ -743,8 +743,8 @@ export default function HomePage() {
               <div className="philo-desc mt-8 mb-10 font-[family-name:var(--font-kr-body)] text-[15px] font-normal leading-[1.88] text-[var(--color-text-muted)] sm:text-[16px] sm:leading-[1.9] max-w-[min(100%,40rem)] text-pretty break-keep">
                 {content.philosophy.paragraphs.map((para, i) => (
                   <p key={i} className="mb-5 last:mb-0 sm:mb-6">
-                    <span className="lg:hidden">{para.compact}</span>
-                    <span className="hidden lg:block">
+                    <span className="philo-line-mobile">{para.compact}</span>
+                    <span className="philo-line-desktop">
                       {para.desktopLines[0]}
                       <br />
                       {para.desktopLines[1]}
@@ -1618,12 +1618,12 @@ function PhiloHeadline({ text }: { text: string }) {
     const merged = `${second} ${third}`;
     return (
       <h2 className={tit}>
-        <span className="block">{injectPhiloLightShine(lines[0])}</span>
-        <span className="mt-1 block sm:hidden">{injectPhiloLightShine(second)}</span>
-        <span className="block sm:hidden">{injectPhiloLightShine(third)}</span>
-        <span className="mt-1 hidden text-balance sm:mt-2 sm:block">
-          {injectPhiloLightShine(merged)}
+        <span className="philo-tit-line0 block">{injectPhiloLightShine(lines[0])}</span>
+        <span className="philo-tit-split mt-1 block">
+          <span className="block">{injectPhiloLightShine(second)}</span>
+          <span className="block">{injectPhiloLightShine(third)}</span>
         </span>
+        <span className="philo-tit-merged mt-1 block text-balance">{injectPhiloLightShine(merged)}</span>
       </h2>
     );
   }
@@ -1631,9 +1631,7 @@ function PhiloHeadline({ text }: { text: string }) {
   return (
     <h2 className={tit}>
       <span className="block">{injectPhiloLightShine(lines[0])}</span>
-      <span className="mt-1 block text-balance sm:mt-2">
-        {injectPhiloLightShine(lines[1])}
-      </span>
+      <span className="philo-tit-line1 mt-1 block text-balance">{injectPhiloLightShine(lines[1])}</span>
     </h2>
   );
 }

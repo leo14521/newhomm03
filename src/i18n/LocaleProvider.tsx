@@ -5,6 +5,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -38,7 +39,7 @@ function readStoredLocale(): Locale {
 export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>("ko");
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setLocaleState(readStoredLocale());
   }, []);
 

@@ -57,8 +57,8 @@ export const MENU_OVERLAY_ITEMS: MenuOverlayItem[] = [
     ],
   },
   {
-    title: "LIFTING",
-    subtitle: "리프팅",
+    title: "리프팅",
+    subtitle: "LIFTING",
     link: "/signature/lifting",
   },
   {
@@ -83,20 +83,17 @@ export const MENU_OVERLAY_ITEMS: MenuOverlayItem[] = [
     ],
   },
   {
-    title: "스킨부스터",
-    subtitle: "SKIN BOOSTER",
-    link: "/signature/skin-booster",
+    title: "부스팅",
+    subtitle: "BOOSTING",
+    link: "/signature/boosting",
     children: [
-      { title: "리쥬란", subtitle: "", link: "/signature/rejuran" },
-      { title: "엑소좀", subtitle: "", link: "/signature/exosome" },
-    ],
-  },
-  {
-    title: "콜라겐부스터",
-    subtitle: "COLLAGEN BOOSTER",
-    link: "/signature/collagen-booster",
-    children: [
-      { title: "쥬브젠", subtitle: "", link: "/signature/juvegen" },
+      { title: "리쥬란 힐러", subtitle: "PDRN 스킨부스터", link: "/signature/rejuran" },
+      { title: "리투오", subtitle: "hADM · LITOO", link: "/signature/litoo" },
+      { title: "쥬베룩", subtitle: "PLLA + HA", link: "/signature/juvelook" },
+      { title: "스킨바이브", subtitle: "SKINVIVE by Juvéderm", link: "/signature/skinvive" },
+      { title: "힐로웨이브", subtitle: "듀얼 HA 바이오스티뮬레이터", link: "/signature/hilo-wave" },
+      { title: "쥬브젠", subtitle: "자가 진피 재생술", link: "/signature/juvegen" },
+      { title: "엑소좀", subtitle: "줄기세포 유래", link: "/signature/exosome" },
     ],
   },
 ];
@@ -168,19 +165,18 @@ export const MENU_OVERLAY_ITEMS_EN: MenuOverlayItem[] = [
     ],
   },
   {
-    title: "Skin booster",
-    subtitle: "SKIN BOOSTER",
-    link: "/signature/skin-booster",
+    title: "Boosting",
+    subtitle: "BOOSTING",
+    link: "/signature/boosting",
     children: [
-      { title: "Rejuran", subtitle: "", link: "/signature/rejuran" },
-      { title: "Exosome", subtitle: "", link: "/signature/exosome" },
+      { title: "Rejuran Healer", subtitle: "PDRN skin booster", link: "/signature/rejuran" },
+      { title: "Litoo", subtitle: "hADM dermal matrix", link: "/signature/litoo" },
+      { title: "Juvelook", subtitle: "PLLA + HA collagen", link: "/signature/juvelook" },
+      { title: "SKINVIVE", subtitle: "Micro-droplet HA (Juvéderm)", link: "/signature/skinvive" },
+      { title: "Hilo Wave", subtitle: "Dual HA biostimulator", link: "/signature/hilo-wave" },
+      { title: "Juvegen", subtitle: "Autologous dermal regeneration", link: "/signature/juvegen" },
+      { title: "Exosome", subtitle: "Stem-cell derived", link: "/signature/exosome" },
     ],
-  },
-  {
-    title: "Collagen booster",
-    subtitle: "COLLAGEN BOOSTER",
-    link: "/signature/collagen-booster",
-    children: [{ title: "Juvegen", subtitle: "", link: "/signature/juvegen" }],
   },
 ];
 

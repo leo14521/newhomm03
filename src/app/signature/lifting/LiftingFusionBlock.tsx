@@ -4,38 +4,23 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLocale } from "@/i18n/LocaleProvider";
+import { getLiftingPageContent } from "@/i18n/liftingPageContent";
 import { getLandingImage } from "@/utils/landingImages";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const FUSION_STEPS = [
-  {
-    step: "01",
-    title: "당김",
-    method: "실",
-    description: "실리프팅으로 근본적인 당김 효과를 구현합니다.",
-    image: getLandingImage(0),
-    color: "from-black/5 to-black/10",
-  },
-  {
-    step: "02",
-    title: "탄력",
-    method: "레이저",
-    description: "레이저 에너지로 콜라겐 생성을 촉진하여 탄력을 개선합니다.",
-    image: getLandingImage(1),
-    color: "from-black/5 to-black/10",
-  },
-  {
-    step: "03",
-    title: "결과",
-    method: "융합",
-    description: "실과 레이저의 융합으로 완벽한 리프팅 결과를 완성합니다.",
-    image: getLandingImage(2),
-    color: "from-black/5 to-black/10",
-  },
-];
-
 export function LiftingFusionBlock() {
+  const { locale } = useLocale();
+  const c = getLiftingPageContent(locale);
+  const fusionCards = c.fusionSteps.map((step, idx) => ({
+    step: String(idx + 1).padStart(2, "0"),
+    title: step.title,
+    method: step.method,
+    description: step.description,
+    image: getLandingImage(idx),
+    color: "from-black/5 to-black/10",
+  }));
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const fusionRef = useRef<HTMLDivElement>(null);
@@ -147,15 +132,15 @@ export function LiftingFusionBlock() {
     <section ref={sectionRef} className="section-block relative overflow-hidden bg-[var(--bg-page)]">
       <div className="mx-auto max-w-[1200px]">
         <div className="sec-head mb-14 text-center">
-          <span className="sec-label block">Fusion Approach</span>
-          <h2 className="sec-title mt-3 text-[clamp(28px,4vw,44px)]">리프팅은 한가지로 완성되지 않습니다</h2>
+          <span className="sec-label block">{c.fusionLabel}</span>
+          <h2 className="sec-title mt-3 text-[clamp(28px,4vw,44px)]">{c.fusionHeadline}</h2>
           <p className="mx-auto mt-4 max-w-[720px] text-[16px] leading-relaxed text-[var(--text-secondary)]">
-            당김은 실로, 탄력은 레이저로. 결과는 융합으로 완성됩니다.
+            {c.fusionLead}
           </p>
         </div>
 
         <div className="mb-16 grid gap-6 md:grid-cols-3">
-          {FUSION_STEPS.map((item, idx) => (
+          {fusionCards.map((item, idx) => (
             <div
               key={idx}
               ref={(el) => { cardsRef.current[idx] = el; }}
@@ -182,12 +167,14 @@ export function LiftingFusionBlock() {
             style={{ backgroundImage: `url(${getLandingImage(3)})` }}
           />
           <div className="fusion-content relative z-10 text-center">
-            <span className="inline-block text-[11px] font-light tracking-[0.25em] text-white/60 uppercase">Complete Fusion</span>
+            <span className="inline-block text-[11px] font-light tracking-[0.25em] text-white/60 uppercase">
+              {c.fusionCompleteKicker}
+            </span>
             <h3 className="mt-4 font-[family-name:var(--font-kr-heading)] text-[clamp(28px,4vw,40px)] font-medium text-white">
-              완벽한 융합의 결과
+              {c.fusionCompleteTitle}
             </h3>
             <p className="mx-auto mt-4 max-w-[640px] text-[16px] leading-relaxed text-white/80">
-              실의 당김과 레이저의 탄력이 융합되어, 단일 시술로는 불가능한 완벽한 리프팅 결과를 만들어냅니다.
+              {c.fusionCompleteLead}
             </p>
           </div>
         </div>

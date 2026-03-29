@@ -60,19 +60,18 @@ export const MENU_OVERLAY_ITEMS_JA: MenuOverlayItem[] = [
     ],
   },
   {
-    title: "スキンブースター",
-    subtitle: "SKIN BOOSTER",
-    link: "/signature/skin-booster",
+    title: "ブースティング",
+    subtitle: "BOOSTING",
+    link: "/signature/boosting",
     children: [
-      { title: "Rejuran", subtitle: "", link: "/signature/rejuran" },
-      { title: "Exosome", subtitle: "", link: "/signature/exosome" },
+      { title: "リジュラン ヒーラー", subtitle: "PDRNスキンブースター", link: "/signature/rejuran" },
+      { title: "リトゥオ", subtitle: "hADM · 真皮マトリックス", link: "/signature/litoo" },
+      { title: "ジュベルック", subtitle: "PLLA + ヒアルロン酸", link: "/signature/juvelook" },
+      { title: "スキンバイブ", subtitle: "ジュビダーム マイクロドロップ", link: "/signature/skinvive" },
+      { title: "ヒロウェーブ", subtitle: "デュアルHAバイオスティミュレーター", link: "/signature/hilo-wave" },
+      { title: "ジュベジェン", subtitle: "自家真皮再生術", link: "/signature/juvegen" },
+      { title: "エクソソーム", subtitle: "幹細胞由来", link: "/signature/exosome" },
     ],
-  },
-  {
-    title: "コラゲンブースター",
-    subtitle: "COLLAGEN BOOSTER",
-    link: "/signature/collagen-booster",
-    children: [{ title: "Juvegen", subtitle: "", link: "/signature/juvegen" }],
   },
 ];
 
@@ -135,19 +134,18 @@ export const MENU_OVERLAY_ITEMS_ZH: MenuOverlayItem[] = [
     ],
   },
   {
-    title: "皮肤助推",
-    subtitle: "SKIN BOOSTER",
-    link: "/signature/skin-booster",
+    title: "焕活注射",
+    subtitle: "BOOSTING",
+    link: "/signature/boosting",
     children: [
-      { title: "Rejuran", subtitle: "", link: "/signature/rejuran" },
-      { title: "Exosome", subtitle: "", link: "/signature/exosome" },
+      { title: "丽珠兰 黑盒", subtitle: "PDRN 皮肤助推", link: "/signature/rejuran" },
+      { title: "丽途欧", subtitle: "hADM 真皮基质", link: "/signature/litoo" },
+      { title: "Juvelook", subtitle: "PLLA + 透明质酸", link: "/signature/juvelook" },
+      { title: "SKINVIVE", subtitle: "乔雅登 微滴水光", link: "/signature/skinvive" },
+      { title: "海洛薇波", subtitle: "双相透明质酸 生物刺激", link: "/signature/hilo-wave" },
+      { title: "Juvegen", subtitle: "自体真皮再生", link: "/signature/juvegen" },
+      { title: "外泌体", subtitle: "干细胞来源", link: "/signature/exosome" },
     ],
-  },
-  {
-    title: "胶原助推",
-    subtitle: "COLLAGEN BOOSTER",
-    link: "/signature/collagen-booster",
-    children: [{ title: "Juvegen", subtitle: "", link: "/signature/juvegen" }],
   },
 ];
 
@@ -210,18 +208,17 @@ export const MENU_OVERLAY_ITEMS_RU: MenuOverlayItem[] = [
     ],
   },
   {
-    title: "Скин-бустер",
-    subtitle: "SKIN BOOSTER",
-    link: "/signature/skin-booster",
+    title: "Бустинг",
+    subtitle: "BOOSTING",
+    link: "/signature/boosting",
     children: [
-      { title: "Rejuran", subtitle: "", link: "/signature/rejuran" },
-      { title: "Exosome", subtitle: "", link: "/signature/exosome" },
+      { title: "Rejuran Healer", subtitle: "PDRN-ускоритель кожи", link: "/signature/rejuran" },
+      { title: "Litoo", subtitle: "hADM · дермальный матрикс", link: "/signature/litoo" },
+      { title: "Juvelook", subtitle: "PLLA + гиалуроновая кислота", link: "/signature/juvelook" },
+      { title: "SKINVIVE", subtitle: "Микрокапли ГК (Juvéderm)", link: "/signature/skinvive" },
+      { title: "Hilo Wave", subtitle: "Двойная ГК · биостимулятор", link: "/signature/hilo-wave" },
+      { title: "Juvegen", subtitle: "Аутологичная регенерация дермы", link: "/signature/juvegen" },
+      { title: "Экзосомы", subtitle: "Из стволовых клеток", link: "/signature/exosome" },
     ],
-  },
-  {
-    title: "Коллаген-бустер",
-    subtitle: "COLLAGEN BOOSTER",
-    link: "/signature/collagen-booster",
-    children: [{ title: "Juvegen", subtitle: "", link: "/signature/juvegen" }],
   },
 ];

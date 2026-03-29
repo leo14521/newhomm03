@@ -74,7 +74,7 @@ export type CurationCard = {
   href?: string;
 };
 
-/** 큐레이션 — 오마쥬 진료과목별 분류 경로 (lifting, skin-booster, body, women-care) */
+/** 큐레이션 — 오마쥬 진료과목별 분류 경로 (lifting, boosting, body, women-care) */
 export const CURATION_WOMEN: CurationCard[] = [
   {
     title: "Link-Free Body",
@@ -110,11 +110,11 @@ export const CURATION_SKIN: CurationCard[] = [
     href: "/signature/ulthera-pro-prime",
   },
   {
-    title: "Skin Booster",
-    desc: "쥬브젠·리쥬란·엑소좀로 진피까지 수분·영양을 채웁니다. 모공·탄력·색소 동시 개선이 가능합니다.",
+    title: "Boosting",
+    desc: "리쥬란 힐러·리투오·쥬베룩·스킨바이브·힐로웨이브로 진피 수분·재생·볼륨을 단계적으로 설계합니다.",
     image: "/images/clinic/skin-booster/01.jpg",
-    tags: ["쥬브젠", "리쥬란", "엑소좀"],
-    href: "/signature/skin-booster",
+    tags: ["리쥬란 힐러", "스킨바이브", "힐로웨이브"],
+    href: "/signature/boosting",
   },
   {
     title: "Laser Toning",
@@ -133,7 +133,7 @@ export const REP_ITEMS = [
   { title: "리프팅", href: "/signature/lifting", en: "Lifting", image: "/images/clinic/lifting/01.jpg" },
   { title: "레이저", href: "/signature/ulthera", en: "Laser", image: "/images/clinic/device/02.jpg" },
   { title: "실", href: "/signature/mint-thread", en: "Thread", image: "/images/clinic/lifting/02.jpg" },
-  { title: "피부", href: "/signature/juvegen", en: "Skin", image: "/images/clinic/skin-booster/01.jpg" },
+  { title: "부스팅", href: "/signature/boosting", en: "Boosting", image: "/images/clinic/skin-booster/01.jpg" },
 ];
 
 /** 숫자 인포그래픽 — homeContent.stats 와 동기화, 실감 나는 수치 */

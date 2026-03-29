@@ -2,11 +2,15 @@
 
 import { useRef, useState, useCallback } from "react";
 import { gsap } from "gsap";
+import { useLocale } from "@/i18n/LocaleProvider";
+import { getTotalEraseContent } from "@/i18n/totalEraseContent";
 
 /**
  * 주름 펴는 UX — 드래그/슬라이드로 주름 라인이 사라지는 인터랙션
  */
 export function WrinkleEraseBlock() {
+  const { locale } = useLocale();
+  const c = getTotalEraseContent(locale);
   const [progress, setProgress] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
   const fillRef = useRef<HTMLDivElement>(null);
@@ -51,14 +55,12 @@ export function WrinkleEraseBlock() {
     <section className="relative overflow-hidden border-y border-[#e8e8e8] bg-white px-6 py-16 lg:px-[var(--pad-global)] lg:py-24">
       <div className="mx-auto max-w-[640px]">
         <p className="mb-2 text-center font-[family-name:var(--font-display)] text-[11px] tracking-[0.35em] uppercase text-[var(--hip-accent-dark)]">
-          INTERACTIVE
+          {c.interactiveKicker}
         </p>
         <h3 className="mb-2 text-center font-[family-name:var(--font-heading-kr)] text-[clamp(20px,2.5vw,26px)] tracking-[0.06em] text-[#111]">
-          주름을 펴 보세요
+          {c.interactiveTitle}
         </h3>
-        <p className="mb-10 text-center text-[14px] text-[#666]">
-          바를 드래그하면 주름이 사라지는 토탈 이레이즈의 개념을 체험해 보세요.
-        </p>
+        <p className="mb-10 text-center text-[14px] text-[#666]">{c.interactiveLead}</p>
 
         <div
           ref={trackRef}
@@ -94,9 +96,9 @@ export function WrinkleEraseBlock() {
         </div>
 
         <p className="mt-6 text-center text-[13px] text-[#888]">
-          {progress < 0.1 && "← 바를 드래그해 보세요"}
-          {progress >= 0.1 && progress < 0.9 && "주름이 사라지고 있어요"}
-          {progress >= 0.9 && "토탈 이레이즈 완료"}
+          {progress < 0.1 && c.interactiveHintDrag}
+          {progress >= 0.1 && progress < 0.9 && c.interactiveHintErasing}
+          {progress >= 0.9 && c.interactiveHintDone}
         </p>
       </div>
     </section>

@@ -39,7 +39,7 @@ export const HEADER_NAV: Record<HeaderMode, HeaderNavItem[]> = {
   ],
   aesthetic: [
     {
-      title: "LIFTING",
+      title: "리프팅",
       link: "/signature/lifting",
     },
     {
@@ -73,18 +73,16 @@ export const HEADER_NAV: Record<HeaderMode, HeaderNavItem[]> = {
       ],
     },
     {
-      title: "SKIN BOOSTER",
-      link: "/signature/skin-booster",
+      title: "부스팅",
+      link: "/signature/boosting",
       subs: [
-        { name: "리쥬란", link: "/signature/rejuran" },
-        { name: "엑소좀", link: "/signature/exosome" },
-      ],
-    },
-    {
-      title: "COLLAGEN BOOSTER",
-      link: "/signature/collagen-booster",
-      subs: [
+        { name: "리쥬란 힐러", link: "/signature/rejuran" },
+        { name: "리투오", link: "/signature/litoo" },
+        { name: "쥬베룩", link: "/signature/juvelook" },
+        { name: "스킨바이브", link: "/signature/skinvive" },
+        { name: "힐로웨이브", link: "/signature/hilo-wave" },
         { name: "쥬브젠", link: "/signature/juvegen" },
+        { name: "엑소좀", link: "/signature/exosome" },
       ],
     },
     {

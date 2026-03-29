@@ -427,6 +427,45 @@
   position: relative;
   z-index: 1;
 }
+/* 철학 본문: Tailwind lg:* 없이도 모바일/데스크 한쪽만 표시 */
+.philo-desc .philo-line-desktop {
+  display: none;
+}
+.philo-desc .philo-line-mobile {
+  display: inline;
+}
+@media (min-width: 1024px) {
+  .philo-desc .philo-line-mobile {
+    display: none;
+  }
+  .philo-desc .philo-line-desktop {
+    display: block;
+  }
+}
+/* 철학 헤드라인 3줄 소스: 좁은 화면 분리 2줄 / sm+ 병합 1줄 (sm:hidden 중복 노출 방지) */
+.philo-tit .philo-tit-split {
+  display: block;
+}
+.philo-tit .philo-tit-merged {
+  display: none;
+}
+@media (min-width: 640px) {
+  .philo-tit .philo-tit-split {
+    display: none;
+  }
+  .philo-tit .philo-tit-merged {
+    display: block;
+    margin-top: 0.5rem;
+  }
+}
+.philo-tit .philo-tit-line1 {
+  margin-top: 0.25rem;
+}
+@media (min-width: 640px) {
+  .philo-tit .philo-tit-line1 {
+    margin-top: 0.5rem;
+  }
+}
 .section-philo .highlight {
   color: var(--text-primary);
   font-weight: 600;
@@ -1260,6 +1299,15 @@ a:hover .brand-logo {
 .hero-sequence {
   isolation: isolate;
   position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+}
+/* 홈 메인 #smooth-content — z-10·relative가 Tailwind에만 있을 때 레이어 붕괴 방지 */
+#smooth-content {
+  position: relative;
+  z-index: 10;
 }
 .home-vivid .hero-sequence {
   background-color: #faf8f5;
@@ -1287,20 +1335,67 @@ a:hover .brand-logo {
   pointer-events: none;
   opacity: 0.03;
 }
-.hero-seq-bg,
-.hero-seq-text,
-.hero-seq-center,
-.hero-seq-copy {
+.hero-seq-center {
   will-change: opacity;
+}
+/* 배경·텍스트 레이어: Tailwind 미적용 시에도 absolute 스택 유지 (로컬 dev 캐시 깨짐 등) */
+.hero-seq-bg {
+  will-change: opacity;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-seq-bg video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.home-hero-aurora {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero-seq-text {
+  will-change: opacity;
+  position: absolute;
+  inset: 0;
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
 }
 /* 스크롤 전 Phase2 카피는 완전 비표시 (GSAP 전·하이드레이션 깜빡임 방지) */
 .hero-seq-copy {
+  will-change: opacity;
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background-color: var(--bg-main);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
-.hero-seq-copy {
-  background-color: var(--bg-main);
+.hero-sequence .scrollDown {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 .hero-copy-inner {
   line-height: 1.75;
@@ -1743,10 +1838,14 @@ a:hover .brand-logo {
   inset: 0;
   z-index: var(--z-menu-overlay);
   display: none;
-  grid-template-rows: min(26%, 164px) 1fr 20px;
+  /* 헤더·푸터는 내용 높이, 가운데만 남은 뷰포트를 채우고 스크롤 */
+  grid-template-rows: auto minmax(0, 1fr) auto;
   gap: 10px;
   background: #fff;
   padding: 36px;
+  min-height: 0;
+  max-height: 100dvh;
+  box-sizing: border-box;
 }
 .menu-overlay.menu-open {
   display: grid;
@@ -1755,6 +1854,7 @@ a:hover .brand-logo {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  flex-shrink: 0;
 }
 /* logo-link는 Logo 컴포넌트의 <img>에 붙음 — width:auto 는 intrinsic(대형 PNG)로 터짐. Tailwind w-* 로만 제한 */
 .menu-overlay-close {
@@ -1770,7 +1870,11 @@ a:hover .brand-logo {
   grid-template-columns: 1fr 1px minmax(220px, 1.15fr);
   gap: 32px;
   align-items: start;
-  overflow: hidden;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 .menu-overlay-line {
   width: 1px;
@@ -1831,9 +1935,12 @@ a:hover .brand-logo {
 }
 .menu-overlay-footer {
   display: flex;
+  flex-shrink: 0;
+  flex-wrap: wrap;
   justify-content: flex-end;
   align-items: center;
-  gap: 32px;
+  gap: 16px 32px;
+  padding-bottom: env(safe-area-inset-bottom, 0);
 }
 .menu-overlay-footer a {
   opacity: 0.7;
@@ -1842,10 +1949,30 @@ a:hover .brand-logo {
 .menu-overlay-footer a:hover { opacity: 1; }
 
 @media (max-width: 700px) {
-  .menu-overlay { padding: 36px 24px 36px 36px; }
-  .menu-overlay-content { grid-template-columns: 1fr; }
+  .menu-overlay { padding: 24px 24px 16px 28px; }
+  .menu-overlay-content {
+    grid-template-columns: 1fr;
+    position: relative;
+    align-content: start;
+  }
   .menu-overlay-line { display: none; }
-  .menu-sub-list { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #fff; z-index: 2; }
+  /* 서브 패널: 스크롤 영역 전체를 덮되, 부모 minmax(0,1fr) 안에서만 채움 */
+  .menu-sub-list {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background: #fff;
+    z-index: 2;
+    box-sizing: border-box;
+    padding-right: 4px;
+  }
   .menu-sub-list.hidden { display: none; }
   .menu-back-btn { display: flex !important; }
 }

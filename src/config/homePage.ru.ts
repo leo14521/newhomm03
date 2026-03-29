@@ -35,11 +35,11 @@ export const CURATION_SKIN_RU = [
     href: "/signature/ulthera-pro-prime",
   },
   {
-    title: "Skin booster",
-    desc: "Juvegen, Rejuran и экзосомы увлажняют дерму. Поры, тонус и цвет лица в одном протоколе.",
+    title: "Бустинг",
+    desc: "Rejuran Healer, Litoo, Juvelook, SKINVIVE и Hilo Wave — увлажнение, ремоделирование коллагена и объём в одном меню.",
     image: "/images/clinic/skin-booster/01.jpg",
-    tags: ["Juvegen", "Rejuran", "Exosome"],
-    href: "/signature/skin-booster",
+    tags: ["Rejuran", "SKINVIVE", "Hilo Wave"],
+    href: "/signature/boosting",
   },
   {
     title: "Laser toning",

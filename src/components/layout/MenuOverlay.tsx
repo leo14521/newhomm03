@@ -12,7 +12,7 @@ type MenuOverlayProps = {
 };
 
 export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
-  const { locale } = useLocale();
+  const { locale, t } = useLocale();
   const menuItems = getMenuOverlayItems(locale);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [activeSubIndex, setActiveSubIndex] = useState<number | null>(null);
@@ -70,7 +70,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
         <div className={`menu-list flex flex-col gap-4 ${mobileSubVisible ? "max-md:hidden" : ""}`}>
           <button type="button" className="menu-back-btn" onClick={handleBack}>
             <span aria-hidden>←</span>
-            <span>BACK</span>
+            <span>{t("signatureCommon.menuOverlayBack")}</span>
           </button>
           {menuItems.map((item, i) =>
             item.children?.length ? (
@@ -128,7 +128,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
                 <>
                   <button type="button" className="menu-tier-back" onClick={handleTierBack}>
                     <span aria-hidden>←</span>
-                    상위 메뉴
+                    {t("signatureCommon.parentMenu")}
                   </button>
                   {activeSub.children.map((sub3) => (
                     <Link key={sub3.link} href={sub3.link} className="menu-item" onClick={onClose}>

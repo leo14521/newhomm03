@@ -4,46 +4,10 @@ import { useRef, useState, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLocale } from "@/i18n/LocaleProvider";
+import { getTotalEraseContent } from "@/i18n/totalEraseContent";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const ZONES = [
-  {
-    id: "forehead",
-    label: "이마",
-    sub: "Forehead",
-    desc: "표정 시 생기는 가로 주름. 반복적인 이마 찡그림으로 깊어집니다.",
-    wrinkle: "horizontal",
-  },
-  {
-    id: "glabella",
-    label: "미간",
-    sub: "Glabella",
-    desc: "눈썹 사이 세로 주름. 집중·스트레스 시 찡그리며 생깁니다.",
-    wrinkle: "vertical",
-  },
-  {
-    id: "nasolabial",
-    label: "팔자",
-    sub: "Nasolabial",
-    desc: "코와 입술 바깥을 잇는 굴곡. 웃을 때 두드러지는 주름.",
-    wrinkle: "curve",
-  },
-  {
-    id: "marionette",
-    label: "마리오넷",
-    sub: "Marionette",
-    desc: "입가에서 턱으로 내려가는 라인. 얼굴 처짐과 함께 깊어집니다.",
-    wrinkle: "marionette",
-  },
-  {
-    id: "neck",
-    label: "목주름",
-    sub: "Neck",
-    desc: "목의 가로 띠 형태 주름. 턱을 자주 당기거나 노화로 나타납니다.",
-    wrinkle: "neck",
-  },
-];
 
 function WrinkleIcon({ type, active }: { type: string; active: boolean }) {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -111,6 +75,8 @@ function WrinkleIcon({ type, active }: { type: string; active: boolean }) {
  * 토탈 이레이즈 대상 부위 — 부위별 주름 특징·형태 애니메이션
  */
 export function FaceDiagramBlock() {
+  const { locale } = useLocale();
+  const c = getTotalEraseContent(locale);
   const sectionRef = useRef<HTMLElement>(null);
   const zonesRef = useRef<(HTMLButtonElement | null)[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -149,17 +115,17 @@ export function FaceDiagramBlock() {
       <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-transparent via-[var(--hip-accent)] to-transparent opacity-40" aria-hidden />
       <div className="relative mx-auto max-w-[900px]">
         <p className="mb-2 text-center font-[family-name:var(--font-display)] text-[11px] tracking-[0.35em] uppercase text-[var(--hip-accent-dark)]">
-          TOTAL ERASE ZONES
+          {c.zonesKicker}
         </p>
         <h3 className="mb-4 text-center font-[family-name:var(--font-heading-kr)] text-[clamp(22px,2.8vw,28px)] tracking-[0.06em] text-[#111]">
-          토탈 이레이즈 <span className="text-[var(--hip-accent-dark)]">대상 부위</span>
+          {c.zonesTitleBefore}
+          <span className="text-[var(--hip-accent-dark)]">{c.zonesTitleAccent}</span>
+          {c.zonesTitleAfter}
         </h3>
-        <p className="mb-14 text-center text-[14px] text-[#666]">
-          부위를 클릭하면 주름의 특징과 형태를 확인할 수 있습니다.
-        </p>
+        <p className="mb-14 text-center text-[14px] text-[#666]">{c.zonesLead}</p>
 
         <div className="relative mx-auto flex min-h-[480px] max-w-[340px] flex-col items-stretch justify-between gap-4 rounded-2xl border border-[#e8e8e8] bg-white p-6 shadow-sm">
-          {ZONES.map((z, i) => (
+          {c.zones.map((z, i) => (
             <button
               key={z.id}
               ref={(el) => {
