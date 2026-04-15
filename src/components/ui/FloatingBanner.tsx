@@ -1,12 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLocale } from "@/i18n/LocaleProvider";
-import { CLINIC_NAVER_PLACE_URL, CLINIC_TEL, CLINIC_TEL_DIGITS } from "@/config/brand";
+import {
+  CLINIC_INSTAGRAM_URL,
+  CLINIC_KAKAO_TALK_URL,
+  CLINIC_NAVER_PLACE_URL,
+  CLINIC_TEL,
+  CLINIC_TEL_DIGITS,
+  CLINIC_YOUTUBE_URL,
+} from "@/config/brand";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,14 +24,12 @@ gsap.registerPlugin(ScrollTrigger);
  */
 export default function FloatingBanner() {
   const { t } = useLocale();
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [scrollVisible, setScrollVisible] = useState(false);
 
   const consultLinks = useMemo(
     () =>
       [
         { icon: "fa-phone", label: t("floating.phone"), href: `tel:${CLINIC_TEL_DIGITS}`, type: "tel" as const },
-        { icon: "fa-comment", label: t("floating.kakao"), href: "#", color: "#FEE500", type: "link" as const },
+        { icon: "fa-comment", label: t("floating.kakao"), href: CLINIC_KAKAO_TALK_URL, color: "#FEE500", type: "link" as const },
         {
           icon: "fa-calendar-check",
           label: t("floating.naver"),
@@ -40,8 +45,8 @@ export default function FloatingBanner() {
   const snsLinks = useMemo(
     () =>
       [
-        { icon: "fa-brands fa-instagram", label: t("floating.instagram"), href: "#", color: "#E4405F" },
-        { icon: "fa-brands fa-youtube", label: t("floating.youtube"), href: "#", color: "#FF0000" },
+        { icon: "fa-brands fa-instagram", label: t("floating.instagram"), href: CLINIC_INSTAGRAM_URL, color: "#E4405F" },
+        { icon: "fa-brands fa-youtube", label: t("floating.youtube"), href: CLINIC_YOUTUBE_URL, color: "#FF0000" },
       ] as const,
     [t]
   );
@@ -53,8 +58,8 @@ export default function FloatingBanner() {
         start: "top top-=15%",
         endTrigger: "footer",
         end: "top bottom",
-        onEnter: () => setScrollVisible(true),
-        onLeaveBack: () => setScrollVisible(false),
+        onEnter: () => null,
+        onLeaveBack: () => null,
       });
     },
     { dependencies: [] }
@@ -137,82 +142,44 @@ export default function FloatingBanner() {
         </div>
       </div>
 
-      {/* PC: 우측 플로팅 패널 — 예약·상담 + SNS + TOP (항상 표시) */}
-      <div className="hidden lg:flex fixed right-0 top-1/2 z-[1996] -translate-y-1/2 transition-transform duration-300">
-        <div className="relative flex items-center">
-          {/* 토글 버튼 */}
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="flex-shrink-0 w-11 h-14 bg-white/95 backdrop-blur-md rounded-l-xl shadow-lg border border-r-0 border-black/10 flex items-center justify-center text-[#333] hover:bg-white transition-all hover:scale-105"
-            aria-label={isExpanded ? "퀵 메뉴 닫기" : "퀵 메뉴 열기"}
-            aria-expanded={isExpanded}
-          >
-            <i className={`fa-solid text-sm transition-transform duration-300 ${isExpanded ? "fa-chevron-right" : "fa-chevron-left"}`} />
-          </button>
-
-          {/* 패널: 예약·상담 / SNS / TOP */}
-          <div
-            className={`bg-white/95 backdrop-blur-md border-l border-black/10 shadow-xl transition-all duration-300 overflow-hidden ${isExpanded ? "w-[180px]" : "w-0"}`}
-          >
-            <div className="py-4 px-3 w-[180px]">
-              <p className="text-[10px] tracking-widest text-[#999] uppercase mb-2">예약·상담</p>
-              <div className="flex flex-col gap-1.5 mb-4">
-                {consultLinks.map((link, idx) =>
-                  link.type === "tel" ? (
-                    <a
-                      key={idx}
-                      href={`tel:${CLINIC_TEL_DIGITS}`}
-                      className="flex items-center gap-2.5 w-full rounded-lg py-2.5 px-3 text-left text-sm text-[#333] hover:bg-black/5 transition-colors"
-                      aria-label={`${link.label} ${CLINIC_TEL}`}
-                    >
-                      <div className="w-8 h-8 rounded-full bg-[#1a1918] flex items-center justify-center text-white flex-shrink-0">
-                        <i className={`fa-solid ${link.icon} text-xs`} />
-                      </div>
-                      <span>{link.label}</span>
-                    </a>
-                  ) : (
-                    <Link
-                      key={idx}
-                      href={link.href}
-                      className={`flex items-center gap-2.5 w-full rounded-lg py-2.5 px-3 text-sm text-[#333] hover:bg-black/5 transition-colors ${"highlight" in link && link.highlight ? "font-medium" : ""}`}
-                    >
-                      <div
-                        className="w-8 h-8 rounded-full flex items-center justify-center text-white flex-shrink-0"
-                        style={{ backgroundColor: link.color || "#333" }}
-                      >
-                        <i className={`fa-solid ${link.icon} text-xs`} />
-                      </div>
-                      <span>{link.label}</span>
-                    </Link>
-                  )
-                )}
+      {/* PC: 우측 고정 퀵 배너 — 토글 없이 항상 노출 */}
+      <div className="hidden lg:flex fixed right-0 top-1/2 z-[1996] -translate-y-1/2">
+        <div className="w-[78px] overflow-hidden rounded-l-xl border border-r-0 border-black/10 bg-white/95 shadow-[0_10px_30px_rgba(0,0,0,0.12)] backdrop-blur-md">
+          <div className="flex flex-col">
+            <a
+              href={`tel:${CLINIC_TEL_DIGITS}`}
+              className="group flex h-[76px] flex-col items-center justify-center gap-0.5 border-b border-black/10 text-[#333] transition-colors hover:bg-black/[0.03]"
+              aria-label={`${t("floating.phone")} ${CLINIC_TEL}`}
+            >
+              <i className="fa-solid fa-phone text-lg" />
+              <span className="mt-1 text-[10px] leading-none tracking-[-0.02em] text-center">02.517.7125</span>
+            </a>
+            <a href={CLINIC_KAKAO_TALK_URL} target="_blank" rel="noopener noreferrer" className="group flex h-[76px] flex-col items-center justify-center gap-0.5 border-b border-black/10 text-[#333] transition-colors hover:bg-black/[0.03]" aria-label={t("floating.kakao")}>
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#FEE500] text-[#2B2B2B]">
+                <i className="fa-solid fa-comment text-sm" />
               </div>
-              <p className="text-[10px] tracking-widest text-[#999] uppercase mb-2">SNS</p>
-              <div className="flex gap-2 mb-4">
-                {snsLinks.map((link, idx) => (
-                  <Link
-                    key={idx}
-                    href={link.href}
-                    className="flex items-center justify-center w-9 h-9 rounded-full text-white transition-transform hover:scale-110"
-                    style={{ backgroundColor: link.color || "#333" }}
-                    aria-label={link.label}
-                  >
-                    <i className={`${link.icon} text-sm`} />
-                  </Link>
-                ))}
-              </div>
-              <button
-                type="button"
-                onClick={scrollToTop}
-                className="flex items-center justify-center gap-1.5 w-full py-2.5 rounded-lg bg-[#1a1918] text-white text-sm font-medium hover:bg-[#2a2928] transition-colors"
-                aria-label="맨 위로"
-              >
-                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 19V5M5 12l7-7 7 7" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                TOP
-              </button>
-            </div>
+              <span className="text-[11px] leading-none">카카오톡</span>
+            </a>
+            <a href={CLINIC_INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="group flex h-[76px] flex-col items-center justify-center gap-0.5 border-b border-black/10 text-[#333] transition-colors hover:bg-black/[0.03]" aria-label={t("floating.instagram")}>
+              <i className="fa-brands fa-instagram text-[20px] text-[#E4405F]" />
+              <span className="text-[11px] leading-none">인스타</span>
+            </a>
+            <a href={CLINIC_YOUTUBE_URL} target="_blank" rel="noopener noreferrer" className="group flex h-[76px] flex-col items-center justify-center gap-0.5 border-b border-black/10 text-[#333] transition-colors hover:bg-black/[0.03]" aria-label={t("floating.youtube")}>
+              <i className="fa-brands fa-youtube text-[20px] text-[#FF0000]" />
+              <span className="text-[11px] leading-none">유튜브</span>
+            </a>
+            <a href={CLINIC_NAVER_PLACE_URL} target="_blank" rel="noopener noreferrer" className="group flex h-[76px] flex-col items-center justify-center gap-0.5 border-b border-black/10 text-[#333] transition-colors hover:bg-black/[0.03]" aria-label={t("floating.naver")}>
+              <div className="rounded-full bg-[#03C75A] px-2 py-0.5 text-[10px] font-semibold tracking-wide text-white">N</div>
+              <span className="text-[11px] leading-none">네이버예약</span>
+            </a>
+            <button
+              type="button"
+              onClick={scrollToTop}
+              className="flex h-14 items-center justify-center bg-[#f3f5f4] text-[#2e2e2e] transition-colors hover:bg-[#e8ecea]"
+              aria-label="맨 위로"
+            >
+              <i className="fa-solid fa-chevron-up text-sm" />
+            </button>
           </div>
         </div>
       </div>

@@ -25,8 +25,13 @@ export const CLINIC_ADDRESS_KR = "서울 서초구 강남대로 509 오마쥬클
 export const CLINIC_ADDRESS_EN =
   "509 Gangnam-daero, Seocho-gu, Seoul — Hommage Clinic, Building A, 4F";
 
-/** 구글맵 검색·임베드 쿼리 */
-export const CLINIC_MAP_QUERY = "서울 서초구 강남대로 509 오마쥬클리닉 A동 4층";
+/** 구글맵 검색·임베드 쿼리 (임베드에서 장소 핀 인식 우선) */
+export const CLINIC_MAP_QUERY = "강남산부인과 피부과 오마쥬의원";
+/** 구글맵 임베드 중심 좌표 */
+export const CLINIC_MAP_LAT = 37.5101996;
+export const CLINIC_MAP_LNG = 127.0429674;
+/** 구글 지도 외부 링크 */
+export const CLINIC_GOOGLE_MAP_URL = "https://maps.app.goo.gl/u4kK5AntpeRqmFZM9";
 
 /** 대표 전화 (표기용) */
 export const CLINIC_TEL = "02-517-7125";
@@ -35,7 +40,13 @@ export const CLINIC_TEL = "02-517-7125";
 export const CLINIC_TEL_DIGITS = CLINIC_TEL.replace(/\D/g, "");
 
 /** 네이버 예약/플레이스 링크 */
-export const CLINIC_NAVER_PLACE_URL = "https://map.naver.com/p/entry/place/1547796366";
+export const CLINIC_NAVER_PLACE_URL = "https://naver.me/xQeKW87V";
+/** 공식 SNS 및 외부 채널 */
+export const CLINIC_INSTAGRAM_URL = "https://www.instagram.com/yedaclinic";
+export const CLINIC_YOUTUBE_URL = "https://www.youtube.com/@user-zm4qk5wt9j";
+export const CLINIC_KAKAO_TALK_URL = "https://pf.kakao.com/_xkiclxl";
+/** 네이버 블로그 */
+export const CLINIC_BLOG_URL = "https://blog.naver.com/yeda_clinic";
 
 /** 사업자등록번호 (하이픈 표기) */
 export const CLINIC_BUSINESS_REG = "141-19-00808";

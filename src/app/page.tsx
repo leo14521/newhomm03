@@ -8,6 +8,10 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { YT_MAIN_ID, YT_MAIN_CUSTOM_POSTER } from "@/config/homePage";
 import {
+  CLINIC_BLOG_URL,
+  CLINIC_GOOGLE_MAP_URL,
+  CLINIC_MAP_LAT,
+  CLINIC_MAP_LNG,
   getBrandMessageLabel,
   getBrandSloganForLocale,
   getClinicAddressForLocale,
@@ -48,7 +52,6 @@ const HOSPITAL_TOUR_ZONES: readonly TourZone[] = [
       "/images/interior/079A4450.jpg",
       "/images/interior/079A4453.jpg",
       "/images/interior/079A4456.jpg",
-      "/images/interior/079A4473.jpg",
     ],
   },
   {
@@ -848,14 +851,6 @@ export default function HomePage() {
                         }`}
                         sizes="165px"
                       />
-                      <div
-                        className={`absolute inset-0 transition ${
-                          safeActiveTourIndex === idx
-                            ? "bg-gradient-to-t from-black/25 via-transparent to-transparent"
-                            : "bg-black/20 group-hover:bg-black/10"
-                        }`}
-                        aria-hidden
-                      />
                       <span className="absolute bottom-2 left-2 rounded bg-black/25 px-2 py-1 font-[family-name:var(--font-en-title)] text-[9px] tracking-[0.16em] text-white/90 uppercase backdrop-blur-sm">
                         {String(idx + 1).padStart(2, "0")}
                       </span>
@@ -1035,9 +1030,9 @@ export default function HomePage() {
                       <Link href="/doctor" className="inline-flex items-center rounded border border-[var(--text-primary)] px-4 py-2 font-[family-name:var(--font-display)] text-xs tracking-[0.1em] text-[var(--text-primary)] transition-all duration-300 hover:bg-[var(--text-primary)] hover:text-white">
                         {t("home.doctorIntro")}
                       </Link>
-                      <Link href="/blog" className="inline-flex items-center rounded border border-[var(--text-primary)] px-4 py-2 font-[family-name:var(--font-en-title)] text-xs tracking-[0.1em] text-[var(--text-primary)] transition-all duration-300 hover:bg-[var(--text-primary)] hover:text-white uppercase" style={{ fontWeight: 300 }}>
+                      <a href={CLINIC_BLOG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded border border-[var(--text-primary)] px-4 py-2 font-[family-name:var(--font-en-title)] text-xs tracking-[0.1em] text-[var(--text-primary)] transition-all duration-300 hover:bg-[var(--text-primary)] hover:text-white uppercase" style={{ fontWeight: 300 }}>
                         {t("home.doctorBlog")}
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -1515,18 +1510,18 @@ export default function HomePage() {
               <p className="mt-8 text-[14px] leading-relaxed text-white/70">{getClinicAddressForLocale(locale)}</p>
             </div>
             <div className="relative h-[360px] w-full overflow-hidden bg-[var(--text-primary)] lg:h-[480px]">
-              <div className="relative h-full w-full grayscale [&>iframe]:grayscale">
+              <div className="relative h-full w-full">
                 <iframe
                   title={t("home.mapIframeTitle")}
-                  src={`https://maps.google.com/maps?q=${encodeURIComponent(CLINIC_MAP_QUERY)}&output=embed&hl=${localeToMapHl(locale)}`}
-                  className="absolute inset-0 h-full w-full border-0 grayscale"
+                  src={`https://maps.google.com/maps?hl=${localeToMapHl(locale)}&ll=${CLINIC_MAP_LAT},${CLINIC_MAP_LNG}&q=${encodeURIComponent(CLINIC_MAP_QUERY)}&z=17&output=embed`}
+                  className="absolute inset-0 h-full w-full border-0"
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 />
                 <div className="absolute bottom-4 left-4 right-4 flex justify-center gap-3 lg:left-6 lg:right-auto lg:justify-start">
                   <a
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CLINIC_MAP_QUERY)}`}
+                    href={CLINIC_GOOGLE_MAP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="rounded-sm border-2 border-white/70 bg-[var(--text-primary)] px-5 py-3 text-sm tracking-[0.08em] text-white transition-all duration-300 hover:opacity-90 hover:border-white"

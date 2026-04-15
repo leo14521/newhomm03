@@ -3,8 +3,12 @@
 import Link from "next/link";
 import {
   CLINIC_DIRECTOR_NAME_KR,
+  CLINIC_INSTAGRAM_URL,
+  CLINIC_KAKAO_TALK_URL,
+  CLINIC_NAVER_PLACE_URL,
   CLINIC_TEL,
   CLINIC_TEL_DIGITS,
+  CLINIC_YOUTUBE_URL,
   getBrandMessageLabel,
   getBrandServicesForLocale,
   getBrandSloganForLocale,
@@ -15,9 +19,9 @@ import Logo from "@/components/ui/Logo";
 import { useLocale } from "@/i18n/LocaleProvider";
 
 const SNS_LINKS = [
-  { href: "#", label: "Instagram" },
-  { href: "#", label: "Youtube" },
-  { href: "#", label: "Kakao Talk" },
+  { href: CLINIC_INSTAGRAM_URL, label: "Instagram" },
+  { href: CLINIC_YOUTUBE_URL, label: "Youtube" },
+  { href: CLINIC_KAKAO_TALK_URL, label: "Kakao Talk" },
 ] as const;
 
 export default function Footer() {
@@ -108,7 +112,12 @@ export default function Footer() {
                 {SNS_LINKS.map((s, i) => (
                   <span key={s.label} className="inline-flex items-center">
                     {i > 0 && <span className="mx-1.5 text-[var(--text-secondary)]/40" aria-hidden>·</span>}
-                    <a href={s.href} className="transition-colors hover:text-[var(--accent-terracotta)]">
+                    <a
+                      href={s.href}
+                      target={s.href.startsWith("http") ? "_blank" : undefined}
+                      rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="transition-colors hover:text-[var(--accent-terracotta)]"
+                    >
                       {s.label}
                     </a>
                   </span>
@@ -116,12 +125,14 @@ export default function Footer() {
               </div>
               <div className="flex min-w-0 flex-col gap-1 sm:max-w-[55%] sm:text-right lg:max-w-none">
                 <p className="leading-snug text-[var(--text-secondary)]">{transit}</p>
-                <Link
-                  href="/#map"
+                <a
+                  href={CLINIC_NAVER_PLACE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-fit text-[12px] font-medium text-[var(--accent-terracotta)] underline decoration-[color-mix(in_srgb,var(--accent-terracotta)_40%,transparent)] underline-offset-[5px] hover:text-[var(--accent-terracotta-dark)] sm:ml-auto sm:w-auto"
                 >
                   {t("footer.mapLink")}
-                </Link>
+                </a>
               </div>
             </div>
           </div>
