@@ -1,4 +1,5 @@
 /** 의료진 — 홈 시그니처 섹션 (한국어 기본) */
+import { CLINIC_INSTAGRAM_URL, CLINIC_YOUTUBE_URL } from "@/config/brand";
 
 export type HomeDoctor = {
   id: string;
@@ -27,8 +28,8 @@ export const HOME_DOCTORS: HomeDoctor[] = [
       "편안한 상담과 정확한 진단으로 당신만의 솔루션을 제안합니다.",
     ],
     oneLiner: "당신의 이야기를 듣고, 함께 결정해 나가겠습니다.",
-    instagram: "#",
-    youtube: "#",
+    instagram: CLINIC_INSTAGRAM_URL,
+    youtube: CLINIC_YOUTUBE_URL,
   },
   {
     id: "kim",
@@ -43,7 +44,7 @@ export const HOME_DOCTORS: HomeDoctor[] = [
       "상담부터 시술까지 꼼꼼하고 세심하게 케어합니다.",
     ],
     oneLiner: "당신의 피부 고민을 이해하고, 가장 적합한 방법을 제안합니다.",
-    instagram: "#",
-    youtube: "#",
+    instagram: CLINIC_INSTAGRAM_URL,
+    youtube: CLINIC_YOUTUBE_URL,
   },
 ];

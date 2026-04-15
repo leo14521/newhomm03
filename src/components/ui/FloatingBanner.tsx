@@ -110,6 +110,16 @@ export default function FloatingBanner() {
             </div>
             {/* SNS 그룹 */}
             <div className="flex items-center gap-1 px-2 py-3 border-r border-black/5">
+              <Link
+                href="/event"
+                className="flex flex-col items-center gap-0.5 p-2 rounded-lg transition-all active:scale-95"
+                aria-label="이벤트"
+              >
+                <div className="w-8 h-8 rounded-full flex items-center justify-center text-white bg-[#8b6f62]">
+                  <i className="fa-solid fa-ticket text-xs" />
+                </div>
+                <span className="text-[8px] text-[#666]">이벤트</span>
+              </Link>
               {snsLinks.map((link, idx) => (
                 <Link
                   key={idx}
@@ -172,6 +182,12 @@ export default function FloatingBanner() {
               <div className="rounded-full bg-[#03C75A] px-2 py-0.5 text-[10px] font-semibold tracking-wide text-white">N</div>
               <span className="text-[11px] leading-none">네이버예약</span>
             </a>
+            <Link href="/event" className="group flex h-[76px] flex-col items-center justify-center gap-0.5 border-b border-black/10 text-[#333] transition-colors hover:bg-black/[0.03]" aria-label="이벤트">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#8b6f62] text-white">
+                <i className="fa-solid fa-ticket text-sm" />
+              </div>
+              <span className="text-[11px] leading-none">이벤트</span>
+            </Link>
             <button
               type="button"
               onClick={scrollToTop}

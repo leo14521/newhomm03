@@ -1,4 +1,5 @@
 import type { HomeDoctor } from "@/config/homeDoctors";
+import { CLINIC_INSTAGRAM_URL, CLINIC_YOUTUBE_URL } from "@/config/brand";
 
 export const HOME_DOCTORS_ZH: HomeDoctor[] = [
   {
@@ -14,8 +15,8 @@ export const HOME_DOCTORS_ZH: HomeDoctor[] = [
       "先倾听，再提出贴合您个人情况的方案。",
     ],
     oneLiner: "从您的故事出发，我们一步步共同决定。",
-    instagram: "#",
-    youtube: "#",
+    instagram: CLINIC_INSTAGRAM_URL,
+    youtube: CLINIC_YOUTUBE_URL,
   },
   {
     id: "kim",
@@ -30,7 +31,7 @@ export const HOME_DOCTORS_ZH: HomeDoctor[] = [
       "从咨询到治疗全程细致跟进。",
     ],
     oneLiner: "理解您的皮肤困扰，推荐真正适合的方式。",
-    instagram: "#",
-    youtube: "#",
+    instagram: CLINIC_INSTAGRAM_URL,
+    youtube: CLINIC_YOUTUBE_URL,
   },
 ];

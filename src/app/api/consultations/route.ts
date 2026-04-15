@@ -37,6 +37,23 @@ export async function POST(req: Request) {
     };
 
     try {
+      // 동일 유저가 아주 짧은 시간 내 연속 클릭 시 중복 저장 방지
+      const duplicated = await prisma.consultation.findFirst({
+        where: {
+          name,
+          phone,
+          interest: interest || null,
+          message: message || null,
+          createdAt: {
+            gte: new Date(Date.now() - 60 * 1000),
+          },
+        },
+        select: { id: true },
+      });
+      if (duplicated) {
+        return NextResponse.json({ ok: true, deduped: true });
+      }
+
       await prisma.consultation.create({ data: payload });
     } catch (error) {
       const messageText = error instanceof Error ? error.message : "";

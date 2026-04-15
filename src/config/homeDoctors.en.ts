@@ -1,4 +1,5 @@
 import type { HomeDoctor } from "@/config/homeDoctors";
+import { CLINIC_INSTAGRAM_URL, CLINIC_YOUTUBE_URL } from "@/config/brand";
 
 /** English doctor bios for home */
 
@@ -16,8 +17,8 @@ export const HOME_DOCTORS_EN: HomeDoctor[] = [
       "Listens first, then proposes a plan that fits you—not a template.",
     ],
     oneLiner: "We decide together, step by step, starting with your story.",
-    instagram: "#",
-    youtube: "#",
+    instagram: CLINIC_INSTAGRAM_URL,
+    youtube: CLINIC_YOUTUBE_URL,
   },
   {
     id: "kim",
@@ -32,7 +33,7 @@ export const HOME_DOCTORS_EN: HomeDoctor[] = [
       "Meticulous care from consultation through treatment.",
     ],
     oneLiner: "Understanding your skin concerns and recommending what truly fits.",
-    instagram: "#",
-    youtube: "#",
+    instagram: CLINIC_INSTAGRAM_URL,
+    youtube: CLINIC_YOUTUBE_URL,
   },
 ];

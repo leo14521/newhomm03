@@ -125,11 +125,12 @@ export default function HomePage() {
   const curationSkinList = getCurationSkin(locale);
   const ytList = getYtVideos(locale);
   const repGrid = REP_GRID_BY_LOCALE[locale] ?? REP_GRID_BY_LOCALE.en;
-  const doctorsVisible = useMemo(() => doctors.filter((doc) => doc.id !== "kim"), [doctors]);
+  const doctorsVisible = doctors;
 
   const [baWipOpen, setBaWipOpen] = useState(false);
   const [loaderVisible, setLoaderVisible] = useState(true);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formSubmitting, setFormSubmitting] = useState(false);
   const [cName, setCName] = useState("");
   const [cPhone, setCPhone] = useState("");
   const [cInterest, setCInterest] = useState("");
@@ -1027,9 +1028,6 @@ export default function HomePage() {
                       ))}
                     </ul>
                     <div className="mt-8 flex flex-wrap items-center gap-3">
-                      <Link href="/doctor" className="inline-flex items-center rounded border border-[var(--text-primary)] px-4 py-2 font-[family-name:var(--font-display)] text-xs tracking-[0.1em] text-[var(--text-primary)] transition-all duration-300 hover:bg-[var(--text-primary)] hover:text-white">
-                        {t("home.doctorIntro")}
-                      </Link>
                       <a href={CLINIC_BLOG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded border border-[var(--text-primary)] px-4 py-2 font-[family-name:var(--font-en-title)] text-xs tracking-[0.1em] text-[var(--text-primary)] transition-all duration-300 hover:bg-[var(--text-primary)] hover:text-white uppercase" style={{ fontWeight: 300 }}>
                         {t("home.doctorBlog")}
                       </a>
@@ -1378,11 +1376,13 @@ export default function HomePage() {
               className="db-form-grid mt-12 grid grid-cols-1 gap-5 md:grid-cols-2"
               onSubmit={async (e) => {
                 e.preventDefault();
+                if (formSubmitting || formSubmitted) return;
                 setFormError("");
                 if (!privacyAgreed) {
                   setFormError(t("home.formPrivacyError"));
                   return;
                 }
+                setFormSubmitting(true);
                 try {
                   const res = await fetch("/api/consultations", {
                     method: "POST",
@@ -1398,11 +1398,14 @@ export default function HomePage() {
                   const data = (await res.json().catch(() => ({}))) as { error?: string };
                   if (!res.ok) {
                     setFormError(typeof data.error === "string" ? data.error : t("home.formError"));
+                    setFormSubmitting(false);
                     return;
                   }
                   setFormSubmitted(true);
                 } catch {
                   setFormError(t("home.formNetwork"));
+                } finally {
+                  setFormSubmitting(false);
                 }
               }}
             >
@@ -1470,10 +1473,10 @@ export default function HomePage() {
               </label>
               <button
                 type="submit"
-                disabled={formSubmitted || !privacyAgreed}
+                disabled={formSubmitted || formSubmitting || !privacyAgreed}
                 className="btn-submit col-span-1 mt-6 w-full rounded-sm bg-[var(--hip-accent)] py-5 text-center text-[16px] font-semibold tracking-[0.1em] text-white transition-all duration-300 hover:bg-[var(--hip-accent-dark)] hover:shadow-lg disabled:opacity-60 disabled:cursor-default md:col-span-2"
               >
-                {formSubmitted ? t("home.formDone") : t("home.formSubmit")}
+                {formSubmitted ? t("home.formDone") : formSubmitting ? "전송 중..." : t("home.formSubmit")}
               </button>
             </form>
           </div>

@@ -18,6 +18,7 @@ export type MenuOverlayItem = {
 
 export const MENU_OVERLAY_ITEMS: MenuOverlayItem[] = [
   { title: "About Hommage", subtitle: "어바웃 오마쥬", link: "/about" },
+  { title: "이벤트", subtitle: "EVENT", link: "/event" },
   {
     title: "시그니처",
     subtitle: "SIGNATURE",
@@ -108,6 +109,7 @@ export const MENU_FOOTER_SOCIAL = [
 /** English menu tree — same links, localised labels */
 export const MENU_OVERLAY_ITEMS_EN: MenuOverlayItem[] = [
   { title: "About Hommage", subtitle: "Brand & clinic", link: "/about" },
+  { title: "Event", subtitle: "EVENT", link: "/event" },
   {
     title: "Signature",
     subtitle: "SIGNATURE",

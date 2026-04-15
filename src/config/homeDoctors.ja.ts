@@ -1,4 +1,5 @@
 import type { HomeDoctor } from "@/config/homeDoctors";
+import { CLINIC_INSTAGRAM_URL, CLINIC_YOUTUBE_URL } from "@/config/brand";
 
 export const HOME_DOCTORS_JA: HomeDoctor[] = [
   {
@@ -14,8 +15,8 @@ export const HOME_DOCTORS_JA: HomeDoctor[] = [
       "まずお話を伺い、テンプレートではなくあなたに合う計画をご提案。",
     ],
     oneLiner: "あなたの話から始め、一歩ずつ一緒に決めていきます。",
-    instagram: "#",
-    youtube: "#",
+    instagram: CLINIC_INSTAGRAM_URL,
+    youtube: CLINIC_YOUTUBE_URL,
   },
   {
     id: "kim",
@@ -30,7 +31,7 @@ export const HOME_DOCTORS_JA: HomeDoctor[] = [
       "カウンセリングから施術まで丁寧にケア。",
     ],
     oneLiner: "肌の悩みを理解し、本当に合う方法をご提案します。",
-    instagram: "#",
-    youtube: "#",
+    instagram: CLINIC_INSTAGRAM_URL,
+    youtube: CLINIC_YOUTUBE_URL,
   },
 ];
