@@ -76,5 +76,58 @@ export async function ensureHommageSchema() {
     CREATE INDEX IF NOT EXISTS "Consultation_phone_idx"
     ON "Consultation" ("phone");
   `);
+
+  await prisma.$executeRawUnsafe(`
+    CREATE TABLE IF NOT EXISTS "EventPost" (
+      "id" TEXT PRIMARY KEY,
+      "title" TEXT NOT NULL,
+      "summary" TEXT,
+      "imageUrl" TEXT,
+      "content" TEXT NOT NULL,
+      "isPublished" BOOLEAN NOT NULL DEFAULT TRUE,
+      "popupEnabled" BOOLEAN NOT NULL DEFAULT FALSE,
+      "publishedAt" TIMESTAMPTZ,
+      "createdAt" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      "updatedAt" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      "authorId" TEXT
+    );
+  `);
+
+  await prisma.$executeRawUnsafe(`
+    ALTER TABLE "EventPost"
+    ADD COLUMN IF NOT EXISTS "imageUrl" TEXT;
+  `);
+  await prisma.$executeRawUnsafe(`
+    ALTER TABLE "EventPost"
+    ADD COLUMN IF NOT EXISTS "popupEnabled" BOOLEAN NOT NULL DEFAULT FALSE;
+  `);
+
+  await prisma.$executeRawUnsafe(`
+    DO $$
+    BEGIN
+      IF NOT EXISTS (
+        SELECT 1
+        FROM pg_constraint
+        WHERE conname = 'EventPost_authorId_fkey'
+      ) THEN
+        ALTER TABLE "EventPost"
+        ADD CONSTRAINT "EventPost_authorId_fkey"
+        FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE SET NULL;
+      END IF;
+    END $$;
+  `);
+
+  await prisma.$executeRawUnsafe(`
+    CREATE INDEX IF NOT EXISTS "EventPost_published_idx"
+    ON "EventPost" ("isPublished", "publishedAt");
+  `);
+
+  await prisma.$executeRawUnsafe(`
+    CREATE TABLE IF NOT EXISTS "SiteSetting" (
+      "key" TEXT PRIMARY KEY,
+      "value" TEXT NOT NULL,
+      "updatedAt" TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+  `);
 }
 

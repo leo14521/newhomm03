@@ -8,6 +8,13 @@ import { gsap } from "gsap";
 import { useLocale } from "@/i18n/LocaleProvider";
 
 const STORAGE_KEY = "hommage-grand-opening-popup";
+const POPUP_CACHE_KEY = "hommage-popup-cache-v1";
+
+declare global {
+  interface Window {
+    __hommagePopupShownInRuntime?: boolean;
+  }
+}
 
 function dismissedUntil(): number | null {
   if (typeof window === "undefined") return null;
@@ -23,9 +30,15 @@ function dismissedUntil(): number | null {
 
 function shouldShowPopup(): boolean {
   if (typeof window === "undefined") return false;
+  if (window.__hommagePopupShownInRuntime) return false;
   const until = dismissedUntil();
   if (until == null) return true;
   return Date.now() > until;
+}
+
+function markShownInRuntime() {
+  if (typeof window === "undefined") return;
+  window.__hommagePopupShownInRuntime = true;
 }
 
 function dismissForToday() {
@@ -48,6 +61,14 @@ export default function GrandOpeningPopup() {
   const panelRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [dismissToday, setDismissToday] = useState(false);
+  const [popupEvent, setPopupEvent] = useState<{
+    id: string;
+    title: string;
+    summary: string | null;
+    imageUrl: string | null;
+    content: string;
+  } | null>(null);
+  const [popupType, setPopupType] = useState<"none" | "event" | "opening">("none");
 
   const hideOnRoute =
     pathname?.startsWith("/admin") ||
@@ -82,8 +103,79 @@ export default function GrandOpeningPopup() {
   useEffect(() => {
     if (hideOnRoute || typeof window === "undefined") return;
     if (!shouldShowPopup()) return;
-    const id = window.setTimeout(() => setVisible(true), 720);
-    return () => window.clearTimeout(id);
+    let cancelled = false;
+
+    // 즉시 체감을 위해 캐시가 없으면 개원 팝업을 먼저 띄운 뒤, 서버 응답으로 확정한다.
+    let hasLocalCache = false;
+    try {
+      const raw = localStorage.getItem(POPUP_CACHE_KEY);
+      if (raw) {
+        const cached = JSON.parse(raw) as {
+          expiresAt?: number;
+          type?: "none" | "event" | "opening";
+          item?: typeof popupEvent;
+        };
+        if (typeof cached.expiresAt === "number" && cached.expiresAt > Date.now()) {
+          hasLocalCache = true;
+          const type = cached.type ?? "none";
+          if (type !== "none") {
+            setPopupType(type);
+            setPopupEvent(cached.item ?? null);
+            setVisible(true);
+          }
+        }
+      }
+    } catch {
+      /* ignore */
+    }
+
+    if (!hasLocalCache) {
+      setPopupType("opening");
+      setPopupEvent(null);
+      setVisible(true);
+      markShownInRuntime();
+    }
+
+    (async () => {
+      try {
+        const res = await fetch("/api/events/popup");
+        const data = (await res.json().catch(() => ({}))) as {
+          type?: "none" | "event" | "opening";
+          item?: typeof popupEvent;
+        };
+        if (cancelled) return;
+        const type = data.type ?? "none";
+
+        try {
+          localStorage.setItem(
+            POPUP_CACHE_KEY,
+            JSON.stringify({
+              type,
+              item: data.item ?? null,
+              expiresAt: Date.now() + 1000 * 60 * 3,
+            })
+          );
+        } catch {
+          /* ignore */
+        }
+
+        if (type === "none") {
+          setVisible(false);
+          return;
+        }
+
+        setPopupType(type);
+        setPopupEvent(data.item ?? null);
+        setVisible(true);
+        markShownInRuntime();
+      } catch {
+        // 네트워크 오류면 이미 기본 개원 팝업이 떠 있으므로 그대로 유지
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
   }, [hideOnRoute]);
 
   useEffect(() => {
@@ -178,34 +270,47 @@ export default function GrandOpeningPopup() {
                 }}
               />
               <div className="relative z-[1] flex w-full flex-col items-center px-7 pb-6 pt-8 md:px-0 md:pb-0 md:pt-0">
-                <div
-                  role="img"
-                  aria-label={t("eventPopup.packageAlt")}
-                  className="flex w-full justify-center py-1"
-                >
-                  <span className="event-popup-logo-mark" aria-hidden />
-                </div>
-                <p className="font-paperlogy mt-4 w-full text-center text-[11px] font-medium tracking-[0.08em] text-[var(--text-secondary)]">
-                  {t("eventPopup.packageCaption")}
-                </p>
+                {popupType === "event" && popupEvent?.imageUrl ? (
+                  <div className="w-full overflow-hidden rounded-xl border border-[var(--border-page)] bg-white">
+                    <img
+                      src={popupEvent.imageUrl}
+                      alt={popupEvent.title}
+                      className="h-[170px] w-full object-cover object-center md:h-[220px]"
+                    />
+                  </div>
+                ) : (
+                  <>
+                    <div
+                      role="img"
+                      aria-label={t("eventPopup.packageAlt")}
+                      className="flex w-full justify-center py-1"
+                    >
+                      <span className="event-popup-logo-mark" aria-hidden />
+                    </div>
+                    <p className="font-paperlogy mt-4 w-full text-center text-[11px] font-medium tracking-[0.08em] text-[var(--text-secondary)]">
+                      {t("eventPopup.packageCaption")}
+                    </p>
+                  </>
+                )}
               </div>
             </div>
 
             <div className="relative z-[1] flex flex-1 flex-col px-7 pb-8 pt-2 md:px-9 md:pb-10 md:pl-8 md:pr-10 md:pt-10">
               <p className="text-[10px] font-semibold tracking-[0.28em] text-[var(--accent-terracotta-dark)]">
-                {t("eventPopup.kicker")}
+                {popupType === "event" ? "EVENT POPUP" : "OPENING POPUP"}
               </p>
               <h2
                 id="grand-opening-title"
                 className="mt-2.5 text-[clamp(1.2rem,3.8vw,1.55rem)] font-semibold leading-snug tracking-tight text-[var(--text-primary)]"
               >
-                {t("eventPopup.title")}
+                {popupType === "event" ? popupEvent?.title : t("eventPopup.title")}
               </h2>
               <p className="mt-2 text-[15px] font-medium leading-relaxed text-[color-mix(in_srgb,var(--text-primary)_90%,var(--text-secondary))]">
-                {t("eventPopup.lead")}
+                {popupType === "event" ? popupEvent?.summary : t("eventPopup.lead")}
               </p>
               <p className="mt-3 text-[13px] font-normal leading-[1.75] text-[var(--text-secondary)]">
-                {t("eventPopup.detail")}
+                {popupType === "event" ? popupEvent?.content?.slice(0, 160) : t("eventPopup.detail")}
+                {popupType === "event" && popupEvent?.content && popupEvent.content.length > 160 ? "..." : ""}
               </p>
 
               <div className="mt-6 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 sm:mt-auto md:pt-6">
@@ -219,11 +324,11 @@ export default function GrandOpeningPopup() {
                   <span className="whitespace-nowrap">{t("eventPopup.dismissToday")}</span>
                 </label>
                 <Link
-                  href="/#consult"
+                  href={popupType === "event" && popupEvent ? `/event/${popupEvent.id}` : "/#consult"}
                   onClick={() => close(dismissToday)}
                   className="inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-[var(--text-primary)] px-6 py-2.5 text-[13px] font-semibold tracking-wide text-white transition-transform hover:scale-[1.02] hover:bg-[color-mix(in_srgb,var(--text-primary)_92%,var(--accent-terracotta))] active:scale-[0.98]"
                 >
-                  {t("eventPopup.cta")}
+                  {popupType === "event" && popupEvent ? "이벤트 자세히 보기" : t("eventPopup.cta")}
                 </Link>
               </div>
             </div>
