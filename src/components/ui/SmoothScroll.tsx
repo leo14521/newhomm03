@@ -4,6 +4,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { setLenisInstance } from "@/lib/lenis-instance";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,6 +28,7 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     });
 
     lenisRef.current = lenis;
+    setLenisInstance(lenis);
 
     // Sync ScrollTrigger with Lenis scroll position
     ScrollTrigger.scrollerProxy(document.documentElement, {
@@ -56,6 +58,7 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
       gsap.ticker.remove(update);
       lenis.destroy();
       lenisRef.current = null;
+      setLenisInstance(null);
     };
   }, []);
 

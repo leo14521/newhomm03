@@ -34,7 +34,7 @@ export default function StemCellView() {
         </div>
       </section>
 
-      {/* 섹션 3: 스마트프렙 2 (SmartPReP 2) + MCT(메타셀) 소개 */}
+      {/* 섹션 3: 미라셀(Miracell) + MCT(메타셀) 소개 */}
       <section className="section-block relative bg-[var(--bg-card)]">
         <div className="mx-auto max-w-[800px]">
           <span className="sec-label block">EQUIPMENT</span>

@@ -31,6 +31,7 @@ import {
 import { REP_GRID_BY_LOCALE } from "@/config/homeRepItems";
 import { localeToMapHl } from "@/i18n/localeHtml";
 import { useLocale } from "@/i18n/LocaleProvider";
+import { getLenisInstance } from "@/lib/lenis-instance";
 import HeroVideo from "@/components/ui/HeroVideo";
 import Logo from "@/components/ui/Logo";
 gsap.registerPlugin(ScrollTrigger);
@@ -177,6 +178,44 @@ export default function HomePage() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [baWipOpen]);
+
+  /** /#consult — Lenis가 기본 앵커 스크롤을 삼키므로, 홈 진입 시 명시적으로 상담 섹션으로 이동 */
+  const scrollHomeToConsultHash = useCallback(() => {
+    if (typeof window === "undefined" || window.location.hash !== "#consult") return;
+    const lenis = getLenisInstance();
+    const headerRaw =
+      getComputedStyle(document.documentElement).getPropertyValue("--header-h").trim() ||
+      getComputedStyle(document.documentElement).getPropertyValue("--header-height").trim();
+    const headerPx = Number.parseFloat(headerRaw) || 100;
+    const offset = -(headerPx + 12);
+    if (lenis) {
+      lenis.scrollTo("#consult", { offset, duration: 1.15 });
+      return;
+    }
+    const el = document.getElementById("consult");
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY + offset;
+    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
+    /* Lenis는 SmoothScroll에서 나중에 붙으므로, 즉시 스크롤은 생략하고 지연 재시도만 둔다 */
+    const t1 = setTimeout(scrollHomeToConsultHash, 120);
+    const t2 = setTimeout(scrollHomeToConsultHash, 500);
+    const t3 = setTimeout(scrollHomeToConsultHash, 1600);
+    const t4 = setTimeout(scrollHomeToConsultHash, 3400);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+    };
+  }, [scrollHomeToConsultHash]);
+
+  useEffect(() => {
+    window.addEventListener("hashchange", scrollHomeToConsultHash);
+    return () => window.removeEventListener("hashchange", scrollHomeToConsultHash);
+  }, [scrollHomeToConsultHash]);
 
   const loaderRef = useRef<HTMLDivElement>(null);
   const contentWrapperRef = useRef<HTMLDivElement>(null);

@@ -47,6 +47,7 @@ export const MENU_OVERLAY_ITEMS_JA: MenuOverlayItem[] = [
       { title: "Onda", subtitle: "マイクロ波 顔・体", link: "/signature/onda" },
       { title: "Tune Face", subtitle: "高周波リフト", link: "/signature/tune-face" },
       { title: "Correction Fit", subtitle: "細胞シナジー", link: "/signature/correction-fit" },
+      { title: "サーマクール FLX", subtitle: "Thermage FLX", link: "/signature/thermage-flx" },
     ],
   },
   {
@@ -121,6 +122,7 @@ export const MENU_OVERLAY_ITEMS_ZH: MenuOverlayItem[] = [
       { title: "Onda", subtitle: "微波面与体", link: "/signature/onda" },
       { title: "Tune Face", subtitle: "射频提拉", link: "/signature/tune-face" },
       { title: "Correction Fit", subtitle: "细胞协同", link: "/signature/correction-fit" },
+      { title: "热玛吉 FLX", subtitle: "Thermage FLX", link: "/signature/thermage-flx" },
     ],
   },
   {
@@ -195,6 +197,7 @@ export const MENU_OVERLAY_ITEMS_RU: MenuOverlayItem[] = [
       { title: "Onda", subtitle: "СВЧ лицо и тело", link: "/signature/onda" },
       { title: "Tune Face", subtitle: "RF-лифтинг", link: "/signature/tune-face" },
       { title: "Correction Fit", subtitle: "Клеточная синергия", link: "/signature/correction-fit" },
+      { title: "Thermage FLX", subtitle: "RF-лифтинг", link: "/signature/thermage-flx" },
     ],
   },
   {

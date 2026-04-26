@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
@@ -39,17 +38,17 @@ export default async function EventDetailPage({ params }: { params: { id: string
           </p>
         ) : null}
         {row.imageUrl ? (
-          <div className="mt-6 overflow-hidden rounded-lg border border-[var(--border-page)] bg-[var(--bg-page)]">
-            <div className="relative h-[240px] w-full sm:h-[360px]">
-              <Image
-                src={row.imageUrl}
-                alt={row.title}
-                fill
-                className="object-cover object-center"
-                sizes="(max-width: 1024px) 100vw, 920px"
-              />
-            </div>
-          </div>
+          <figure className="mt-6 overflow-hidden rounded-lg border border-[var(--border-page)] bg-[var(--bg-page)]">
+            {/* 원본 비율 유지 — 고정 높이·cover 사용 시 정사각형 배너가 세로로 잘림 */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={row.imageUrl}
+              alt={row.title}
+              className="mx-auto block h-auto w-full max-w-full object-contain align-middle"
+              loading="eager"
+              decoding="async"
+            />
+          </figure>
         ) : null}
         <div className="mt-6 whitespace-pre-wrap text-[15px] leading-[1.9] text-[var(--text-primary)]">
           {row.content}

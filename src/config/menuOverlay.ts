@@ -71,6 +71,7 @@ export const MENU_OVERLAY_ITEMS: MenuOverlayItem[] = [
       { title: "온다", subtitle: "Onda", link: "/signature/onda" },
       { title: "튠페이스", subtitle: "Tune Face", link: "/signature/tune-face" },
       { title: "코레지셀핏", subtitle: "Correction Fit", link: "/signature/correction-fit" },
+      { title: "써마지 FLX", subtitle: "Thermage FLX", link: "/signature/thermage-flx" },
     ],
   },
   {
@@ -154,6 +155,7 @@ export const MENU_OVERLAY_ITEMS_EN: MenuOverlayItem[] = [
       { title: "Onda", subtitle: "Microwave body & face", link: "/signature/onda" },
       { title: "Tune Face", subtitle: "RF lifting", link: "/signature/tune-face" },
       { title: "Correction Fit", subtitle: "Cell synergy", link: "/signature/correction-fit" },
+      { title: "Thermage FLX", subtitle: "RF tightening", link: "/signature/thermage-flx" },
     ],
   },
   {

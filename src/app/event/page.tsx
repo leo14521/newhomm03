@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { ensureHommageSchema } from "@/lib/bootstrap-prisma-schema";
@@ -68,16 +67,13 @@ export default async function EventPage() {
                       {item.title}
                     </Link>
                     {item.imageUrl ? (
-                      <div className="mt-2 overflow-hidden rounded border border-[var(--border-page)] bg-[var(--bg-page)]">
-                        <div className="relative h-[140px] w-full">
-                          <Image
-                            src={item.imageUrl}
-                            alt={item.title}
-                            fill
-                            className="object-cover object-center"
-                            sizes="(max-width: 1024px) 100vw, 520px"
-                          />
-                        </div>
+                      <div className="mt-2 max-h-[200px] overflow-hidden rounded border border-[var(--border-page)] bg-[var(--bg-page)]">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={item.imageUrl}
+                          alt=""
+                          className="mx-auto block h-auto max-h-[200px] w-auto max-w-full object-contain object-center"
+                        />
                       </div>
                     ) : null}
                     {item.summary ? (

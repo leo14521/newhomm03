@@ -1,18 +1,50 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-type PopupPayload = {
+export const dynamic = "force-dynamic";
+
+const POPUP_EVENT_LIMIT = 4;
+
+export type PopupEventItem = {
+  id: string;
+  title: string;
+  summary: string | null;
+  imageUrl: string | null;
+  content: string;
+};
+
+export type PopupPayload = {
   type: "none" | "event" | "opening";
-  item: {
-    id: string;
-    title: string;
-    summary: string | null;
-    imageUrl: string | null;
-    content: string;
-  } | null;
+  /** 첫 번째 배너 (구 클라이언트 호환) */
+  item: PopupEventItem | null;
+  /** 팝업에 노출할 이벤트 최대 4건, 최신순 */
+  items: PopupEventItem[];
 };
 
 let memoryCache: { expiresAt: number; payload: PopupPayload } | null = null;
+
+async function fetchPopupEvents(): Promise<PopupEventItem[]> {
+  return prisma.eventPost.findMany({
+    where: {
+      isPublished: true,
+      popupEnabled: true,
+    },
+    orderBy: [{ publishedAt: "desc" }, { createdAt: "desc" }],
+    take: POPUP_EVENT_LIMIT,
+    select: {
+      id: true,
+      title: true,
+      summary: true,
+      imageUrl: true,
+      content: true,
+    },
+  });
+}
+
+function eventPayload(rows: PopupEventItem[]): PopupPayload {
+  const item = rows[0] ?? null;
+  return { type: "event", item, items: rows };
+}
 
 export async function GET() {
   if (memoryCache && memoryCache.expiresAt > Date.now()) {
@@ -33,39 +65,25 @@ export async function GET() {
     } catch (error) {
       const msg = error instanceof Error ? error.message.toLowerCase() : "";
       if (!msg.includes("does not exist")) throw error;
-      // SiteSetting 테이블이 아직 없어도 홈페이지 팝업은 기본 모드(auto)로 즉시 응답한다.
     }
 
     if (popupMode === "off") {
-      const payload: PopupPayload = { type: "none", item: null };
+      const payload: PopupPayload = { type: "none", item: null, items: [] };
       memoryCache = { payload, expiresAt: Date.now() + 10_000 };
       return NextResponse.json(payload);
     }
 
-    const row = await prisma.eventPost.findFirst({
-      where: {
-        isPublished: true,
-        popupEnabled: true,
-      },
-      orderBy: [{ publishedAt: "desc" }, { createdAt: "desc" }],
-      select: {
-        id: true,
-        title: true,
-        summary: true,
-        imageUrl: true,
-        content: true,
-      },
-    });
-
     if (popupMode === "opening") {
-      const payload: PopupPayload = { type: "opening", item: null };
+      const payload: PopupPayload = { type: "opening", item: null, items: [] };
       memoryCache = { payload, expiresAt: Date.now() + 30_000 };
       return NextResponse.json(payload);
     }
 
+    const rows = await fetchPopupEvents();
+
     if (popupMode === "event") {
-      if (row) {
-        const payload: PopupPayload = { type: "event", item: row };
+      if (rows.length > 0) {
+        const payload = eventPayload(rows);
         memoryCache = { payload, expiresAt: Date.now() + 30_000 };
         return NextResponse.json(payload);
       }
@@ -74,18 +92,18 @@ export async function GET() {
         select: { id: true },
       });
       if (!hasPublished) {
-        const payload: PopupPayload = { type: "opening", item: null };
+        const payload: PopupPayload = { type: "opening", item: null, items: [] };
         memoryCache = { payload, expiresAt: Date.now() + 15_000 };
         return NextResponse.json(payload);
       }
-      const payload: PopupPayload = { type: "none", item: null };
+      const payload: PopupPayload = { type: "none", item: null, items: [] };
       memoryCache = { payload, expiresAt: Date.now() + 10_000 };
       return NextResponse.json(payload);
     }
 
-    // auto: 이벤트 우선, 이벤트 게시글이 전혀 없으면 개원 팝업
-    if (row) {
-      const payload: PopupPayload = { type: "event", item: row };
+    // auto: 이벤트 우선(최대 4건), 없으면 개원
+    if (rows.length > 0) {
+      const payload = eventPayload(rows);
       memoryCache = { payload, expiresAt: Date.now() + 30_000 };
       return NextResponse.json(payload);
     }
@@ -94,15 +112,15 @@ export async function GET() {
       select: { id: true },
     });
     if (!hasPublished) {
-      const payload: PopupPayload = { type: "opening", item: null };
+      const payload: PopupPayload = { type: "opening", item: null, items: [] };
       memoryCache = { payload, expiresAt: Date.now() + 15_000 };
       return NextResponse.json(payload);
     }
-    const payload: PopupPayload = { type: "none", item: null };
+    const payload: PopupPayload = { type: "none", item: null, items: [] };
     memoryCache = { payload, expiresAt: Date.now() + 10_000 };
     return NextResponse.json(payload);
-  } catch (error) {
-    const payload: PopupPayload = { type: "none", item: null };
+  } catch {
+    const payload: PopupPayload = { type: "none", item: null, items: [] };
     memoryCache = { payload, expiresAt: Date.now() + 5_000 };
     return NextResponse.json(payload);
   }

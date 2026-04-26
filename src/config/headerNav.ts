@@ -50,6 +50,7 @@ export const HEADER_NAV: Record<HeaderMode, HeaderNavItem[]> = {
         { name: "온다", link: "/signature/onda" },
         { name: "튠페이스", link: "/signature/tune-face" },
         { name: "코레지셀핏", link: "/signature/correction-fit" },
+        { name: "써마지 FLX", link: "/signature/thermage-flx" },
       ],
     },
     {
